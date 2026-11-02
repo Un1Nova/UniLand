@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="Предметы и рецепты TechnoMagic RPG.">
+  <title>LoliLand · TMR</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <button class="brand" id="home-button" type="button" aria-label="Все предметы"><span data-icon="cube"></span><strong>LoliLand</strong><span class="brand-server">TMR</span></button>
+    <div class="search"><span data-icon="search"></span><input id="search-input" type="search" placeholder="Найти предмет…" aria-label="Поиск по названию, ID или @моду" autocomplete="off" spellcheck="false"><button class="icon-button search-clear" id="clear-search" type="button" aria-label="Очистить поиск" hidden><span data-icon="close"></span></button><kbd id="search-shortcut">/</kbd></div>
+    <div class="header-actions"><button class="icon-button" id="favorite-items" type="button" aria-label="Избранное" aria-pressed="false" title="Избранное"><span data-icon="star"></span></button><button class="icon-button" id="settings-button" type="button" aria-label="Настройки базы" title="База рецептов"><span data-icon="settings"></span></button></div>
+  </header>
+  <div class="toolbar" id="toolbar"><div class="filters"><label class="mod-filter"><span class="sr-only">Модификация</span><select id="mod-filter"><option value="">Все моды</option></select><span data-icon="down"></span></label><button class="filter-button" id="recipe-filter" type="button" aria-pressed="false">С крафтом</button></div><span class="result-count" id="result-count" aria-live="polite"></span><button class="data-state" id="data-state" type="button" title="Актуальность данных"><span class="status-dot"></span><span id="status-text">Загрузка</span></button></div>
+  <div class="content empty-catalog" id="content">
+    <main class="catalog" id="catalog"><div class="items-grid" id="items-grid" aria-label="Предметы"></div><div class="empty-state" id="empty-state"><span data-icon="cube"></span><h1>Загрузка…</h1></div><button class="load-more" id="load-more" type="button" hidden>Ещё</button></main>
+    <aside class="inspector" id="inspector" aria-label="Рецепты предмета"></aside>
+  </div>
+  <div class="inspector-scrim" id="inspector-scrim" hidden></div>
+  <dialog class="settings-dialog" id="settings-dialog" aria-labelledby="settings-title"><div class="dialog-heading"><h2 id="settings-title">База рецептов</h2><button class="icon-button" type="button" id="close-settings" aria-label="Закрыть"><span data-icon="close"></span></button></div><div id="settings-content"></div></dialog>
+  <input type="file" id="catalog-file" accept="application/json,.json" hidden>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <script src="app.js" defer></script>
+</body>
+</html>

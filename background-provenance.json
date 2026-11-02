@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-11-02",
+  "asset": "background.webp",
+  "purpose": "Original monochrome techno-magic landscape wallpaper behind the recipe browser.",
+  "generation": {
+    "method": "OpenAI built-in image_gen__imagegen",
+    "mode": "generate",
+    "useCase": "stylized-concept",
+    "transparentBackground": false,
+    "references": [],
+    "prompt": "Use case: stylized-concept.\nAsset type: original cinematic gaming wallpaper for the full-screen background of a minimal recipe browser.\nPrimary request: an atmospheric voxel techno-magic landscape in a very wide 16:9 composition, preferably 2048 by 1152 pixels. A ruined monumental blackstone temple rises along the left edge, while distant industrial towers stand on the far right; one luminous floating faceted crystal hangs high near the right-side architecture. Massive low-lit geometric terrain, enormous stone slabs and stepped block forms recede into drifting fog. Make it a tangible, richly detailed world with architectural scale, not an abstract blur.\nStyle/medium: elegant high-end stylized 3D environment concept art, voxel-inspired geometry with intricate weathered surfaces and cinematic lighting. Original design, no copied game assets.\nComposition: landscape. Concentrate strong silhouettes, architectural details and pearly highlights near the outer edges. Keep the broad central region dark and lower in contrast, with subtle legible terrain and depth, so translucent recipe lists can sit over it. Keep the horizon low to middle; substantial dark sky. Immersive coherent perspective.\nLighting/mood: deep obsidian shadows, dramatic pearly-white rim lighting along stone edges, restrained white crystal emission, layered smoke and mist, rich textured contrast, mysterious and calm.\nColor palette: strictly neutral black, white and grayscale; absolutely no hue, no blue or warm tint, no colored light.\nConstraints: render only the landscape wallpaper. No interface, panels, cards, grids, buttons, text, glyphs, logo, watermark, people or characters. Do not add icons or item sprites. Opaque background."
+  },
+  "output": {
+    "width": 1672,
+    "height": 941,
+    "format": "WebP",
+    "bytes": 208318,
+    "sha256": "d8190ebca69b87d1f831ea56a6ccdcb1d2d25a66fd622a6bcb3f553614089c44"
+  },
+  "original": {
+    "file": "generated_images/exec-fe3575af-6cd6-4967-bf53-78ba64811767.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2253260,
+    "sha256": "e0d639cdf954533735d20c5f186628019aa2ef74e32a609a9ef23ade4752ba1e"
+  },
+  "webConversion": {
+    "tool": "Pillow",
+    "format": "WEBP",
+    "quality": 90,
+    "method": 6,
+    "resized": false,
+    "cropped": false,
+    "retouched": false
+  },
+  "review": {
+    "composition": "Monumental ruined temple at left, industrial silhouettes and floating crystal at right; lower-contrast center.",
+    "palette": "Neutral grayscale.",
+    "containsUi": false,
+    "containsText": false,
+    "containsPeople": false
+  },
+  "note": "Original generated artwork; not a screenshot or item sprite from LoliLand or Minecraft. Requested 2048×1152; built-in tool delivered 1672×941. Preserved native dimensions."
+}

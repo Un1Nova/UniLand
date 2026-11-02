@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "checks": [
+    "default_noninteractive_inventory_only_exact_allowlist_no_private_absolute_paths",
+    "explicit_zip_opt_in_every_part_below_limit_large_file_reconstructs_hashes_match",
+    "no_credential_canary_in_inventory_or_any_archive_entry",
+    "symlink_files_directories_and_linked_resource_ancestors_not_followed",
+    "production_reconstructor_verifies_all_parts_and_rebuilds_input_tree",
+    "interactive_empty_answer_creates_no_zip",
+    "unknown_profile_never_auto_selected_even_if_only_candidate",
+    "standard_appdata_discovery_and_explicit_number_selection",
+    "linked_input_root_rejected_before_output",
+    "existing_output_not_overwritten"
+  ],
+  "syntheticIncludedFiles": 8,
+  "syntheticArchivePartsAt1MiBLimit": 4,
+  "platform": "linux",
+  "powershell": "/tmp/tmr-powershell-test/runtime/pwsh",
+  "actualWindows51Execution": false,
+  "scriptSha256": "71ef3389b28ec5ca4c9e6b513a6be399ba265f813934669773f54f2f28bdd122",
+  "reconstructorSha256": "2867d2f257933adf36bd3323b8ffee954784d1048f3b2d2fba37b42c1257a4bd"
+}

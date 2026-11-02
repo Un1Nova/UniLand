@@ -1,0 +1,32 @@
+{
+  "checkedAt": "2026-11-02",
+  "status": "client-authentication-required",
+  "runtimeRecipesExported": 0,
+  "bootstrap": {
+    "url": "https://static.loliland.ru/launcher/LoliLand.exe",
+    "bytes": 2052312,
+    "sha256": "3cc25a3ca492ffdd52edac3767ca8589a44e60de2c8140b40bb249e17909815b"
+  },
+  "updater": {
+    "url": "https://klauncher.loliland.ru/api/updater/win64",
+    "httpDate": "Mon, 02 Nov 2026 11:15:38 GMT",
+    "mirrorSource": "literal URL embedded in official EXE"
+  },
+  "launcher": {
+    "url": "https://klauncher.loliland.ru/api/updater/load/launcher",
+    "bytes": 84661228,
+    "sha256": "a66f29f2718c2042c877aa2a6f2c6f68d2f24a58a699cbbdb3c4e84d8ab8d250",
+    "manifestHash": "08e6f786",
+    "manifestHashVerified": true,
+    "containsGameClient": false,
+    "containsRecipeData": false
+  },
+  "clientCatalog": {
+    "url": "https://launcher-new.loliland.pro/clients",
+    "httpStatus": 401,
+    "errorCode": -6,
+    "errorMessage": "Header 'Access-Id' not found"
+  },
+  "defaultWindowsClientRoot": "%APPDATA%/.loliland/game-resources/clients/<systemName>/<branch>",
+  "note": "Дата HTTP подтверждает получение лаунчера, а не свежесть игровых рецептов. Данные аккаунта не требуются для обработки уже обновлённого клиента."
+}
