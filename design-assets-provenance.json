@@ -128,10 +128,17 @@
       "width": 111,
       "height": 24,
       "bytes": 7525,
-      "sha256": "8a1af02ee0387069b910d0e630f8fef5c7594817df6979ce621b1690becc20d6",
+      "sha256": "34274fec2ebff95339cb5784351418b990d34c3dd79fdad71a84f682b15c5a6d",
       "source": "Saved public research/home.html, desktop header-logo-button inline SVG.",
       "sourceSha256": "1862494302eb3b3b1df3a41e65a718419dee76b48fc90a85845ac32efeab0815",
-      "modifications": "Removed Vue scope attributes and icon CSS class, retained all path geometry and currentColor fills; set standalone width/height and currentColor #fff, matching the observed official header icon token."
+      "modifications": "Removed Vue scope attributes and icon CSS class, retained all child elements, path geometry and currentColor fills; normalized HTML-lowercased viewbox to case-sensitive SVG viewBox; set standalone width/height and currentColor #fff, matching the observed official header icon token.",
+      "xmlVerification": {
+        "rootViewBox": "0 0 111 24",
+        "lowercaseViewboxAbsent": true,
+        "childElementsAndAttributesEqualToSavedSource": true,
+        "externalReferences": false,
+        "childElementCount": 9
+      }
     }
   ],
   "background": {

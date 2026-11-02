@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
 dist/__qa/
+__qa/
 .openai/
 data-sources/current/raw/
 *.zip

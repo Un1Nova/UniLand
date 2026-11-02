@@ -7,12 +7,11 @@
     search:svg('<circle cx="10.5" cy="10.5" r="6.8"/><path d="m16 16 4.5 4.5"/>'),
     star:svg('<path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2L3.2 9.6l6-.9L12 3Z"/>'),
     close:svg('<path d="m6 6 12 12M6 18 18 6"/>'),
-    settings:svg('<path d="M4 6h8m5 0h3M4 12h3m5 0h8M4 18h10m5 0h1"/><circle cx="14.5" cy="6" r="2.5"/><circle cx="9.5" cy="12" r="2.5"/><circle cx="16.5" cy="18" r="2.5"/>'),
+    info:svg('<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>'),
     down:svg('<path d="m6 9 6 6 6-6"/>'),
     left:svg('<path d="m15 5-7 7 7 7"/>'),
     right:svg('<path d="m9 5 7 7-7 7"/>'),
     arrow:svg('<path d="M3 12h17m-6-6 6 6-6 6"/>'),
-    upload:svg('<path d="M12 16V3m-4 4 4-4 4 4M4 15v5a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5"/>'),
     external:svg('<path d="M14 3h7v7m0-7L10 14M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"/>')
   };
   const esc = (value) => String(value ?? '').replace(/[&<>"']/g,(c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -33,15 +32,15 @@
   };
   const readLocal = (key,fallback) => {try{return JSON.parse(localStorage.getItem(key))??fallback;}catch{return fallback;}};
   const writeLocal = (key,value) => {try{localStorage.setItem(key,JSON.stringify(value));}catch{}};
-  const emptyCatalog = () => ({schemaVersion:1,meta:{status:'unavailable'},mods:[],items:[],recipes:[]});
-  let catalog=emptyCatalog(),bundled=null,items=new Map(),mods=new Map(),searchIndex=new Map(),byOutput=new Map(),byInput=new Map();
-  let hoverItem=null,toastTimer,searchTimer,drawerOpen=false,returnFocus=null,returnItem=null;
+  const emptyCatalog = (loadFailed=false) => ({schemaVersion:1,meta:{status:'unavailable',loadFailed},mods:[],items:[],recipes:[]});
+  let catalog=emptyCatalog(),items=new Map(),mods=new Map(),searchIndex=new Map(),byOutput=new Map(),byInput=new Map();
+  let hoverItem=null,searchTimer,drawerOpen=false,returnFocus=null,returnItem=null;
   const favorites=readLocal('atlas.favorites',[]);
-  const state={query:'',mod:'',favoritesOnly:false,recipesOnly:false,selected:null,tab:'recipes',recipeIndex:0,limit:150,trail:[],origin:'bundled',fileName:'',persisted:true,favorites:new Set(Array.isArray(favorites)?favorites.filter(v=>typeof v==='string'):[])};
+  const state={query:'',mod:'',favoritesOnly:false,recipesOnly:false,selected:null,tab:'recipes',recipeIndex:0,limit:150,trail:[],favorites:new Set(Array.isArray(favorites)?favorites.filter(v=>typeof v==='string'):[])};
   document.querySelectorAll('[data-icon]').forEach(node=>{node.innerHTML=icons[node.dataset.icon]||'';});
   function validateCatalog(raw) {
-    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) throw new Error('В файле должен быть JSON-объект каталога.');
-    if (raw.schemaVersion !== 1) throw new Error('Нужен JSON в формате Атласа (schemaVersion: 1). Произвольные дампы Index/NEI сначала нужно преобразовать.');
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) throw new Error('Некорректный объект каталога.');
+    if (raw.schemaVersion !== 1) throw new Error('Неподдерживаемая версия каталога.');
     if (!Array.isArray(raw.items) || !Array.isArray(raw.recipes)) throw new Error('В каталоге должны быть массивы items и recipes.');
     if (raw.items.length > 100000 || raw.recipes.length > 250000) throw new Error('Слишком большой каталог: максимум 100 000 предметов и 250 000 рецептов.');
     const ids = new Set();
@@ -91,16 +90,20 @@
     if(!(target instanceof HTMLImageElement)||!target.classList.contains('item-icon'))return;
     const fallback=document.createElement('span');fallback.className='item-icon missing-icon';fallback.title='Нет иконки';fallback.innerHTML=icons.cube;target.replaceWith(fallback);
   },true);
-  function toast(message){clearTimeout(toastTimer);$('toast').textContent=message;$('toast').hidden=false;toastTimer=setTimeout(()=>{$('toast').hidden=true;},4500);}
   function dataStatus(){
     const meta=catalog.meta||{},coverage=meta.coverage||{};
-    const complete=meta.status==='complete'&&coverage.complete===true&&coverage.runtimeExport===true&&coverage.registryEnumerated===true&&meta.serverSynchronized===true&&typeof meta.clientManifestSha256==='string'&&/^[a-f0-9]{64}$/i.test(meta.clientManifestSha256);
+    const handlersComplete=Array.isArray(coverage.handlers)&&coverage.handlers.length>0&&coverage.handlers.every(handler=>handler&&handler.status==='exported'&&Number.isSafeInteger(handler.sourceCount)&&handler.sourceCount>=0&&handler.sourceCount===handler.exportedCount);
+    const totalsMatch=(coverage.items===undefined||coverage.items===catalog.items.length)&&(coverage.recipes===undefined||coverage.recipes===catalog.recipes.length);
+    const runtimeInventory=catalog.items.length>0&&catalog.recipes.length>0&&catalog.items.every(item=>!!item.icon)&&catalog.recipes.every(recipe=>recipe.verification==='runtime');
+    const timestampHasZone=typeof meta.exportedAt==='string'&&/T.+(?:Z|[+-]\d{2}:\d{2})$/i.test(meta.exportedAt);
+    const complete=meta.status==='complete'&&coverage.complete===true&&coverage.runtimeExport===true&&coverage.registryEnumerated===true&&meta.serverSynchronized===true&&typeof meta.clientManifestSha256==='string'&&/^[a-f0-9]{64}$/i.test(meta.clientManifestSha256)&&handlersComplete&&totalsMatch&&runtimeInventory&&timestampHasZone;
     const date=typeof meta.exportedAt==='string'?new Date(meta.exportedAt):null;
-    const validDate=date&&!Number.isNaN(date.getTime())&&date.getTime()<=Date.now()+300000;
+    const validDate=timestampHasZone&&date&&!Number.isNaN(date.getTime())&&date.getTime()<=Date.now()+300000;
     const old=validDate&&Date.now()-date.getTime()>14*86400000;
     const short=validDate?date.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',timeZone:'Europe/Moscow'}):'';
     const full=validDate?date.toLocaleString('ru-RU',{timeZone:'Europe/Moscow',dateStyle:'short',timeStyle:'short'}):'';
-    if(!catalog.items.length)return {label:'Нет базы',detail:'Актуальная выгрузка ещё не подключена.',complete:false};
+    if(meta.loadFailed)return {label:'База недоступна',detail:'Не удалось получить данные. Попробуй открыть страницу позже.',complete:false};
+    if(!catalog.items.length)return {label:'Нет базы',detail:'Рецепты текущей сборки пока не опубликованы.',complete:false};
     if(!validDate)return {label:'Нет даты выгрузки',detail:'Время выгрузки клиента не подтверждено.',complete:false};
     if(old)return {label:'Обновить базу',detail:`Снимок ${full}. Выгрузке больше 14 дней.`,complete:false};
     return {label:complete?`Снимок ${short}`:'Частичная база',detail:`Снимок ${full}${complete?' · полная выгрузка клиента.':' · полнота не подтверждена.'}`,complete};
@@ -116,8 +119,8 @@
     const add=(map,id,recipe)=>{if(!map.has(id))map.set(id,[]);map.get(id).push(recipe);};
     for(const recipe of catalog.recipes){new Set(recipe.outputs.map(stack=>stack.itemId)).forEach(id=>add(byOutput,id,recipe));new Set(recipe.inputs.flatMap(stack=>[stack.itemId,...(stack.alternatives||[])])).forEach(id=>add(byInput,id,recipe));}
   }
-  function applyCatalog(value,origin='bundled',name=''){
-    catalog=value;state.origin=origin;state.fileName=name;state.mod='';state.selected=null;state.trail=[];state.recipeIndex=0;state.limit=150;state.persisted=true;indexCatalog();
+  function applyCatalog(value){
+    catalog=value;state.mod='';state.selected=null;state.trail=[];state.recipeIndex=0;state.limit=150;indexCatalog();
     $('mod-filter').innerHTML='<option value="">Все моды</option>'+[...mods.values()].filter(mod=>mod.count>0).sort((a,b)=>a.name.localeCompare(b.name,'ru')).map(mod=>`<option value="${esc(mod.id)}">${esc(mod.name)}</option>`).join('');
     $('content').classList.toggle('empty-catalog',!catalog.items.length);renderCatalog();renderInspector();renderStatus();
   }
@@ -130,6 +133,7 @@
   });}
   function renderCatalog(){
     const filtered=results();$('result-count').textContent=catalog.items.length?itemsLabel(filtered.length):'';
+    $('page-title').textContent=state.favoritesOnly?'Избранное':'Каталог крафтов';$('catalog-nav').classList.toggle('active',!state.favoritesOnly);$('catalog-nav').setAttribute('aria-pressed',String(!state.favoritesOnly));
     $('favorite-items').classList.toggle('active',state.favoritesOnly);$('favorite-items').setAttribute('aria-pressed',String(state.favoritesOnly));$('favorite-items').title=state.favoritesOnly?'Показать все предметы':'Избранное';
     $('recipe-filter').classList.toggle('active',state.recipesOnly);$('recipe-filter').setAttribute('aria-pressed',String(state.recipesOnly));
     $('clear-search').hidden=!state.query;$('search-shortcut').hidden=!!state.query;
@@ -137,10 +141,10 @@
     $('load-more').hidden=filtered.length<=state.limit;$('empty-state').hidden=!!filtered.length;
     if(!filtered.length){
       let title='Ничего не найдено',text='Измени поиск или фильтр.',action='reset',button='Сбросить';
-      if(!catalog.items.length){title='Нет актуальной базы';text='Рецепты текущей сборки ещё не загружены.';action='settings';button='Подключить базу';}
+      if(!catalog.items.length){title=catalog.meta.loadFailed?'База недоступна':'Нет актуальной базы';text=catalog.meta.loadFailed?'Не удалось получить данные. Попробуй позже.':'Рецепты текущей сборки пока не опубликованы.';action='';button='';}
       else if(state.favoritesOnly&&!state.query&&!state.mod&&!state.recipesOnly){title='Пока пусто';text='Сохраняй предметы звёздочкой.';button='Все предметы';}
       else if(state.recipesOnly&&!catalog.recipes.length){title='Крафты не загружены';text='В базе пока есть только предметы.';button='Все предметы';}
-      $('empty-state').innerHTML=`<span>${icons.cube}</span><h1>${title}</h1><p>${text}</p><button class="${action==='settings'?'primary-button':'text-button'}" type="button" data-action="${action}">${button}</button>`;
+      $('empty-state').innerHTML=`<span>${icons.cube}</span><h2>${title}</h2><p>${text}</p>${action?`<button class="text-button" type="button" data-action="${action}">${button}</button>`:''}`;
     }
   }
   function reset(){state.query='';state.mod='';state.favoritesOnly=false;state.recipesOnly=false;state.limit=150;$('search-input').value='';$('mod-filter').value='';renderCatalog();}
@@ -190,41 +194,20 @@
   function focusable(){return [...$('inspector').querySelectorAll('button:not([disabled]),a[href],summary,[tabindex]:not([tabindex="-1"])')].filter(node=>!node.closest('[inert]')&&node.getClientRects().length);}
   function inaccessible(element,value){if(value&&element.contains(document.activeElement))document.activeElement.blur();element.inert=value;if(value)element.setAttribute('aria-hidden','true');else element.removeAttribute('aria-hidden');}
   function syncOverlay(){
-    const mobile=window.innerWidth<=900,open=mobile&&!!state.selected&&catalog.items.length>0;
+    const mobile=window.matchMedia('(max-width: 991px)').matches,open=mobile&&!!state.selected&&catalog.items.length>0;
     if(open&&!drawerOpen){returnFocus=document.activeElement;returnItem=document.activeElement?.closest('[data-item]')?.dataset.item||state.selected;}
     const wasOpen=drawerOpen;drawerOpen=open;$('inspector-scrim').hidden=!open;
-    inaccessible($('inspector'),mobile&&!open);inaccessible($('catalog'),open);inaccessible($('toolbar'),open);inaccessible(document.querySelector('.app-header'),open);
+    inaccessible($('inspector'),mobile&&!open);inaccessible($('catalog'),open);inaccessible($('toolbar'),open);inaccessible($('page-heading'),open);inaccessible($('site-footer'),open);inaccessible(document.querySelector('.app-header'),open);
     if(open){$('inspector').setAttribute('role','dialog');$('inspector').setAttribute('aria-modal','true');if(!$('inspector').contains(document.activeElement))focusable()[0]?.focus({preventScroll:true});}
     else{$('inspector').removeAttribute('role');$('inspector').removeAttribute('aria-modal');if(wasOpen){let target=returnFocus;if(!target?.isConnected)target=[...$('items-grid').querySelectorAll('[data-select]')].find(node=>node.dataset.select===returnItem);if(!target?.isConnected||target.closest('[inert]')||!target.getClientRects().length)target=$('search-input');target.focus({preventScroll:true});returnFocus=null;returnItem=null;}}
     document.body.style.overflow=open?'hidden':'';
   }
   function settings(){
-    const status=dataStatus(),sources=Array.isArray(catalog.meta.sources)?catalog.meta.sources.filter(s=>s&&safeUrl(s.url)):[];
-    $('settings-content').innerHTML=`<p class="settings-counts">${itemsLabel(catalog.items.length)} · ${recipesLabel(catalog.recipes.length)}</p><p class="settings-status">${esc(status.detail)}</p><div class="settings-actions"><button class="primary-button" type="button" data-action="import">${icons.upload}Загрузить JSON</button>${state.origin==='imported'?'<button class="text-button" type="button" data-action="restore">Сбросить импорт</button>':''}</div><p class="settings-note">Формат Атласа. Файл остаётся в этом браузере.${state.origin==='imported'?`<br>${esc(state.fileName)}${!state.persisted?' · только в этой вкладке':''}`:''}</p>${sources.length?`<details class="settings-section"><summary>Источники</summary>${sources.map(source=>`<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.title||source.url)} ↗</a>`).join('')}</details>`:''}<details class="settings-section"><summary>Формат файла</summary><p>JSON версии 1: предметы, рецепты и иконки. Дамп Index/NEI нужно предварительно преобразовать. Максимум 40 МБ.</p><pre>{
-  "schemaVersion": 1,
-  "meta": { "exportedAt": "ISO 8601" },
-  "mods": [],
-  "items": [],
-  "recipes": []
-}</pre></details>`;
+    const status=dataStatus(),sources=Array.isArray(catalog.meta.sources)?catalog.meta.sources.filter(source=>source&&safeUrl(source.url)):[];
+    $('settings-content').innerHTML=`<p class="settings-counts">${itemsLabel(catalog.items.length)} · ${recipesLabel(catalog.recipes.length)}</p><p class="settings-status">${esc(status.detail)}</p>${sources.length?`<details class="settings-section"><summary>Источники</summary>${sources.map(source=>`<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.title||source.url)} ↗</a>`).join('')}</details>`:''}`;
     if(!$('settings-dialog').open)$('settings-dialog').showModal();
   }
-  function database(operation,value){return new Promise((resolve,reject)=>{
-    if(!window.indexedDB){reject(new Error('Хранилище недоступно'));return;}
-    const request=indexedDB.open('loliland-atlas',1);
-    request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains('catalog'))request.result.createObjectStore('catalog');};
-    request.onerror=()=>reject(request.error);request.onblocked=()=>reject(new Error('Хранилище занято'));
-    request.onsuccess=()=>{const db=request.result,transaction=db.transaction('catalog',operation==='get'?'readonly':'readwrite'),store=transaction.objectStore('catalog');let result;
-      const action=operation==='get'?store.get('active'):operation==='delete'?store.delete('active'):store.put(value,'active');action.onsuccess=()=>{result=action.result;};
-      transaction.oncomplete=()=>{db.close();resolve(result);};transaction.onerror=()=>{db.close();reject(transaction.error);};transaction.onabort=()=>{db.close();reject(transaction.error||new Error('Не удалось сохранить базу'));};};
-  });}
-  async function importFile(file){
-    if(!file)return;if(file.size>40*1024*1024){toast('Максимальный размер файла — 40 МБ.');$('catalog-file').value='';return;}
-    try{const value=validateCatalog(JSON.parse(await file.text()));applyCatalog(value,'imported',file.name);reset();closeItem();try{await database('put',{catalog:value,name:file.name});}catch{state.persisted=false;}$('settings-dialog').close();toast(`${itemsLabel(value.items.length)} · ${recipesLabel(value.recipes.length)}${state.persisted?'':' · только в этой вкладке'}`);}
-    catch(error){toast(error instanceof SyntaxError?'Не удалось прочитать JSON.':error.message||'Не удалось загрузить базу.');}finally{$('catalog-file').value='';}
-  }
-  async function restore(){try{await database('delete');}catch{}applyCatalog(bundled||emptyCatalog());reset();closeItem();$('settings-dialog').close();toast('Импорт сброшен. Избранное сохранено.');}
-  function action(name){if(name==='settings')settings();else if(name==='import')$('catalog-file').click();else if(name==='reset')reset();else if(name==='restore')restore();else if(name==='close-item')closeItem();else if(name==='back'){const id=state.trail.pop();if(id)select(id,'recipes',false);}}
+  function action(name){if(name==='reset')reset();else if(name==='close-item')closeItem();else if(name==='back'){const id=state.trail.pop();if(id)select(id,'recipes',false);}}
   document.addEventListener('click',(event)=>{
     const button=event.target.closest('button');if(!button||button.disabled)return;
     if(button.dataset.favorite)favorite(button.dataset.favorite);else if(button.dataset.select)select(button.dataset.select);else if(button.dataset.tab){state.tab=button.dataset.tab;state.recipeIndex=0;renderInspector();}else if(button.dataset.step){state.recipeIndex+=Number(button.dataset.step);renderInspector();}else if(button.dataset.action)action(button.dataset.action);
@@ -234,9 +217,8 @@
   $('mod-filter').addEventListener('change',()=>{state.mod=$('mod-filter').value;state.limit=150;renderCatalog();});
   $('recipe-filter').addEventListener('click',()=>{state.recipesOnly=!state.recipesOnly;state.limit=150;renderCatalog();});
   $('favorite-items').addEventListener('click',()=>{state.favoritesOnly=!state.favoritesOnly;state.limit=150;renderCatalog();});
-  $('home-button').addEventListener('click',reset);$('settings-button').addEventListener('click',settings);$('data-state').addEventListener('click',settings);
+  $('home-button').addEventListener('click',reset);$('catalog-nav').addEventListener('click',reset);$('settings-button').addEventListener('click',settings);$('data-state').addEventListener('click',settings);
   $('close-settings').addEventListener('click',()=>$('settings-dialog').close());$('inspector-scrim').addEventListener('click',closeItem);$('load-more').addEventListener('click',()=>{state.limit+=150;renderCatalog();});
-  $('catalog-file').addEventListener('change',()=>importFile($('catalog-file').files[0]));
   $('settings-dialog').addEventListener('click',(event)=>{if(event.target!==$('settings-dialog'))return;const rect=$('settings-dialog').getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)$('settings-dialog').close();});
   $('content').addEventListener('pointerover',(event)=>{hoverItem=event.target.closest('[data-select]')?.dataset.select||event.target.closest('[data-item]')?.dataset.item||null;});
   $('content').addEventListener('pointerleave',()=>{hoverItem=null;});$('content').addEventListener('focusin',(event)=>{hoverItem=event.target.closest('[data-select]')?.dataset.select||event.target.closest('[data-item]')?.dataset.item||null;});
@@ -253,10 +235,13 @@
   });
   async function init(){
     syncOverlay();
-    const loaded=await Promise.allSettled([fetch('catalog.json',{cache:'no-cache'}).then(response=>{if(!response.ok)throw new Error('База недоступна');return response.json();}).then(validateCatalog),database('get')]);
-    if(loaded[0].status==='fulfilled')bundled=loaded[0].value;
-    let imported;if(loaded[1].status==='fulfilled'&&loaded[1].value?.catalog){try{imported={catalog:validateCatalog(loaded[1].value.catalog),name:loaded[1].value.name||''};}catch{}}
-    if(imported)applyCatalog(imported.catalog,'imported',imported.name);else applyCatalog(bundled||emptyCatalog());
+    let next;
+    try{
+      const response=await fetch('catalog.json',{cache:'no-cache'});
+      if(!response.ok)throw new Error('База недоступна');
+      next=validateCatalog(await response.json());
+    }catch{next=emptyCatalog(true);}
+    applyCatalog(next);
     const id=new URL(location.href).searchParams.get('item');if(id&&items.has(id))select(id,'recipes',false);
   }
   init();
