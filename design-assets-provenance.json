@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "preparedAt": "2026-11-02",
+  "method": "Offline extraction of already saved public official resources; no network requests and no site execution.",
+  "sourceLauncher": {
+    "file": "research-current-launcher/launcher.jar",
+    "sha256": "a66f29f2718c2042c877aa2a6f2c6f68d2f24a58a699cbbdb3c4e84d8ab8d250",
+    "downloadHttpDate": "Mon, 02 Nov 2026 11:16:15 GMT",
+    "entryCss": "loliland/application/public/_nuxt-static/entry.Ke9o9DIW.css"
+  },
+  "assets": [
+    {
+      "file": "ubuntu-400-cyrillic.woff2",
+      "kind": "font",
+      "family": "Ubuntu",
+      "weight": "400",
+      "style": "normal",
+      "subset": "cyrillic",
+      "unicodeRange": "u+0301,u+0400-045f,u+0490-0491,u+04b0-04b1,u+2116",
+      "bytes": 8116,
+      "sha256": "09193112c3fc60c972c90a14becd364a3ff44c1c751360e840e5648cf0ebc99e",
+      "sourceArchivePath": "loliland/application/public/_fonts/Uq9LPEX26JTSK0gaNQn_6Z3pVOPFb1aIFVxuUFAjYBE-TDIVAiZtfw7lleo9WReLlozuDd68_MbAu2ZRGoMRkdc.woff2",
+      "sourceLocalCopy": "research-official-design/fonts/Uq9LPEX26JTSK0gaNQn_6Z3pVOPFb1aIFVxuUFAjYBE-TDIVAiZtfw7lleo9WReLlozuDd68_MbAu2ZRGoMRkdc.woff2",
+      "modifications": "None; byte-for-byte copy."
+    },
+    {
+      "file": "ubuntu-400-latin.woff2",
+      "kind": "font",
+      "family": "Ubuntu",
+      "weight": "400",
+      "style": "normal",
+      "subset": "latin",
+      "unicodeRange": "u+00??,u+0131,u+0152-0153,u+02bb-02bc,u+02c6,u+02da,u+02dc,u+0304,u+0308,u+0329,u+2000-206f,u+20ac,u+2122,u+2191,u+2193,u+2212,u+2215,u+feff,u+fffd",
+      "bytes": 14088,
+      "sha256": "1765c67da4a24fc6d9dc3cd16484fe694106495423e45412dc6a986cc6928fd5",
+      "sourceArchivePath": "loliland/application/public/_fonts/2jtKtjn0jVUoC-Z7Cf8SbbyAq7lWLO_YmjHrE0jt6os-s_gu8XvkQiqM_341oryL2NWuuio3LSudT9bWkGkZuLQ.woff2",
+      "sourceLocalCopy": "research-official-design/fonts/2jtKtjn0jVUoC-Z7Cf8SbbyAq7lWLO_YmjHrE0jt6os-s_gu8XvkQiqM_341oryL2NWuuio3LSudT9bWkGkZuLQ.woff2",
+      "modifications": "None; byte-for-byte copy."
+    },
+    {
+      "file": "ubuntu-500-cyrillic.woff2",
+      "kind": "font",
+      "family": "Ubuntu",
+      "weight": "500",
+      "style": "normal",
+      "subset": "cyrillic",
+      "unicodeRange": "u+0301,u+0400-045f,u+0490-0491,u+04b0-04b1,u+2116",
+      "bytes": 8004,
+      "sha256": "43f3f6be6257ac876893185876536f5540f98e50b2238417ac9f7a44deb37f91",
+      "sourceArchivePath": "loliland/application/public/_fonts/KMzk6ptaouoRl0pusYNLIoZ27ufg20n7FjJ0r-jWX24-evmKS3cTd7KDwv5oVFiF4mwiN1qzHIYcMr18MtkX_YU.woff2",
+      "sourceLocalCopy": "research-official-design/fonts/KMzk6ptaouoRl0pusYNLIoZ27ufg20n7FjJ0r-jWX24-evmKS3cTd7KDwv5oVFiF4mwiN1qzHIYcMr18MtkX_YU.woff2",
+      "modifications": "None; byte-for-byte copy."
+    },
+    {
+      "file": "ubuntu-500-latin.woff2",
+      "kind": "font",
+      "family": "Ubuntu",
+      "weight": "500",
+      "style": "normal",
+      "subset": "latin",
+      "unicodeRange": "u+00??,u+0131,u+0152-0153,u+02bb-02bc,u+02c6,u+02da,u+02dc,u+0304,u+0308,u+0329,u+2000-206f,u+20ac,u+2122,u+2191,u+2193,u+2212,u+2215,u+feff,u+fffd",
+      "bytes": 14264,
+      "sha256": "9793934b327d48e4c2f206d37f50bea50de1bce47d6ad98d94276101054b0743",
+      "sourceArchivePath": "loliland/application/public/_fonts/2uj_NkgfcQ3iYnC8ta4ZjyGs0SQG5G8mTV9oTj2xhdk-OwpznulC9p3zW2ObRx0B51k6g1pPy2dUscCCpm_AchI.woff2",
+      "sourceLocalCopy": "research-official-design/fonts/2uj_NkgfcQ3iYnC8ta4ZjyGs0SQG5G8mTV9oTj2xhdk-OwpznulC9p3zW2ObRx0B51k6g1pPy2dUscCCpm_AchI.woff2",
+      "modifications": "None; byte-for-byte copy."
+    },
+    {
+      "file": "ubuntu-700-cyrillic.woff2",
+      "kind": "font",
+      "family": "Ubuntu",
+      "weight": "700",
+      "style": "normal",
+      "subset": "cyrillic",
+      "unicodeRange": "u+0301,u+0400-045f,u+0490-0491,u+04b0-04b1,u+2116",
+      "bytes": 7816,
+      "sha256": "71d8784956df557797413e953f79e9c3762e0ac2b52a2d22af9cf9cc1d52a2a1",
+      "sourceArchivePath": "loliland/application/public/_fonts/mUm0eTfamh3-N48vpdGRyU1-8P_4QNM1H-GR9VkmaVo-E21d7LMNlUytZ2o2uaz6GXP771FCmWYkyio2ejxryFg.woff2",
+      "sourceLocalCopy": "research-official-design/fonts/mUm0eTfamh3-N48vpdGRyU1-8P_4QNM1H-GR9VkmaVo-E21d7LMNlUytZ2o2uaz6GXP771FCmWYkyio2ejxryFg.woff2",
+      "modifications": "None; byte-for-byte copy."
+    },
+    {
+      "file": "ubuntu-700-latin.woff2",
+      "kind": "font",
+      "family": "Ubuntu",
+      "weight": "700",
+      "style": "normal",
+      "subset": "latin",
+      "unicodeRange": "u+00??,u+0131,u+0152-0153,u+02bb-02bc,u+02c6,u+02da,u+02dc,u+0304,u+0308,u+0329,u+2000-206f,u+20ac,u+2122,u+2191,u+2193,u+2212,u+2215,u+feff,u+fffd",
+      "bytes": 14920,
+      "sha256": "39dd78306b58e45cd666ea75964f405fa5957b53af75c024f8adc1f3fe1e6a48",
+      "sourceArchivePath": "loliland/application/public/_fonts/9ZFRJH8Df7SbrP8j5KgC-ZLn9gb1pCWo8G9nFtxgcMQ-EyGwRsKbziIn3DnympkstqXjIDKYICanPtmtVOnxkSA.woff2",
+      "sourceLocalCopy": "research-official-design/fonts/9ZFRJH8Df7SbrP8j5KgC-ZLn9gb1pCWo8G9nFtxgcMQ-EyGwRsKbziIn3DnympkstqXjIDKYICanPtmtVOnxkSA.woff2",
+      "modifications": "None; byte-for-byte copy."
+    },
+    {
+      "file": "montserrat-variable-cyrillic.woff2",
+      "kind": "font",
+      "family": "Montserrat",
+      "weight": "100 900",
+      "style": "normal",
+      "subset": "cyrillic",
+      "unicodeRange": "u+0301,u+0400-045f,u+0490-0491,u+04b0-04b1,u+2116",
+      "bytes": 21492,
+      "sha256": "0b00fbd6edcc84cd5f77364bbeb06b75ed263c740061eba34511f1e2ac1a82d3",
+      "sourceArchivePath": "loliland/application/public/_fonts/gr-f_oqydtTkXDIrcvO2V6lTg577tmEKlnOIwkPBKo4-WDQoptAu51cZNHwlKNv8q_DbjgFvbS15ja8uBZXj1NY.woff2",
+      "sourceLocalCopy": "research-official-design/fonts/gr-f_oqydtTkXDIrcvO2V6lTg577tmEKlnOIwkPBKo4-WDQoptAu51cZNHwlKNv8q_DbjgFvbS15ja8uBZXj1NY.woff2",
+      "modifications": "None; byte-for-byte copy."
+    },
+    {
+      "file": "montserrat-variable-latin.woff2",
+      "kind": "font",
+      "family": "Montserrat",
+      "weight": "100 900",
+      "style": "normal",
+      "subset": "latin",
+      "unicodeRange": "u+00??,u+0131,u+0152-0153,u+02bb-02bc,u+02c6,u+02da,u+02dc,u+0304,u+0308,u+0329,u+2000-206f,u+20ac,u+2122,u+2191,u+2193,u+2212,u+2215,u+feff,u+fffd",
+      "bytes": 35508,
+      "sha256": "6438d7b8ea9c7c3992d5e2fd2afdb1ff948570a3ef0bedae76247b51632960ba",
+      "sourceArchivePath": "loliland/application/public/_fonts/CisIO2l7o2ty4gUsHbZM1s-FwhhBIal_RAh3HnHGWeU-qHa52bf9rUI5bNRdOF8CWhTu1gvIyaIkvP4nOhwAeEU.woff2",
+      "sourceLocalCopy": "research-official-design/fonts/CisIO2l7o2ty4gUsHbZM1s-FwhhBIal_RAh3HnHGWeU-qHa52bf9rUI5bNRdOF8CWhTu1gvIyaIkvP4nOhwAeEU.woff2",
+      "modifications": "None; byte-for-byte copy."
+    },
+    {
+      "file": "logo.svg",
+      "kind": "logo",
+      "viewBox": "0 0 111 24",
+      "width": 111,
+      "height": 24,
+      "bytes": 7525,
+      "sha256": "8a1af02ee0387069b910d0e630f8fef5c7594817df6979ce621b1690becc20d6",
+      "source": "Saved public research/home.html, desktop header-logo-button inline SVG.",
+      "sourceSha256": "1862494302eb3b3b1df3a41e65a718419dee76b48fc90a85845ac32efeab0815",
+      "modifications": "Removed Vue scope attributes and icon CSS class, retained all path geometry and currentColor fills; set standalone width/height and currentColor #fff, matching the observed official header icon token."
+    }
+  ],
+  "background": {
+    "file": "background.webp",
+    "provenanceFile": "background-provenance.json",
+    "source": "Original generated monochrome wallpaper already present in this repository; not official LoliLand artwork.",
+    "reason": "Current official hero pixels are unavailable locally. No archived background is being represented as the current hero.",
+    "offlineCandidateReview": {
+      "reviewed": [
+        "loliland/application/public/_nuxt-static/background_glow.CMg_rSSe.webp",
+        "loliland/application/public/theme/brilliant-blue/images/main-page/background-about.webp"
+      ],
+      "decision": "Do not add: first is a blue glow and second is a bright blue anime illustration, both conflict with the restrained gold/orange adaptation. Retain existing original monochrome background."
+    }
+  },
+  "limitations": [
+    "The launcher entry CSS differs from the entry CSS filename linked by the saved live homepage.",
+    "This is an adaptation using confirmed official UI resources, not a screenshot-verified exact replica."
+  ],
+  "sourceSavedHomepage": {
+    "originalUrl": "https://loliland.ru/ru",
+    "savedFile": "research/home.html",
+    "sha256": "1862494302eb3b3b1df3a41e65a718419dee76b48fc90a85845ac32efeab0815",
+    "currentEntryCssReference": "/_nuxt/entry.dTYhNAkW.css",
+    "note": "Only already saved public HTML and inline styles were read; no new website request."
+  },
+  "sourceDesignTokens": {
+    "certainty": {
+      "savedHtmlInline": "Literal value in the saved public home HTML or its inline CSS.",
+      "launcherEntry": "Literal value in the already downloaded official launcher CSS; its entry filename differs from the saved website entry.",
+      "implementation": "The catalog adapts these values; visual pixel-for-pixel matching has not been verified."
+    },
+    "savedHtmlInline": {
+      "fontFamilyNavigation": "Montserrat, sans-serif",
+      "fontWeightNavigation": 700,
+      "navigationTextTransform": "uppercase",
+      "desktopBreakpoint": "992px",
+      "desktopHeaderPanelMinHeight": "46px",
+      "desktopHeaderPadding": "24px 50px 0",
+      "headerPanelRadiusReference": "var(--corner-radius-2)",
+      "tabRadiusReference": "var(--corner-radius-3)",
+      "accent1": "#FFF4B4FF",
+      "accent2": "#FFD88AFF",
+      "glowDark": "#FF5C00FF",
+      "doubleGradientColors": [
+        "#FF912CFF",
+        "#DE5000FF"
+      ],
+      "tripleGradientColors": [
+        "#E8FFA6FF",
+        "#FF842BFF",
+        "#FFE194FF"
+      ]
+    },
+    "launcherEntry": {
+      "fontFamilyBody": "Ubuntu, sans-serif",
+      "fontSizeBody": "15px",
+      "fontWeightBody": 400,
+      "lineHeightBody": 1.6,
+      "background": "#010012",
+      "backgroundLight": "#0d0b1c",
+      "extraBackgroundLight": "#141226",
+      "glassBackgroundAlpha": {
+        "light": 0.05,
+        "default": 0.1,
+        "bold": 0.2
+      },
+      "glassTextAlpha": {
+        "bold": 1,
+        "default": 0.85,
+        "light": 0.5
+      },
+      "glassStrokeDefault": "rgba(255,255,255,.2)",
+      "cornerRadiiPx": {
+        "0": 25,
+        "1": 18,
+        "2": 15,
+        "3": 10
+      },
+      "glassBlurToken": "150px",
+      "headerBlurFormula": "calc(var(--glass-effect-background-blur)/2)",
+      "glassInsetShadow": "0 40px 50px 0 rgba(203,212,255,.1) inset"
+    },
+    "cssFilenameComparison": {
+      "homepageStylesheets": 58,
+      "identicalHashedNamesFoundInLauncher": 32,
+      "differentOrAbsentNames": 26,
+      "interpretation": "Filename agreement supports reuse of individual components; it does not prove all archived CSS equals the current website."
+    }
+  },
+  "currentOfficialHero": {
+    "referenceFromSavedHtml": "https://loliland.ru/apiv2/object-images/main_page/01a148d5-530e-77be-85e4-7d459a235e7b/01a1490a-8f87-72dc-a697-0bd339c04f4e.webp",
+    "downloaded": false,
+    "availableLocally": false,
+    "usedInCatalog": false
+  },
+  "visualVerification": {
+    "officialSiteScreenshotAvailable": false,
+    "exactOneToOneMatchVerified": false,
+    "scope": "Official-style adaptation using known source tokens, fonts and the header wordmark; existing original wallpaper retained."
+  },
+  "fontsCss": {
+    "file": "fonts.css",
+    "bytes": 2425,
+    "sha256": "9ff473a57daa7e5eadb3f1892d5d331e89991c8986d6cb32dfe5b6448730a4dd",
+    "urlMode": "Relative ./ filenames; compatible with GitHub Pages project subpaths."
+  }
+}
