@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "target": "LoliLand TechnoMagic RPG, Minecraft 1.7.10",
+  "requestedContextDate": "2026-11-02",
+  "maximumExportAgeDays": 14,
+  "status": "awaiting-current-client",
+  "recipesExported": 0,
+  "facts": [
+    {
+      "fact": "MineTweaker3 в multiplayer игнорирует scripts подключающегося клиента; сервер отправляет свои scripts для выполнения на клиенте.",
+      "source": "https://github.com/stanhebben/MineTweaker3/blob/master/MineTweaker3-Web/markdown-tutorials/tutorial.md",
+      "implication": "Свежие клиентские mods/config сами по себе не доказывают соответствие серверным рецептам. Проверять конкретную реализацию синхронизации текущего клиента и источник scripts_cache.dat."
+    },
+    {
+      "fact": "NotEnoughRecipeDumps получает рецепты через NEI handlers и рассчитан на GTNH fork NEI; его generic dumper использует PositionedStack.item вместо полного PositionedStack.items.",
+      "source": "https://github.com/Hermanoid/NotEnoughRecipeDumps/blob/main/src/main/java/com/hermanoid/nerd/dumpers/GenericDumper.java",
+      "implication": "Не переносить его результат как полный Index экспорт. Проверять альтернативы ингредиентов, дополнительные выходы и условия отдельно."
+    },
+    {
+      "fact": "NESQL Exporter заявляет NEI item list, fluids, OreDictionary, vanilla crafting/furnace recipes и GT5 recipe maps; универсальные Index recipes не заявлены.",
+      "source": "https://github.com/D-Cysteine/nesql-exporter",
+      "implication": "Этот exporter пригоден как пример рендера предметов, но его наличие не доказывает покрытие модов текущего TMR."
+    },
+    {
+      "fact": "В официальном launcher.jar, полученном в текущем исследовании, нет в именах ZIP entries loliindex/minetweaker/scripts_cache и нет textures/items или textures/blocks.",
+      "localSource": "../research-current-launcher/launcher.jar",
+      "sha256": "a66f29f2718c2042c877aa2a6f2c6f68d2f24a58a699cbbdb3c4e84d8ab8d250",
+      "implication": "Launcher не является самим клиентским модпаком; нужны клиентские ресурсы."
+    }
+  ],
+  "runtime": {
+    "java": "17.0.20",
+    "compilerInvocation": ["java", "com.sun.tools.javac.Main"],
+    "bytecodeInspectorInvocation": ["java", "com.sun.tools.javap.Main"],
+    "graphicsLibrariesPresent": ["libGL", "libGLX", "libEGL", "libX11", "libXrender", "libXext"],
+    "displayAvailable": false,
+    "xvfbAvailable": false,
+    "java8Available": false,
+    "note": "Недостающие runtime зависимости можно установить в рабочую папку; их отсутствие не считается окончательным блокером."
+  },
+  "acceptanceCriteria": [
+    "Точная серверная сборка подтверждена client manifest и SHA-256 участвующих JAR/config/scripts.",
+    "exportedAt отражает реальное получение данных, а не дату повторной упаковки старого JSON.",
+    "Источник серверных recipes установлен: штатная завершённая синхронизация либо документированный актуальный серверный набор.",
+    "Index registry/handlers перечислены полностью; для каждого сохранены исходное количество, число экспортированных записей, пропуски и ошибки.",
+    "Сохранены registry ID, metadata/damage и NBT, влияющий на разновидность предмета; различные варианты не склеены по отображаемому имени.",
+    "Для каждого рецепта сохранены все входы, их альтернативы и количества, все выходы и вероятности, если они есть в источнике.",
+    "Жидкости, газы, катализаторы, инструменты, энергия, длительность, исследования и другие условия не превращены в фиктивные обычные предметы.",
+    "Сохранена геометрия shaped рецепта, включая большие верстаки; у shapeless и машинных рецептов не выдумана сетка.",
+    "Спрайты либо отрендерены реальным клиентским renderer с нужными metadata/NBT/resourcepack, либо явно отмечены как исходные текстуры, а не inventory render.",
+    "coverage.complete не выставляется при неизвестных обработчиках, ошибках, пропущенных рецептах или непроверенной серверной синхронизации."
+  ]
+}
