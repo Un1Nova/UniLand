@@ -1,0 +1,121 @@
+{
+  "checkedAt": "2026-11-02T12:25:03.350732+00:00",
+  "publicUrl": "https://un1nova.github.io/loliland-atlas/",
+  "uiCommit": "5ab22115ad0c1dfc34135b6940333e81e8c1dc2c",
+  "workflowRun": 41444316782,
+  "authenticated": false,
+  "files": [
+    {
+      "file": "index.html",
+      "httpStatus": 200,
+      "bytes": 4280,
+      "sha256": "f6b37bfd4c770705bda3b6207fe7fb4d2b4c688da14957af18da6bb835d34c16",
+      "matchesSource": true
+    },
+    {
+      "file": "styles.css",
+      "httpStatus": 200,
+      "bytes": 26270,
+      "sha256": "d9625392aa9afc79e2d56bf6f8e273c83f56095db738072388e3dc89e4aa6d28",
+      "matchesSource": true
+    },
+    {
+      "file": "fonts.css",
+      "httpStatus": 200,
+      "bytes": 2425,
+      "sha256": "9ff473a57daa7e5eadb3f1892d5d331e89991c8986d6cb32dfe5b6448730a4dd",
+      "matchesSource": true
+    },
+    {
+      "file": "app.js",
+      "httpStatus": 200,
+      "bytes": 32484,
+      "sha256": "29f9102e52ffc46f1754fd771dc5c8f712be62003a8bc6c2f3a53cfd9104ebb9",
+      "matchesSource": true
+    },
+    {
+      "file": "favicon.svg",
+      "httpStatus": 200,
+      "bytes": 392,
+      "sha256": "8b46d49c34f1f10ebb53a34e66e8cd1d03b6e0325b40c97d1b6188a0c668fbd2",
+      "matchesSource": true
+    },
+    {
+      "file": "logo.svg",
+      "httpStatus": 200,
+      "bytes": 7525,
+      "sha256": "34274fec2ebff95339cb5784351418b990d34c3dd79fdad71a84f682b15c5a6d",
+      "matchesSource": true
+    },
+    {
+      "file": "catalog.json",
+      "httpStatus": 200,
+      "bytes": 595,
+      "sha256": "30e0ab231dcdbbe8292ae9d819878d9c6f0fdf9aad4ae5bfa563b53c08dbd1e6",
+      "matchesSource": true
+    },
+    {
+      "file": "background.webp",
+      "httpStatus": 200,
+      "bytes": 208318,
+      "sha256": "d8190ebca69b87d1f831ea56a6ccdcb1d2d25a66fd622a6bcb3f553614089c44",
+      "matchesSource": true
+    },
+    {
+      "file": "montserrat-variable-cyrillic.woff2",
+      "httpStatus": 200,
+      "bytes": 21492,
+      "sha256": "0b00fbd6edcc84cd5f77364bbeb06b75ed263c740061eba34511f1e2ac1a82d3",
+      "matchesSource": true
+    },
+    {
+      "file": "montserrat-variable-latin.woff2",
+      "httpStatus": 200,
+      "bytes": 35508,
+      "sha256": "6438d7b8ea9c7c3992d5e2fd2afdb1ff948570a3ef0bedae76247b51632960ba",
+      "matchesSource": true
+    },
+    {
+      "file": "ubuntu-400-cyrillic.woff2",
+      "httpStatus": 200,
+      "bytes": 8116,
+      "sha256": "09193112c3fc60c972c90a14becd364a3ff44c1c751360e840e5648cf0ebc99e",
+      "matchesSource": true
+    },
+    {
+      "file": "ubuntu-400-latin.woff2",
+      "httpStatus": 200,
+      "bytes": 14088,
+      "sha256": "1765c67da4a24fc6d9dc3cd16484fe694106495423e45412dc6a986cc6928fd5",
+      "matchesSource": true
+    },
+    {
+      "file": "ubuntu-500-cyrillic.woff2",
+      "httpStatus": 200,
+      "bytes": 8004,
+      "sha256": "43f3f6be6257ac876893185876536f5540f98e50b2238417ac9f7a44deb37f91",
+      "matchesSource": true
+    },
+    {
+      "file": "ubuntu-500-latin.woff2",
+      "httpStatus": 200,
+      "bytes": 14264,
+      "sha256": "9793934b327d48e4c2f206d37f50bea50de1bce47d6ad98d94276101054b0743",
+      "matchesSource": true
+    },
+    {
+      "file": "ubuntu-700-cyrillic.woff2",
+      "httpStatus": 200,
+      "bytes": 7816,
+      "sha256": "71d8784956df557797413e953f79e9c3762e0ac2b52a2d22af9cf9cc1d52a2a1",
+      "matchesSource": true
+    },
+    {
+      "file": "ubuntu-700-latin.woff2",
+      "httpStatus": 200,
+      "bytes": 14920,
+      "sha256": "39dd78306b58e45cd666ea75964f405fa5957b53af75c024f8adc1f3fe1e6a48",
+      "matchesSource": true
+    }
+  ]
+}
