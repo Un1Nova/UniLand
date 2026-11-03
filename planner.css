@@ -138,7 +138,7 @@
   .production-options select { max-width: 114px; font-size: 11px; min-height: 44px; padding: 8px; }
   .production-options .icon-button { min-width: 32px; width: 32px; }
   .production-body.has-detail .production-main { margin-right: 0; }
-  .production-inspector { position: fixed; inset: auto 0 0; width: 100%; max-width: 100%; height: auto; max-height: min(80dvh,720px); border-radius: 22px 22px 0 0; border: 1px solid #4a4a4a; border-bottom: 0; overscroll-behavior: contain; margin: 0; padding-bottom: env(safe-area-inset-bottom,0px); }
+  .production-inspector { position: fixed; inset: auto 0 0; width: 100%; max-width: 100%; height: min(80dvh,720px); max-height: min(80dvh,720px); border-radius: 22px 22px 0 0; border: 1px solid #4a4a4a; border-bottom: 0; overscroll-behavior: contain; margin: 0; padding-bottom: env(safe-area-inset-bottom,0px); }
   .production-detail-top .icon-button { width: 44px; height: 44px; }
   .production-field select { min-height: 46px; font-size: 16px; }
   .production-map-controls { left: 12px; bottom: 12px; border-radius: 13px; padding: 2px; }
@@ -178,5 +178,5 @@
 @media(max-width:700px) {
   .production-view { bottom: calc(max(10px,env(safe-area-inset-bottom,0px)) + var(--keyboard-inset,0px)); }
   .keyboard-open .production-view { top: 72px; }
-  .production-inspector { max-height: min(calc(var(--visual-height,100dvh) - 24px),720px); }
+  .production-inspector { bottom: var(--keyboard-inset,0px); max-height: min(calc(var(--visual-height,100dvh) - 24px),720px); }
 }
