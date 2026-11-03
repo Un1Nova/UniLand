@@ -1,0 +1,15 @@
+{
+  "project": "LoliLand",
+  "wipeDate": "2026-10-17",
+  "completionAnnouncedAt": "2026-10-17T17:16:59+03:00",
+  "announcementPublishedAt": "2026-10-16T14:26:47+03:00",
+  "sources": [
+    {"url": "https://t.me/loliland_official/94", "supports": "Announced on October 16: wipe starts the next morning on all servers."},
+    {"url": "https://t.me/loliland_official/100", "supports": "Wipe in progress on October 17."},
+    {"url": "https://t.me/loliland_official/101", "supports": "Wipe finished; all servers available."},
+    {"url": "https://loliland.ru/ru/news/wipe-autumn-2026", "supports": "Official autumn update notes published October 17, 2026."}
+  ],
+  "snapshotRequirement": "Obtain a new runtime snapshot from the current TMR server after normal synchronization; the wipe date alone does not establish freshness and does not exclude later hotfixes.",
+  "serverSynchronized": false,
+  "runtimeExport": false
+}

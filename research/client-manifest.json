@@ -1,0 +1,1479 @@
+{
+  "schemaVersion": 1,
+  "kind": "local-client-fingerprint",
+  "serverSynchronized": false,
+  "runtimeExport": false,
+  "note": "File hashes identify local inputs; they do not prove server freshness or recipe coverage.",
+  "files": [
+    {
+      "path": "client.jar",
+      "sizeBytes": 10440876,
+      "sha256": "e1aa733d299ff72d30611c2b075ecbeae128e6c8c42e03df739f4a910809406a"
+    },
+    {
+      "path": "config/MineTweaker3.cfg",
+      "sizeBytes": 1112,
+      "sha256": "92d368b896944cc91f1b15519db63c99ae1d1b0a5c48be64a922cb36aa4115a2"
+    },
+    {
+      "path": "coremods/loligraphics-master-881c6717.jar",
+      "sizeBytes": 20246340,
+      "sha256": "f6ccf2e7b1ba9b0866c59a3680ef93fe20aafa57147a1fc7b34857f2939ff6e3"
+    },
+    {
+      "path": "libraries/akka-actor_2.11-2.3.3.jar",
+      "sizeBytes": 2514991,
+      "sha256": "4ccbc821a417f0174c9734fc721f078177cacef94ded09c3775ebf40c6a7bdfd"
+    },
+    {
+      "path": "libraries/annotations-26.0.2-1.jar",
+      "sizeBytes": 31170,
+      "sha256": "2037be378980d3ba9333e97955f3b2cde392aa124d04ca73ce2eee6657199297"
+    },
+    {
+      "path": "libraries/asm-9.9.jar",
+      "sizeBytes": 126122,
+      "sha256": "03d99a74ad1ee5c71334ef67437f4ef4fe3488caa7c96d8645abc73c8e2017d4"
+    },
+    {
+      "path": "libraries/asm-analysis-9.9.jar",
+      "sizeBytes": 35149,
+      "sha256": "6a15d28e8bd29ba4fd5bca4baf9b50e8fba2d7b51fbf78cfa0c875a7214c678b"
+    },
+    {
+      "path": "libraries/asm-commons-9.9.jar",
+      "sizeBytes": 74348,
+      "sha256": "db2f6f26150bbe7c126606b4a1151836bcc22a1e05a423b3585698bece995ff8"
+    },
+    {
+      "path": "libraries/asm-tree-9.9.jar",
+      "sizeBytes": 51947,
+      "sha256": "42178f3775c9c63f9e5e1446747d29b4eca4d91bd6e75e5c43cfa372a47d38c6"
+    },
+    {
+      "path": "libraries/asm-util-9.9.jar",
+      "sizeBytes": 94565,
+      "sha256": "3842e13cfe324ee9ab7cdc4914be9943541ead397c17e26daf0b8a755bede717"
+    },
+    {
+      "path": "libraries/atomicfu-jvm-0.25.0.jar",
+      "sizeBytes": 36084,
+      "sha256": "91990ec8a7b6b6ad2609fd81d6f3feb08ca695c7502958a0bd61e8a3af2650cb"
+    },
+    {
+      "path": "libraries/authlib-1.5.16.jar",
+      "sizeBytes": 62628,
+      "sha256": "2c149735a093b6c65a27db760896ad5c5b06e29100bb8969937667784fef4ba0"
+    },
+    {
+      "path": "libraries/baking-data.jar",
+      "sizeBytes": 209,
+      "sha256": "91f75fa30806c8c5f0ad18425dd39c232a3434e3ef618e0ce7afa309d0261d36"
+    },
+    {
+      "path": "libraries/BakingHelper-master-70e93844.jar",
+      "sizeBytes": 9423,
+      "sha256": "a4cac45f46b29cd512dd0dfe0d115bb14183c7509b72f0f616e06fe91d4a9cd3"
+    },
+    {
+      "path": "libraries/checker-qual-3.43.0.jar",
+      "sizeBytes": 231525,
+      "sha256": "3fbc2e98f05854c3df16df9abaa955b91b15b3ecac33623208ed6424640ef0f6"
+    },
+    {
+      "path": "libraries/class-data.jar",
+      "sizeBytes": 496215,
+      "sha256": "8d738b45699fb4a241f8fce381fa41ff4f1057f8b81ee54ccd7d6bd0c438fa7a"
+    },
+    {
+      "path": "libraries/codecjorbis-20101023.jar",
+      "sizeBytes": 103871,
+      "sha256": "6c4b4e50e608763564afa1bde2d25ece9dd715e7c9129540faa1faded4896506"
+    },
+    {
+      "path": "libraries/codecwav-20101023.jar",
+      "sizeBytes": 5618,
+      "sha256": "bb7d17b340afe6abdfbfdaa03683bce4aef39a64887dbab0636eaff3cf2d59ba"
+    },
+    {
+      "path": "libraries/commons-codec-1.19.0.jar",
+      "sizeBytes": 374716,
+      "sha256": "5c3881e4f556855e9c532927ee0c9dfde94cc66760d5805c031a59887070af5f"
+    },
+    {
+      "path": "libraries/commons-compress-1.28.0.jar",
+      "sizeBytes": 1117221,
+      "sha256": "e1522945218456f3649a39bc4afd70ce4bd466221519dba7d378f2141a4642ca"
+    },
+    {
+      "path": "libraries/commons-io-2.20.0.jar",
+      "sizeBytes": 563971,
+      "sha256": "df90bba0fe3cb586b7f164e78fe8f8f4da3f2dd5c27fa645f888100ccc25dd72"
+    },
+    {
+      "path": "libraries/commons-lang3-3.19.0.jar",
+      "sizeBytes": 709075,
+      "sha256": "32733ab4bc90b45b63eb72677d886961003fd4ed113e07b1028f9877cb2ac735"
+    },
+    {
+      "path": "libraries/commons-logging-1.3.5.jar",
+      "sizeBytes": 73737,
+      "sha256": "6d7a744e4027649fbb50895df9497d109f98c766a637062fe8d2eabbb3140ba4"
+    },
+    {
+      "path": "libraries/config-1.2.1.jar",
+      "sizeBytes": 219554,
+      "sha256": "c160fbd78f51a0c2375a794e435ce2112524a6871f64d0331895e9e26ee8b9ee"
+    },
+    {
+      "path": "libraries/error_prone_annotations-2.41.0.jar",
+      "sizeBytes": 20389,
+      "sha256": "a56e782b5b50811ac204073a355a21d915a2107fce13ec711331ad036f660fcc"
+    },
+    {
+      "path": "libraries/failureaccess-1.0.3.jar",
+      "sizeBytes": 10763,
+      "sha256": "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb"
+    },
+    {
+      "path": "libraries/fastutil-8.5.18.jar",
+      "sizeBytes": 23965563,
+      "sha256": "9094ae67d01d0ad246f886f11ad557fc2e79c72cbf3feed83e1512a8ae90a74a"
+    },
+    {
+      "path": "libraries/gson-2.13.2.jar",
+      "sizeBytes": 289901,
+      "sha256": "dd0ce1b55a3ed2080cb70f9c655850cda86c206862310009dcb5e5c95265a5e0"
+    },
+    {
+      "path": "libraries/guava-33.5.0-jre.jar",
+      "sizeBytes": 3017283,
+      "sha256": "1e301f0c52ac248b0b14fdc3d12283c77252d4d6f48521d572e7d8c4c2cc4ac7"
+    },
+    {
+      "path": "libraries/httpasyncclient-4.1.5.jar",
+      "sizeBytes": 181512,
+      "sha256": "0c1877489a9d1ba4fa50f6cfcab11d1123618858cb31d56afaab5afdd5064d99"
+    },
+    {
+      "path": "libraries/httpclient-4.5.14.jar",
+      "sizeBytes": 785639,
+      "sha256": "c8bc7e1c51a6d4ce72f40d2ebbabf1c4b68bfe76e732104b04381b493478e9d6"
+    },
+    {
+      "path": "libraries/httpcore-4.4.16.jar",
+      "sizeBytes": 327891,
+      "sha256": "6c9b3dd142a09dc468e23ad39aad6f75a0f2b85125104469f026e52a474e464f"
+    },
+    {
+      "path": "libraries/httpcore-nio-4.4.16.jar",
+      "sizeBytes": 368896,
+      "sha256": "4018736ede2d321034e8517ea90baefb31831a8608afccc446d8a699fb1d00d4"
+    },
+    {
+      "path": "libraries/httpmime-4.5.14.jar",
+      "sizeBytes": 41727,
+      "sha256": "d401243d5c6eae928a37121b6e819158c8c32ea0584793e7285bb489ab2a3d17"
+    },
+    {
+      "path": "libraries/ic2/EJML-core-0.26.jar",
+      "sizeBytes": 341614,
+      "sha256": "ee7840eb553b850bdb32ed5be6194936f02f2cb2c9b915e4996312ec4a812588"
+    },
+    {
+      "path": "libraries/icu4j-core-mojang-51.2.jar",
+      "sizeBytes": 1634692,
+      "sha256": "147592c5eb8e11fc8394125954f877acf25918bae13aa210c2825aefc3030ed8"
+    },
+    {
+      "path": "libraries/jackson-annotations-2.18.3.jar",
+      "sizeBytes": 78502,
+      "sha256": "8aa5740d80b5a5025508b41bbadbaa1fb3772267c628b2e30681a4f45f8b8931"
+    },
+    {
+      "path": "libraries/jackson-core-2.18.3.jar",
+      "sizeBytes": 598026,
+      "sha256": "056bc4d3e5e53ce821450fa97b3f9e0f8dde125cf6da6884353bb1f09582e1d9"
+    },
+    {
+      "path": "libraries/jackson-databind-2.18.3.jar",
+      "sizeBytes": 1659155,
+      "sha256": "510bdda75a7a6186c5bf33b851239488a1450906ae5757121f2e1cc48a7e108f"
+    },
+    {
+      "path": "libraries/jackson-datatype-guava-2.18.3.jar",
+      "sizeBytes": 104164,
+      "sha256": "4afcd3c137b65c9fa7218d9d378d9558bd857a9c7cfd4cf0a635ca1a2cae0f8a"
+    },
+    {
+      "path": "libraries/jackson-datatype-jdk8-2.18.3.jar",
+      "sizeBytes": 36160,
+      "sha256": "1f517af91ace54150525cdb30a012fca19a536194564756f580c21acfc7e04a0"
+    },
+    {
+      "path": "libraries/jackson-datatype-jsr310-2.18.3.jar",
+      "sizeBytes": 133035,
+      "sha256": "2e1df2feb93683d379969ceaf78b76a0ac115c67d04671958fddf4eed6e6401d"
+    },
+    {
+      "path": "libraries/jackson-jaxrs-base-2.18.3.jar",
+      "sizeBytes": 36119,
+      "sha256": "d881cb267d52ef6bd930194bea7a197a31824b6cbf9fb90bd0c56d3a1417a9a4"
+    },
+    {
+      "path": "libraries/jackson-jaxrs-json-provider-2.18.3.jar",
+      "sizeBytes": 16856,
+      "sha256": "f98daadd65ec7454b310a906791390020e1a09488438ebc9c9ae51ac1e4c2a55"
+    },
+    {
+      "path": "libraries/jackson-module-jaxb-annotations-2.18.3.jar",
+      "sizeBytes": 37186,
+      "sha256": "699ca6a1033ab53cd78504a776c3e35f6b1af41967e7fc350b9c19d0bf26f3b0"
+    },
+    {
+      "path": "libraries/jackson-module-kotlin-2.18.3.jar",
+      "sizeBytes": 186243,
+      "sha256": "93ba1638bbab8f8ebc750382477fe05754e78d00bff1473611ec33c305e2a197"
+    },
+    {
+      "path": "libraries/jakarta.activation-api-2.1.3.jar",
+      "sizeBytes": 66514,
+      "sha256": "01b176d718a169263e78290691fc479977186bcc6b333487325084d6586f4627"
+    },
+    {
+      "path": "libraries/jakarta.xml.bind-api-4.0.2.jar",
+      "sizeBytes": 131033,
+      "sha256": "0d6bcfe47763e85047acf7c398336dc84ff85ebcad0a7cb6f3b9d3e981245406"
+    },
+    {
+      "path": "libraries/javassist-3.30.2-GA.jar",
+      "sizeBytes": 794714,
+      "sha256": "eba37290994b5e4868f3af98ff113f6244a6b099385d9ad46881307d3cb01aaf"
+    },
+    {
+      "path": "libraries/jaxb-core-4.0.5.jar",
+      "sizeBytes": 235411,
+      "sha256": "f0eb412ed78e7bed8279a524a1b74fb9f27a449a577321ceffc4313bf876b8ab"
+    },
+    {
+      "path": "libraries/jaxb-impl-4.0.5.jar",
+      "sizeBytes": 923211,
+      "sha256": "00bb6f09eb8128b48061f2305ed49d94db74df58de8795a1eb8e9bedf7fffa39"
+    },
+    {
+      "path": "libraries/jinput-2.0.5.jar",
+      "sizeBytes": 208338,
+      "sha256": "79b5a4f5829e1a49a415711f7fb8eb5b9ad22defa72929fda2da96ec30d3f018"
+    },
+    {
+      "path": "libraries/jinput-platform-2.0.5-natives-linux.jar",
+      "sizeBytes": 10362,
+      "sha256": "1ab4d194277816b6105253d224c8c69f1b6d720690efe7c85f3ce884f0ea273d"
+    },
+    {
+      "path": "libraries/jinput-platform-2.0.5-natives-osx.jar",
+      "sizeBytes": 12186,
+      "sha256": "171024b00f9a743b92388b48733dc30fd3f6d3a7da4f66f9821531fbcf1aa074"
+    },
+    {
+      "path": "libraries/jinput-platform-2.0.5-natives-windows.jar",
+      "sizeBytes": 155179,
+      "sha256": "24afbd5e1fab17da57d16a4d3f19d53f36155ef46a9976484201a4bb9722287f"
+    },
+    {
+      "path": "libraries/jna-5.13.0.jar",
+      "sizeBytes": 1879325,
+      "sha256": "66d4f819a062a51a1d5627bffc23fac55d1677f0e0a1feba144aabdd670a64bb"
+    },
+    {
+      "path": "libraries/jna-platform-5.13.0.jar",
+      "sizeBytes": 1363209,
+      "sha256": "474d7b88f6e97009b6ec1d98c3024dd95c23187c65dabfbc35331bcac3d173dd"
+    },
+    {
+      "path": "libraries/joml-1.10.9.jar",
+      "sizeBytes": 814581,
+      "sha256": "feca4db853371704338621c120acc5cc32300d8af635fa42414b6213301e216b"
+    },
+    {
+      "path": "libraries/jopt-simple-4.9.jar",
+      "sizeBytes": 66469,
+      "sha256": "26c5856e954b5f864db76f13b86919b59c6eecf9fd930b96baa8884626baf2f5"
+    },
+    {
+      "path": "libraries/jsoup-1.17.2.jar",
+      "sizeBytes": 445706,
+      "sha256": "f60b33b38e9d7ac93eaaa68a6c70f706bb99036494b2e2add2bfee11d09ac6f5"
+    },
+    {
+      "path": "libraries/jspecify-1.0.0.jar",
+      "sizeBytes": 3819,
+      "sha256": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab"
+    },
+    {
+      "path": "libraries/jsr305-1.3.9.jar",
+      "sizeBytes": 33015,
+      "sha256": "905721a0eea90a81534abb7ee6ef4ea2e5e645fa1def0a5cd88402df1b46c9ed"
+    },
+    {
+      "path": "libraries/jSystemThemeDetector-main-5e260f32.jar",
+      "sizeBytes": 106486,
+      "sha256": "6ae4c295440adc444c9cc970272bc29b5ff4eda5aee3f6ea6a72c43e840e3cb0"
+    },
+    {
+      "path": "libraries/jutils-1.0.0.jar",
+      "sizeBytes": 7508,
+      "sha256": "c3334ff39cf0ab3b54925619101054c90098b7c733b1e7834c7b75e4c41e84a5"
+    },
+    {
+      "path": "libraries/kotlin-reflect-1.9.25.jar",
+      "sizeBytes": 3222101,
+      "sha256": "0f8386ddfd69e7f454a1e6b90b271dccd901d96a257fdf633ecf052fb8951d9f"
+    },
+    {
+      "path": "libraries/kotlin-stdlib-1.9.25.jar",
+      "sizeBytes": 1718956,
+      "sha256": "f9cdcdbff1f5de85380ae526977e683726c2aa42db1ed6e6e50ae89e496e95fd"
+    },
+    {
+      "path": "libraries/kotlin-stdlib-common-1.9.25.jar",
+      "sizeBytes": 227489,
+      "sha256": "8202e7f032c8dc6698d00c62867701546a7c12c4731ebddfb8eec0788e2eeee4"
+    },
+    {
+      "path": "libraries/kotlin-stdlib-jdk7-1.9.25.jar",
+      "sizeBytes": 961,
+      "sha256": "fb5373dd761b4e93e3f538c5e853bba38a71143a181536e8f193ed6e4eddb3b8"
+    },
+    {
+      "path": "libraries/kotlin-stdlib-jdk8-1.9.25.jar",
+      "sizeBytes": 967,
+      "sha256": "f94fdf78390ce9be30383bf039c5a935caea33b11f037fc7f86bbcee19287e5a"
+    },
+    {
+      "path": "libraries/kotlinx-coroutines-core-jvm-1.8.1.jar",
+      "sizeBytes": 1546991,
+      "sha256": "f3d4f5de1c391bbcc20f3b3435ccbac013521e76b6902d7d59635ec15c1f797e"
+    },
+    {
+      "path": "libraries/kotlinx-coroutines-jdk8-1.8.1.jar",
+      "sizeBytes": 953,
+      "sha256": "d8cfb4c363c91c773353b115bd4a6b5a04608e7916fe235d3a9d87efcb996c01"
+    },
+    {
+      "path": "libraries/kotlinx-coroutines-slf4j-1.8.1.jar",
+      "sizeBytes": 4377,
+      "sha256": "72e10bc13dbb324a56c74476c48ceee07b076db598f926017be76392b9e7fb3a"
+    },
+    {
+      "path": "libraries/ktor-client-auth-jvm-2.3.2.jar",
+      "sizeBytes": 86844,
+      "sha256": "a2eeb74b7be4c7e903cda0625517f0c1252ffdb27584f27de5c5c29571cb0375"
+    },
+    {
+      "path": "libraries/ktor-client-cio-jvm-2.3.2.jar",
+      "sizeBytes": 132373,
+      "sha256": "185356bd97c71d602c1c211d98e5d5e103c912265aa91af80602226fe5da6096"
+    },
+    {
+      "path": "libraries/ktor-client-content-negotiation-jvm-2.3.2.jar",
+      "sizeBytes": 27340,
+      "sha256": "4d60484f416e3aaa354b8f7887ac2c6c2bff28e006781b2ae0556e3bc49a0c0f"
+    },
+    {
+      "path": "libraries/ktor-client-core-2.3.5.jar",
+      "sizeBytes": 58982,
+      "sha256": "1585afedaeabd0bafbe5a753e8b3966adc92cb32d8736a974accff33c10d9c5a"
+    },
+    {
+      "path": "libraries/ktor-client-websockets-jvm-2.0.0.jar",
+      "sizeBytes": 1892,
+      "sha256": "78378eb113fe3b4178858fe617534889429cae2a9b5e597fcc423f9cff754e86"
+    },
+    {
+      "path": "libraries/ktor-events-jvm-2.3.5.jar",
+      "sizeBytes": 7348,
+      "sha256": "49be3acb09cba0aeedd10fd742d7da9dfc45f8c79ca967e89de2b66bc3bd38ba"
+    },
+    {
+      "path": "libraries/ktor-http-cio-jvm-2.3.2.jar",
+      "sizeBytes": 164220,
+      "sha256": "ee2c2b4f60ee6fd6a0326837258273dd9f600c128a220b7dcc38bdd11c7654a4"
+    },
+    {
+      "path": "libraries/ktor-http-jvm-2.3.5.jar",
+      "sizeBytes": 414936,
+      "sha256": "79642f3cdfd3705671381be736ea9fb5f41f2029d93a2e3eecc9a8defd1df996"
+    },
+    {
+      "path": "libraries/ktor-io-jvm-2.3.5.jar",
+      "sizeBytes": 811420,
+      "sha256": "f3ddb66875ffac0bd90d7b7cdeb60be9454ac9bcd659b29daf6d0f025f25e8e3"
+    },
+    {
+      "path": "libraries/ktor-network-jvm-2.3.2.jar",
+      "sizeBytes": 214258,
+      "sha256": "a39aa022ce4f5dbf35a7b032c04010bdc704e406ad1c2b24eceaf706e743046f"
+    },
+    {
+      "path": "libraries/ktor-network-tls-jvm-2.3.2.jar",
+      "sizeBytes": 204212,
+      "sha256": "553c1279ac78a8e396df3ddafff04e4f5f8ff6401c9861166b76004534d19998"
+    },
+    {
+      "path": "libraries/ktor-serialization-jackson-jvm-2.3.2.jar",
+      "sizeBytes": 30960,
+      "sha256": "6f986fc0282cede8c8928c84fd9817f68af52aa7dcab8bf9c31997ffbd7160f7"
+    },
+    {
+      "path": "libraries/ktor-serialization-jvm-2.3.5.jar",
+      "sizeBytes": 24734,
+      "sha256": "d7039cf0dc2323e733648c8d0ea912b6b69b1012d57e938645fcc8311bb2c416"
+    },
+    {
+      "path": "libraries/ktor-utils-jvm-2.3.5.jar",
+      "sizeBytes": 336580,
+      "sha256": "8722f0ef544bc86dcb8bf322ea82518a43df24fcaa64204aaae197584c2777a9"
+    },
+    {
+      "path": "libraries/ktor-websocket-serialization-jvm-2.3.5.jar",
+      "sizeBytes": 6908,
+      "sha256": "090dea20cd1165a8fa92e8932b85083874c2a96ab1c39ad3ac81f5525368a1dd"
+    },
+    {
+      "path": "libraries/ktor-websockets-jvm-2.3.5.jar",
+      "sizeBytes": 178455,
+      "sha256": "601818e9984fe3ac65e4380d1a8a7e1f03b11efc3b942eda44897ed0b53a65ed"
+    },
+    {
+      "path": "libraries/launchwrapper-baking-14a23230.jar",
+      "sizeBytes": 63805,
+      "sha256": "09d4ad1d5b1bf3ddc1682160d1f769de97170f73dd14432ad9422b53b1d5ebb0"
+    },
+    {
+      "path": "libraries/libraryjavasound-20101123.jar",
+      "sizeBytes": 21679,
+      "sha256": "333bbefeff5eb1722dc9b8d2e26c38bc69c1efa07d0ca870480f29d8858aa336"
+    },
+    {
+      "path": "libraries/log4j-api-2.17.2.jar",
+      "sizeBytes": 302511,
+      "sha256": "09351b5a03828f369cdcff76f4ed39e6a6fc20f24f046935d0b28ef5152f8ce4"
+    },
+    {
+      "path": "libraries/log4j-core-2.17.2.jar",
+      "sizeBytes": 1811089,
+      "sha256": "5adb34ff4197cd16a8d24f63035856a933cb59562a6888dde86e9450fcfef646"
+    },
+    {
+      "path": "libraries/log4j-iostreams-2.17.2.jar",
+      "sizeBytes": 49446,
+      "sha256": "480ec37eb484cf0fd8ab67a9824fb0cec02bf5071cf7e7c0019a88fad84fdd5c"
+    },
+    {
+      "path": "libraries/loliland/gif4j_pro_trial_2.3.jar",
+      "sizeBytes": 78923,
+      "sha256": "e9198b0131bd5b5a6d9a2619deab985e3e374063e30fe863412f389e9ad4836d"
+    },
+    {
+      "path": "libraries/loliland/multiverse-core-0.7.0.jar",
+      "sizeBytes": 246777,
+      "sha256": "c54398f0228054b7fae65227433ae9da87e5b2a96eba824e66a924912d10fc50"
+    },
+    {
+      "path": "libraries/loliland/PNGDecoder.jar",
+      "sizeBytes": 11155,
+      "sha256": "9c7ca7c9239a26df55b203ee24af587080cb8445460695945d1c7c0f6e49597b"
+    },
+    {
+      "path": "libraries/lwjgl-3.3.3-natives-linux.jar",
+      "sizeBytes": 114627,
+      "sha256": "e663738c519a06f6d659882fa8e4e09af7f10e921929ee5cc54a7587f62ed4c9"
+    },
+    {
+      "path": "libraries/lwjgl-3.3.3-natives-macos-arm64.jar",
+      "sizeBytes": 48620,
+      "sha256": "50ac9ca09e59f051dcacf4dc0b2145e9e916e6ab14633b75694231bfe59314a8"
+    },
+    {
+      "path": "libraries/lwjgl-3.3.3-natives-macos.jar",
+      "sizeBytes": 60543,
+      "sha256": "0294ee4e2dd7ef6befaffafc0bb99a2a89b76070b5cd8302f3d75624b6786d03"
+    },
+    {
+      "path": "libraries/lwjgl-3.3.3-natives-windows.jar",
+      "sizeBytes": 165442,
+      "sha256": "5ee63a19187efe5bb8747fd24f7b13257db348df5ad641113a3695e43f213959"
+    },
+    {
+      "path": "libraries/lwjgl-3.3.3.jar",
+      "sizeBytes": 785029,
+      "sha256": "dc9c7b2d48e8396d68895f8902ffa01e46253de44dfe927533ff09457ebfeec4"
+    },
+    {
+      "path": "libraries/lwjgl-glfw-3.3.3-natives-linux.jar",
+      "sizeBytes": 118478,
+      "sha256": "b8306062b17741f34269088751421f1ac21a597bfbbd0c6c61226301cde744b8"
+    },
+    {
+      "path": "libraries/lwjgl-glfw-3.3.3-natives-macos-arm64.jar",
+      "sizeBytes": 138288,
+      "sha256": "b9451d67bc17c906fb8282a5522f258b022f30569e0b62da001d590a17b45e19"
+    },
+    {
+      "path": "libraries/lwjgl-glfw-3.3.3-natives-macos.jar",
+      "sizeBytes": 140884,
+      "sha256": "a89b55362aec9e5a3bbd1364601bb85b147db6bae68891ca9a232d6cfb2d55ec"
+    },
+    {
+      "path": "libraries/lwjgl-glfw-3.3.3-natives-windows.jar",
+      "sizeBytes": 166368,
+      "sha256": "98155b451dfc6f585089dec77a12f9c05789c4dceb8da472f9d308160101a70d"
+    },
+    {
+      "path": "libraries/lwjgl-glfw-3.3.3.jar",
+      "sizeBytes": 135546,
+      "sha256": "bedc757fd2b1b255146db26b74b9cbd1fcf5644b89b47b104fa721c741604259"
+    },
+    {
+      "path": "libraries/lwjgl-openal-3.3.3-natives-linux.jar",
+      "sizeBytes": 573224,
+      "sha256": "9030fed928a71eac2fdf4ce1643cc4ec724d8710e3b437bdce750bdc9e982b2a"
+    },
+    {
+      "path": "libraries/lwjgl-openal-3.3.3-natives-macos-arm64.jar",
+      "sizeBytes": 471012,
+      "sha256": "3992463a16a8df19f63117b0883ead0ed928dd4df017f55b5e4e12b7a270489a"
+    },
+    {
+      "path": "libraries/lwjgl-openal-3.3.3-natives-macos.jar",
+      "sizeBytes": 519824,
+      "sha256": "8264ae32ac9f413c4f4501863c5f6e7576a6fdabdc5d052d3281bbacc3377f1d"
+    },
+    {
+      "path": "libraries/lwjgl-openal-3.3.3-natives-windows.jar",
+      "sizeBytes": 698720,
+      "sha256": "e3da7c3db25c81db8d425ef1e3dbfa15000b040d669f008b0813c94333ac96c8"
+    },
+    {
+      "path": "libraries/lwjgl-openal-3.3.3.jar",
+      "sizeBytes": 110586,
+      "sha256": "ae0e82767cacf08921f578fba9d84753ddeb00ceada0510a2b4a882be28fbf95"
+    },
+    {
+      "path": "libraries/lwjgl-opengl-3.3.3-natives-linux.jar",
+      "sizeBytes": 80463,
+      "sha256": "d823a92c6a2810b5112da304dcc6abcd4cb102706f74f7e934a223cea2051250"
+    },
+    {
+      "path": "libraries/lwjgl-opengl-3.3.3-natives-macos-arm64.jar",
+      "sizeBytes": 42487,
+      "sha256": "f1b3f1de83f973abae3a4bc32db5b229ae5d55cc80dbbc5f7c841812fe20b5fe"
+    },
+    {
+      "path": "libraries/lwjgl-opengl-3.3.3-natives-macos.jar",
+      "sizeBytes": 41484,
+      "sha256": "4c1073d0e5ae99966d0ef1d6a7795758476d247d930fdc5ec1865e38cb847cce"
+    },
+    {
+      "path": "libraries/lwjgl-opengl-3.3.3-natives-windows.jar",
+      "sizeBytes": 101535,
+      "sha256": "f45e5f60596b03b2e3d8b98a123c855ebd0b5154c8155dc2a56b890ccc907477"
+    },
+    {
+      "path": "libraries/lwjgl-opengl-3.3.3.jar",
+      "sizeBytes": 929192,
+      "sha256": "5062da750e5f7ec89e27e8b67b7d40fa8c4b16890159e35f828116ce6c8eca1e"
+    },
+    {
+      "path": "libraries/lwjgl-stb-3.3.3-natives-linux.jar",
+      "sizeBytes": 231820,
+      "sha256": "c4489068ddc6dc44b103071943f801a2d076634d4b74db470927f84a308219e1"
+    },
+    {
+      "path": "libraries/lwjgl-stb-3.3.3-natives-macos-arm64.jar",
+      "sizeBytes": 183628,
+      "sha256": "b1f65875fd9ddd28097be6076029e2b8fab5ebc1626e21cef761611dfca715c2"
+    },
+    {
+      "path": "libraries/lwjgl-stb-3.3.3-natives-macos.jar",
+      "sizeBytes": 216456,
+      "sha256": "32937a352db4bac3e92aa1bbdae2988a958e4b907ab5b557764cba82db20ba97"
+    },
+    {
+      "path": "libraries/lwjgl-stb-3.3.3-natives-windows.jar",
+      "sizeBytes": 261297,
+      "sha256": "d12ab866fe1169e924ac5b4d6bb7767ae7842a9fc8652798682c0069bb73fcf2"
+    },
+    {
+      "path": "libraries/lwjgl-stb-3.3.3.jar",
+      "sizeBytes": 120283,
+      "sha256": "0cff7aa46ea9d70fcc20857015293ea80fbf21adcac34600c84da9b81a44ca93"
+    },
+    {
+      "path": "libraries/lwjgl-tinyfd-3.3.3-natives-linux.jar",
+      "sizeBytes": 44192,
+      "sha256": "a076fa05a4d174762eab5852ee72c29d14ab10a5654f27fb00664ef1b52c0c05"
+    },
+    {
+      "path": "libraries/lwjgl-tinyfd-3.3.3-natives-macos-arm64.jar",
+      "sizeBytes": 42498,
+      "sha256": "6f7d979414651e343dc8b8b3faade0e2d9e4fdf99d565d5623e12d40dbae4a22"
+    },
+    {
+      "path": "libraries/lwjgl-tinyfd-3.3.3-natives-macos.jar",
+      "sizeBytes": 45865,
+      "sha256": "4465dd46fdf9309c0ce64c3529a0da6792fb6711c3281e8c5dba935e6a9bfc3c"
+    },
+    {
+      "path": "libraries/lwjgl-tinyfd-3.3.3-natives-windows.jar",
+      "sizeBytes": 130253,
+      "sha256": "02285911f1c881735fa4d0eb141ffeaafd9a2bb9349d98f7c1fb8a9cb49c0f58"
+    },
+    {
+      "path": "libraries/lwjgl-tinyfd-3.3.3.jar",
+      "sizeBytes": 13400,
+      "sha256": "ee0515054ee19a3f4088426fee9d879eb2ee657b07e5064e4e2c851f6adcf14b"
+    },
+    {
+      "path": "libraries/lwjgl-xxhash-3.3.3-natives-linux.jar",
+      "sizeBytes": 34114,
+      "sha256": "4c0bf59a665b1ed14adb6cd96ae14475e049441d740b29428ca75c281c40082e"
+    },
+    {
+      "path": "libraries/lwjgl-xxhash-3.3.3-natives-macos-arm64.jar",
+      "sizeBytes": 16911,
+      "sha256": "06773874d8f72df469dc48df8c328ee3c79f2876dec99a69359f279398896c36"
+    },
+    {
+      "path": "libraries/lwjgl-xxhash-3.3.3-natives-macos.jar",
+      "sizeBytes": 29298,
+      "sha256": "b0ab57c7ec6053b8d67c26d8ae2f31a415a712570b97b51f93ccd7892c81d1d8"
+    },
+    {
+      "path": "libraries/lwjgl-xxhash-3.3.3-natives-windows.jar",
+      "sizeBytes": 82238,
+      "sha256": "3a98082fc1b360a6a5a86696b847b9a8e0055706083ebf75d78d096b0e2fb877"
+    },
+    {
+      "path": "libraries/lwjgl-xxhash-3.3.3.jar",
+      "sizeBytes": 41447,
+      "sha256": "dc820da121cb9ec6aed0872a60d341f6dd44941a7ee2fc8a90266140fdc635c4"
+    },
+    {
+      "path": "libraries/lzma-0.0.1.jar",
+      "sizeBytes": 5762,
+      "sha256": "0c3085cb93c3ef95d731c274b6f2dd195aa0405fe9328d69cab7f5e899d5e124"
+    },
+    {
+      "path": "libraries/markdown-jvm-0.7.3.jar",
+      "sizeBytes": 548313,
+      "sha256": "893abb31f15b6216f74dc704c0c6bf1e567dcf2b62cca29cf42e4f53153637ac"
+    },
+    {
+      "path": "libraries/minio-8.5.7.jar",
+      "sizeBytes": 399227,
+      "sha256": "0f3388a93fc592ff2c59fbda1ad52c3b03a22d2c62212db21d2496ebf1e4987f"
+    },
+    {
+      "path": "libraries/mixin-0.8.6.jar",
+      "sizeBytes": 1124168,
+      "sha256": "d64c6db921b76cd55c1b01477a9588349eebbc4fe6ae3863d0cc4cde4cb2d944"
+    },
+    {
+      "path": "libraries/netty-all-4.1.128.Final.jar",
+      "sizeBytes": 4530,
+      "sha256": "93e05a3cd8a7f8737386c991abd80b74a20e151f7dc2dd53bca11578ccd66b3b"
+    },
+    {
+      "path": "libraries/netty-buffer-4.1.128.Final.jar",
+      "sizeBytes": 354500,
+      "sha256": "25befb6b203b492ead32a50e7374a250504a4b8bcc62bbb89592efdf33fe3e9e"
+    },
+    {
+      "path": "libraries/netty-codec-4.1.128.Final.jar",
+      "sizeBytes": 357369,
+      "sha256": "d2aad8198820b1d0856fa93fe0ac6f1935bd950a48ab2b85e5b4adbdfc5fa7b4"
+    },
+    {
+      "path": "libraries/netty-codec-dns-4.1.128.Final.jar",
+      "sizeBytes": 67363,
+      "sha256": "bb9a96f2457e21a70a7edba2f0b88ebc5f06ca8851f62153ccc69c0e9dc8e208"
+    },
+    {
+      "path": "libraries/netty-codec-haproxy-4.1.128.Final.jar",
+      "sizeBytes": 37848,
+      "sha256": "f3648cea7cb027ef0a7d30ae5c4cdf5560954ca7e1564c23bd4d01e2e66ee2fc"
+    },
+    {
+      "path": "libraries/netty-codec-http-4.1.128.Final.jar",
+      "sizeBytes": 681418,
+      "sha256": "764c42966dcc9df85413e20e0a7f97d3cb682219772fb8dca326e0a2f0e5f5f3"
+    },
+    {
+      "path": "libraries/netty-codec-http2-4.1.128.Final.jar",
+      "sizeBytes": 499528,
+      "sha256": "4679b5de556ae5458733f844657d912de21fdb969724b6cbd5b1942aa094c9e6"
+    },
+    {
+      "path": "libraries/netty-codec-memcache-4.1.128.Final.jar",
+      "sizeBytes": 44796,
+      "sha256": "a476e82d64984f28bcb6c6b0b2a82f07fc8693117c113f4814cb3e8deebccc01"
+    },
+    {
+      "path": "libraries/netty-codec-mqtt-4.1.128.Final.jar",
+      "sizeBytes": 113782,
+      "sha256": "e1381cc23ecb0590ccb7e9296e739f77b3d99f46e66a7ea81a5117bd64165a30"
+    },
+    {
+      "path": "libraries/netty-codec-redis-4.1.128.Final.jar",
+      "sizeBytes": 46072,
+      "sha256": "2e6cada6bda2b676a62fe6d12ab8bc3e7ed4fb5e4be955ed2b66059c932cc3f5"
+    },
+    {
+      "path": "libraries/netty-codec-smtp-4.1.128.Final.jar",
+      "sizeBytes": 22231,
+      "sha256": "1adae771a8326f652fb9308586e5db8ae9353f48d51425a0e808318b9cf621c6"
+    },
+    {
+      "path": "libraries/netty-codec-socks-4.1.128.Final.jar",
+      "sizeBytes": 121086,
+      "sha256": "8316e8159354412aaff00f8ece68eac1f77a19707d1f59dabf50457cb752eceb"
+    },
+    {
+      "path": "libraries/netty-codec-stomp-4.1.128.Final.jar",
+      "sizeBytes": 34695,
+      "sha256": "ef90c7c7ab2bed31a12978533a79352501fb8bffe0294c87b167e021e5fabe6e"
+    },
+    {
+      "path": "libraries/netty-codec-xml-4.1.128.Final.jar",
+      "sizeBytes": 19883,
+      "sha256": "92e621208e8417d5f08bba812aa045e6ba6c93fcbd15a01f1846e2e3ac9ccf6f"
+    },
+    {
+      "path": "libraries/netty-common-4.1.128.Final.jar",
+      "sizeBytes": 724595,
+      "sha256": "575d810342b2400faf8085b8fc0bde09432daf6e8b927c4dcb246f0ee5b3e98f"
+    },
+    {
+      "path": "libraries/netty-handler-4.1.128.Final.jar",
+      "sizeBytes": 580770,
+      "sha256": "d9e3fd9b839cb207030ffd385d5b3c087dbf746a643056db544f16318573975f"
+    },
+    {
+      "path": "libraries/netty-handler-proxy-4.1.128.Final.jar",
+      "sizeBytes": 25707,
+      "sha256": "808434f2da993fb0f327663aa8ef30756c7ee94b164221388ec63fed4a9f6aa6"
+    },
+    {
+      "path": "libraries/netty-handler-ssl-ocsp-4.1.128.Final.jar",
+      "sizeBytes": 26894,
+      "sha256": "392468d4e40aa9129cbc810202a3f980ddaec359215be93d1fb67ca6907d6819"
+    },
+    {
+      "path": "libraries/netty-resolver-4.1.128.Final.jar",
+      "sizeBytes": 37903,
+      "sha256": "3ac2b8f0a00fec785a0648172fbb8bac6a8e8f54e7d5aa958790e5de70504b6b"
+    },
+    {
+      "path": "libraries/netty-resolver-dns-4.1.128.Final.jar",
+      "sizeBytes": 188347,
+      "sha256": "271c27748fcae5e68bee74af81a150d1c40b4c213d836dcb15843c090a452c4a"
+    },
+    {
+      "path": "libraries/netty-resolver-dns-classes-macos-4.1.128.Final.jar",
+      "sizeBytes": 9208,
+      "sha256": "67a13f8452e556c643e18b34da5d18d003ef9a07769220074f06844b0c330503"
+    },
+    {
+      "path": "libraries/netty-resolver-dns-native-macos-4.1.128.Final-osx-aarch_64.jar",
+      "sizeBytes": 19974,
+      "sha256": "b6f9ba77c111a1826d56b3c38f3631fb3780f6291b9b7f7be28d794768405608"
+    },
+    {
+      "path": "libraries/netty-resolver-dns-native-macos-4.1.128.Final-osx-x86_64.jar",
+      "sizeBytes": 19799,
+      "sha256": "133d251b15d67e70641cf85217850d4115aaa516365f39ed08e11912da24ee2d"
+    },
+    {
+      "path": "libraries/netty-transport-4.1.128.Final.jar",
+      "sizeBytes": 521536,
+      "sha256": "dc9107aae931cb5cf59471835358f68b4cb9548c9fb0a9fe06acf2a3d3d422f2"
+    },
+    {
+      "path": "libraries/netty-transport-classes-epoll-4.1.128.Final.jar",
+      "sizeBytes": 147683,
+      "sha256": "17b355fd1c9c3df2706c0ea9324c7ece65f2ca7498de0e822ef90823d75bbe6d"
+    },
+    {
+      "path": "libraries/netty-transport-classes-kqueue-4.1.128.Final.jar",
+      "sizeBytes": 112388,
+      "sha256": "a499bf4b31ba4218b4647413b8cc42a9d3c057cfd1529554f8b6578c7310882b"
+    },
+    {
+      "path": "libraries/netty-transport-native-epoll-4.1.128.Final-linux-aarch_64.jar",
+      "sizeBytes": 42520,
+      "sha256": "31848aa096e7565500081995ad89075b160ee78125b46e36d81dfed39e97212f"
+    },
+    {
+      "path": "libraries/netty-transport-native-epoll-4.1.128.Final-linux-riscv64.jar",
+      "sizeBytes": 36865,
+      "sha256": "ccde7097a22f7488ee0aab54e7bcb7286f0ec2e5d0c057d56607e8100e35c465"
+    },
+    {
+      "path": "libraries/netty-transport-native-epoll-4.1.128.Final-linux-x86_64.jar",
+      "sizeBytes": 40825,
+      "sha256": "b25dbf773353a35ed0b0f97119d4d685878aff340189c9c7c52c4a14c154c724"
+    },
+    {
+      "path": "libraries/netty-transport-native-kqueue-4.1.128.Final-osx-aarch_64.jar",
+      "sizeBytes": 26345,
+      "sha256": "02c12283cbd853747e9599bf6aeb7fd8da9f8815fd069b0cb664a2279aa5d96d"
+    },
+    {
+      "path": "libraries/netty-transport-native-kqueue-4.1.128.Final-osx-x86_64.jar",
+      "sizeBytes": 25484,
+      "sha256": "9840b6c1fc1ab1e9082df1aee9e7e5cda29f3dcf78faf95ee726dbba07d8b0d0"
+    },
+    {
+      "path": "libraries/netty-transport-native-unix-common-4.1.128.Final.jar",
+      "sizeBytes": 44326,
+      "sha256": "8563e2229149d942988d4a7a0ec7c01b9a05def52ad2844633de25c5c0a6869f"
+    },
+    {
+      "path": "libraries/netty-transport-rxtx-4.1.128.Final.jar",
+      "sizeBytes": 18240,
+      "sha256": "da3302b486adc6e4351057017299210c9198b8a2cc216ca34e2907d1c1d6dd3b"
+    },
+    {
+      "path": "libraries/netty-transport-sctp-4.1.128.Final.jar",
+      "sizeBytes": 50866,
+      "sha256": "c9fe978dcc2f66d4ac83d9a08015f961d95ad7bd1130ab0dd1a49a3d988688f3"
+    },
+    {
+      "path": "libraries/netty-transport-udt-4.1.128.Final.jar",
+      "sizeBytes": 32183,
+      "sha256": "4797bf7098212060a5240828a591586ddb3e4edc62361f465ae20cee7aed45aa"
+    },
+    {
+      "path": "libraries/oshi-core-6.9.1.jar",
+      "sizeBytes": 1022562,
+      "sha256": "1706d36f48e9e1a3dc104f48118e1af67362ddc18c432bf1ea5eaa36d22d374f"
+    },
+    {
+      "path": "libraries/realms-1.3.5.jar",
+      "sizeBytes": 353818,
+      "sha256": "a8ced4924d0e285ab287d94889e9920f855b9e13ef42e1c7468377b3c13bdb2b"
+    },
+    {
+      "path": "libraries/reflections-0.10.2.jar",
+      "sizeBytes": 130398,
+      "sha256": "938a2d08fe54050d7610b944d8ddc3a09355710d9e6be0aac838dbc04e9a2825"
+    },
+    {
+      "path": "libraries/rsocket-core-jvm-0.15.4.jar",
+      "sizeBytes": 465379,
+      "sha256": "c9da2f458957c04fc5ff33d7950d100baee013195824f1f94f4ff52f6d82555b"
+    },
+    {
+      "path": "libraries/rsocket-ext-client-master-8d109853.jar",
+      "sizeBytes": 29908,
+      "sha256": "6f2a2f990c4e2e421cbbb802073eb0c8aa63c83da6725ead240fe1710dea5d21"
+    },
+    {
+      "path": "libraries/rsocket-ext-common-master-8d109853.jar",
+      "sizeBytes": 54691,
+      "sha256": "8cfe726808fbd121a60925e1f79c646221b206a7a79c064133f0a3b26847e35e"
+    },
+    {
+      "path": "libraries/rsocket-ktor-client-jvm-0.15.4.jar",
+      "sizeBytes": 17976,
+      "sha256": "ce62239d86b5c3fe0bbbc5bdc5c507868dd3cf0df08970ccbe4ed8573b982a1c"
+    },
+    {
+      "path": "libraries/rsocket-ktor-jvm-0.15.4.jar",
+      "sizeBytes": 1343,
+      "sha256": "f3a3004e6b4c375ff759a79fdbe4169f8c3ed9a031609ccf00ac0abac64fe49f"
+    },
+    {
+      "path": "libraries/rsocket-transport-ktor-jvm-0.15.4.jar",
+      "sizeBytes": 1556,
+      "sha256": "705bf29615faf87b17b113840289e17a693271f48bf7c828c04a95ce146d7029"
+    },
+    {
+      "path": "libraries/rsocket-transport-ktor-websocket-jvm-0.15.4.jar",
+      "sizeBytes": 6123,
+      "sha256": "4aff5b9a5b45da9b91d9e982a9cccd9ade05cd2a1d35e834190f8a5f95790207"
+    },
+    {
+      "path": "libraries/scala-actors-migration_2.11-1.1.0.jar",
+      "sizeBytes": 58018,
+      "sha256": "b89d0beb76df20c7b2c2bee59ba53b802cc48566bc3e89ac96ce6361c5c2ee38"
+    },
+    {
+      "path": "libraries/scala-compiler-2.11.1.jar",
+      "sizeBytes": 13449765,
+      "sha256": "3aa616f5c56d2052fc5e3231f3e8cf1736f876caff0142a66096fc5b4dc87ae5"
+    },
+    {
+      "path": "libraries/scala-continuations-library_2.11-1.0.2.jar",
+      "sizeBytes": 25365,
+      "sha256": "8dd0a4941f4564117cc991734ca36aa53dff6bb0be329f39eab46d8819f60d1a"
+    },
+    {
+      "path": "libraries/scala-continuations-plugin_2.11.1-1.0.2.jar",
+      "sizeBytes": 206575,
+      "sha256": "79329971a31ede7b6823f21a6ab765506b4093d9276debdc9dbe17b996884f2b"
+    },
+    {
+      "path": "libraries/scala-library-2.11.1.jar",
+      "sizeBytes": 5538130,
+      "sha256": "088bcb80f71b6e6a2a31d2fe7288c1fd64f19663ce281b924cdfab3fb105f4f3"
+    },
+    {
+      "path": "libraries/scala-parser-combinators_2.11-1.0.1.jar",
+      "sizeBytes": 419701,
+      "sha256": "19495ce701fd9ba3c499c137e3ad5364acee8f87a01ef99e912f995a23fd4cb1"
+    },
+    {
+      "path": "libraries/scala-reflect-2.11.1.jar",
+      "sizeBytes": 4372892,
+      "sha256": "41938d1e89670979dd783102777a8b879999f4fb00a5b811b51c105b02a9d4f8"
+    },
+    {
+      "path": "libraries/scala-swing_2.11-1.0.1.jar",
+      "sizeBytes": 726500,
+      "sha256": "4a7c757d4d87dd37382bd777ad611b5875748aef148277cf25bb39eebb496d07"
+    },
+    {
+      "path": "libraries/scala-xml_2.11-1.0.2.jar",
+      "sizeBytes": 648678,
+      "sha256": "13c0d8d442bde14b73af3ed60e8d53452f9e1ad62ffbe3d944cb918df652db6f"
+    },
+    {
+      "path": "libraries/slf4j-api-2.0.7.jar",
+      "sizeBytes": 63635,
+      "sha256": "5d6298b93a1905c32cda6478808ac14c2d4a47e91535e53c41f7feeb85d946f4"
+    },
+    {
+      "path": "libraries/slf4j-simple-1.7.36.jar",
+      "sizeBytes": 15333,
+      "sha256": "2f39bed943d624dfa8f4102d0571283a10870b6aa36f197a8a506f147010c10f"
+    },
+    {
+      "path": "libraries/snakeyaml-2.2.jar",
+      "sizeBytes": 334352,
+      "sha256": "1467931448a0817696ae2805b7b8b20bfb082652bf9c4efaed528930dc49389b"
+    },
+    {
+      "path": "libraries/soundsystem-20120107.jar",
+      "sizeBytes": 65020,
+      "sha256": "2882d64550240dd0c026724da664d9f97ef205c91d6a85273d10790d88608f34"
+    },
+    {
+      "path": "libraries/trove4j-3.0.3.jar",
+      "sizeBytes": 2523218,
+      "sha256": "3c8616203d61a12a7e3487e8b34f3c198c2b5ba9e90da0c7ea32d99cd4958012"
+    },
+    {
+      "path": "libraries/twitch-5.16.jar",
+      "sizeBytes": 52315,
+      "sha256": "f921abc9c792f594f7fc6fc06b4a7ea330b646ea5ed3785e3589f90b16b2aad1"
+    },
+    {
+      "path": "libraries/twitch-external-platform-4.5-natives-windows-64.jar",
+      "sizeBytes": 7457619,
+      "sha256": "6428eb438f53afc563d58c7f2a563ca9fcaae80db3520af744de5e5db1c9df6a"
+    },
+    {
+      "path": "libraries/twitch-platform-5.16-natives-osx.jar",
+      "sizeBytes": 418331,
+      "sha256": "8e91fe7ea60f5b584c9d4e3746e89b69c9bbcd868e015813530ecf12b3d25aeb"
+    },
+    {
+      "path": "libraries/twitch-platform-5.16-natives-windows-64.jar",
+      "sizeBytes": 463390,
+      "sha256": "e4857d9ede9e94a75642cfbd4f9ca45981c76de49842716bea7e4081c2ba3245"
+    },
+    {
+      "path": "libraries/unirest-java-3.14.5.jar",
+      "sizeBytes": 206218,
+      "sha256": "f0cc339221e9e759681bd1435f5918f460beadec4745c27a8719af6da26d45e5"
+    },
+    {
+      "path": "libraries/unirest-objectmapper-jackson-3.14.5.jar",
+      "sizeBytes": 3452,
+      "sha256": "ac848de3807247de2bfc2e4eca6babc5d10de1471d4c5d757f186487330be869"
+    },
+    {
+      "path": "libraries/vecmath-1.3.1.jar",
+      "sizeBytes": 289881,
+      "sha256": "dbaa088690a23a954eff669a99d2452a24dd9f10d866725ff5d29ff4740a897e"
+    },
+    {
+      "path": "libraries/versioncompare-1.4.1.jar",
+      "sizeBytes": 6417,
+      "sha256": "d26827bc70e3a6e070f5b728e2f84dbf0a29139b22181af6566e0c16f08d4465"
+    },
+    {
+      "path": "mods/1.7.10/[1.7.10]bspkrsCore-universal-6.16.jar",
+      "sizeBytes": 175861,
+      "sha256": "6bc8595be898ec7f324ea1040d81b5239ac8d2b527944458213476d1333d0613"
+    },
+    {
+      "path": "mods/1.7.10/Alfheim-Modular-11.jar",
+      "sizeBytes": 284980,
+      "sha256": "5b2de5456949f0fee28d9a2dd9814009bc7a0d3532e93605cf7ddcac0e5a4813"
+    },
+    {
+      "path": "mods/1.7.10/Baubles-1.7.10-1.0.1.10.jar",
+      "sizeBytes": 143181,
+      "sha256": "a64a212829e5be953c92e73efc2d98826e99c8d37854a916e08b72a88411d85b"
+    },
+    {
+      "path": "mods/1.7.10/CodeChickenLib-1.7.10-1.1.3.141.jar",
+      "sizeBytes": 291338,
+      "sha256": "b3de38261957e08cd64a9cb1d4266e885c9c6831c871e7acc04bdcad6d93e375"
+    },
+    {
+      "path": "mods/1.7.10-ASJCore-1.1.2.3.jar",
+      "sizeBytes": 2224936,
+      "sha256": "5b2f38d5395df7a82a1c589bc22f4dbf80c88d1b188de8646d90bb5b15b28ac7"
+    },
+    {
+      "path": "mods/airdrops-1.7.10-0.1.0.jar",
+      "sizeBytes": 662643,
+      "sha256": "8215d54345611f3569629b1c34321a7ffffb42382b2381d7766f693364918c9b"
+    },
+    {
+      "path": "mods/Alfheim-BETA-38.jar",
+      "sizeBytes": 17456203,
+      "sha256": "a689cfa83e73ab6230d7d29290cf24c0e417692f128f26018c48d925b6d8c1e4"
+    },
+    {
+      "path": "mods/AnvilRepairFix-master-45d157ba.jar",
+      "sizeBytes": 2279,
+      "sha256": "f2f782bbaeb4a635751e3295c900bfd7b105bada36baa9ec8c61f880a86d367a"
+    },
+    {
+      "path": "mods/appliedenergistics2-rv3-beta-6.jar",
+      "sizeBytes": 4867445,
+      "sha256": "5a4730852ffd4da6e8afea5a66d75a3cc74f91c5cef27081adb589d773579e83"
+    },
+    {
+      "path": "mods/ArmorStatusHUD-master-f3c7993b.jar",
+      "sizeBytes": 22712,
+      "sha256": "96d8a05841c64029a82f085f811c47b035c2e46d5e8ee2f32cbf8bf8aca3e7c8"
+    },
+    {
+      "path": "mods/Avaritia-1.13.jar",
+      "sizeBytes": 733492,
+      "sha256": "7fdf1cc8000c1ebe3df2359da4da14f779310c9f12804e07baa7cd54a592071d"
+    },
+    {
+      "path": "mods/AvaritiaNEI-1.7.10-1.3.2.jar",
+      "sizeBytes": 14852,
+      "sha256": "476fb9dbedbf892671ab1beb50e594e87f2428c6685d606b15387776c37c854d"
+    },
+    {
+      "path": "mods/bdlib-1.9.4.109-mc1.7.10.jar",
+      "sizeBytes": 1480601,
+      "sha256": "0e79c531a52095ee8ee489ded452973c4a2619e2f3b482e42e97d4a70addaa4d"
+    },
+    {
+      "path": "mods/BeeBetterAtBees-0.3.jar",
+      "sizeBytes": 1272,
+      "sha256": "1fd018a6f4c300ab1e0882bb2c2e5aa7347a9934d0916009f7468644693264dc"
+    },
+    {
+      "path": "mods/BetterQuesting-master-46cc8414.jar",
+      "sizeBytes": 1324360,
+      "sha256": "94c0cf3d43e49d8122444af4361e7b4305135ba77e6b93ca71404e8703f36f19"
+    },
+    {
+      "path": "mods/BetterSigns-master-7c167d38.jar",
+      "sizeBytes": 12575,
+      "sha256": "1ac5e0767dc0f0031266dcf8c8a97811295c9e7beaca6a528ee649d8bbde3a47"
+    },
+    {
+      "path": "mods/binnie-mods-1.7.10-2.0.22.7.jar",
+      "sizeBytes": 3067879,
+      "sha256": "7dd27ad5cf7a122740ef7ec510036bc58b1a335632615d6f6bc6b127827112bc"
+    },
+    {
+      "path": "mods/BloodArsenal-1.7.10-1.2-5.jar",
+      "sizeBytes": 648186,
+      "sha256": "2b1122ce4b2564c99e452519ff5ec34eb7b3bd87cfc537ca0e227915dc768a04"
+    },
+    {
+      "path": "mods/BloodMagic-1.7.10-1.3.3-17.jar",
+      "sizeBytes": 7856086,
+      "sha256": "b1a31f1e86ef314aff41d258e6053014c8716b2cbf0461fb0a47b7f6be8b1e04"
+    },
+    {
+      "path": "mods/Botania-r1.8-249.jar",
+      "sizeBytes": 12226908,
+      "sha256": "c26f51f38551ea4defff0ad0fab4cb981c22ccfbdaf6d86033b1fdd9b5160a4d"
+    },
+    {
+      "path": "mods/BrandonsCore-1.0.0.12.jar",
+      "sizeBytes": 90514,
+      "sha256": "7d8e508e97dce7e1f51e434db85f84098281600bff3581458020913e48547874"
+    },
+    {
+      "path": "mods/CodeChickenCore-1.7.10-1.0.7.47.jar",
+      "sizeBytes": 124798,
+      "sha256": "82f6d0a7f2c9be93f1a510b9d7a229323ab86794ed319a62bf6427bdca25f6d0"
+    },
+    {
+      "path": "mods/CoFHCore-[1.7.10]3.1.4-329.jar",
+      "sizeBytes": 773768,
+      "sha256": "ebf1f6425704b024191c5bc1dc97261165c4e69293a39a2c0fa6b3791d6495d4"
+    },
+    {
+      "path": "mods/ContainerWarden-master-a38f002f.jar",
+      "sizeBytes": 35833,
+      "sha256": "1eaadf2b72929a453ce019faec8c2e6c161a53f01641a85429981729aeb9cbfa"
+    },
+    {
+      "path": "mods/CraftTweaker-main-636ba307.jar",
+      "sizeBytes": 985313,
+      "sha256": "032f35ba35ba4ebf4c223f31d0b5f8078e1b24a993633a7480f20468f374ebdf"
+    },
+    {
+      "path": "mods/CreativeCore-master-74e33014.jar",
+      "sizeBytes": 248691,
+      "sha256": "af8530da25335518c1dbf45d8f50831b97a9c480588d3f0b6f5dd625be0290cb"
+    },
+    {
+      "path": "mods/DecorativeAPI-client.jar",
+      "sizeBytes": 50564,
+      "sha256": "959412c82ab64566a584bf798302d7c183751c6b33b9f27079e23935e16d6630"
+    },
+    {
+      "path": "mods/Draconic-Evolution-1.7.10-1.0.2h.jar",
+      "sizeBytes": 7243846,
+      "sha256": "56b56d0c0638771af4e7c9c11e331931812c5f93059e068403d79a36f61025c9"
+    },
+    {
+      "path": "mods/EventHelper-master-ec0a1f42.jar",
+      "sizeBytes": 236589,
+      "sha256": "cb6ffdae27bded90fa075a710f15de357216d0b18104772d4af9a36e67c554a9"
+    },
+    {
+      "path": "mods/FastInventories-master-31c2c101.jar",
+      "sizeBytes": 48659,
+      "sha256": "92106fcf9965c15c2b2d7e3ee527b01d7fa3389f8577184986bb2e3975d43211"
+    },
+    {
+      "path": "mods/ForbiddenMagic-1.7.10-0.575.jar",
+      "sizeBytes": 595337,
+      "sha256": "5da21c8dd1c2c4e8cadad461d928ac85b85d1fe391f65cea409218bf07155c45"
+    },
+    {
+      "path": "mods/forestry_1.7.10-4.2.16.64.jar",
+      "sizeBytes": 2715349,
+      "sha256": "11727e19fe6a6dc022c8674aeb6fcd65c32f21398620260ed50e937514c03bd7"
+    },
+    {
+      "path": "mods/GeckoLib-1.7.10.jar",
+      "sizeBytes": 422012,
+      "sha256": "8aa4cf88f0ab2fff5a40d722e9b8540bd323ec6b015a5edb322c7b4ec4b339de"
+    },
+    {
+      "path": "mods/Gendustry-1.7.10-client.jar",
+      "sizeBytes": 553697,
+      "sha256": "28f4b33f7e97ccda047ac8a8cb15f2209af278506b570ad507a5caea44a53355"
+    },
+    {
+      "path": "mods/guides.jar",
+      "sizeBytes": 104791,
+      "sha256": "32c991da07c9bd470f810bdd6c41765aebc8bf1a4ec4aae688e6942704928736"
+    },
+    {
+      "path": "mods/HUDIntegration-1.0.jar",
+      "sizeBytes": 11539,
+      "sha256": "80f5c2d1269f3ea789e353525d793255aa2565548f3aa8dc368d0d3c4c1407d9"
+    },
+    {
+      "path": "mods/IC2Tweaker-1.7.10-1.0.2.jar",
+      "sizeBytes": 7523,
+      "sha256": "e1870a28a57dde70a5bfc5d1c8c0681644e3f6ceb124f753919a537d3f5a424e"
+    },
+    {
+      "path": "mods/industrialcraft-2-2.2.827-experimental.jar",
+      "sizeBytes": 3553400,
+      "sha256": "8f314ba0134ee2a9e3de005791a5d67b1f547593288e9ed8e5544b7251999ea8"
+    },
+    {
+      "path": "mods/InventoryTweaks-1.7.10-Client.jar",
+      "sizeBytes": 173766,
+      "sha256": "6bf6b2293ad3881c356c8fdfec9d32341a75fcffa4ebc5bf49181c06fe3fe3d6"
+    },
+    {
+      "path": "mods/InvTweaksHelper-master-f6d868a4.jar",
+      "sizeBytes": 6001,
+      "sha256": "caa8219a2959322f84f96552d9b3175df10564b429bd32fe4481c3b71d38128a"
+    },
+    {
+      "path": "mods/ItemPhysicLite-master-1bb71115.jar",
+      "sizeBytes": 18661,
+      "sha256": "cdaf80c84f34943206db683c0768718da641d63835db6bb310ccf19fdb5eb9dd"
+    },
+    {
+      "path": "mods/JourneyMap-master-03eb1e51.jar",
+      "sizeBytes": 1236346,
+      "sha256": "2a47fd0b5ae989fb6542e63c0034a72cb47f843584cfb0f2ef1b9fc63d1ff92e"
+    },
+    {
+      "path": "mods/JustEnoughCalculation-1.7.10-3.8.5.jar",
+      "sizeBytes": 381802,
+      "sha256": "b7b469039ad5b0f9d9455044402419ce701d1c65c89f0f37a5d2d554260646b4"
+    },
+    {
+      "path": "mods/LanguagePatcher-master-185f579f.jar",
+      "sizeBytes": 5868,
+      "sha256": "f0d0cf061afbe7c6ccd8c2fb58a60e6a79ab30919d0ea73a7dc09a2037939aaa"
+    },
+    {
+      "path": "mods/LoliAE2-1.7.10-client.jar",
+      "sizeBytes": 1913930,
+      "sha256": "7dbd3640c4ebf3fed42897053cdbedfe96520046a7ea6a7536c1648911b4dccf"
+    },
+    {
+      "path": "mods/LoliDecorative-summer-wipe-tmr-f5c1dd94.jar",
+      "sizeBytes": 376823,
+      "sha256": "4caf9e3876ecfca950c5527513407f476d79b1871448e1b0f8089d2d2cc98dcf"
+    },
+    {
+      "path": "mods/LoliDimensions-1.7.10-client.jar",
+      "sizeBytes": 48325283,
+      "sha256": "6e47f1766406d6952e5d7e78dd03805840e1bf0674b575a73ff31e1c65013dbc"
+    },
+    {
+      "path": "mods/LoliDragonMight-1.7.10-client.jar",
+      "sizeBytes": 2427699,
+      "sha256": "2a60b41252d9761e3173996d1f0855e73c223600f460e27a46566e5a0937b4cc"
+    },
+    {
+      "path": "mods/lolidungeons-main-6e9def0c.jar",
+      "sizeBytes": 144585,
+      "sha256": "4bfaff83ae6ad245c70c18e51b11d41e6de13565074943f3768749d257c92e67"
+    },
+    {
+      "path": "mods/LoliEnergistics-1.7.10-client.jar",
+      "sizeBytes": 21202540,
+      "sha256": "5e2b0607ad65c9550d420e25f228c9b13b9ac3199b9b596c4aeb739d5c3cf8fb"
+    },
+    {
+      "path": "mods/LoliEnergyRelics-1.7.10-client.jar",
+      "sizeBytes": 194709,
+      "sha256": "59c5d451daa51f0d8a0157209fb17f3139044995601211ccafdec82d9d728bad"
+    },
+    {
+      "path": "mods/LoliForestry-1.7.10-client.jar",
+      "sizeBytes": 668235,
+      "sha256": "683a4fcd745cb83d77dee0a5fa7543e48bc2238a7d68447551a2617408e9aea7"
+    },
+    {
+      "path": "mods/LoliHooks-master-aa342203.jar",
+      "sizeBytes": 116809,
+      "sha256": "71b7a7116085c005f3bbfcd5d9ded97094b8fa38c908ab017073be4238f2d7e7"
+    },
+    {
+      "path": "mods/LoliMagically-1.7.10-client.jar",
+      "sizeBytes": 7115000,
+      "sha256": "02d77d7508f4214c9792faf4899338993fba743b5cbb68263a3ad2b776dc7d5c"
+    },
+    {
+      "path": "mods/LoliMod-1.7.10-client.jar",
+      "sizeBytes": 22103633,
+      "sha256": "1d24539742d1c08a909beaa996b06af4308b4b14ba1c7e2ffbd597f92002594b"
+    },
+    {
+      "path": "mods/LoliUtility-1.7.10-client.jar",
+      "sizeBytes": 3702947,
+      "sha256": "0934a9335014f0a28e24b90e2344c45a65e578142a27c72c12a7791af5a3675c"
+    },
+    {
+      "path": "mods/LoliWeCUI-master-7296045c.jar",
+      "sizeBytes": 20947,
+      "sha256": "e7380ba4cc289e2b4ab5b16673d8e3d2f4fbda3880e15e46e3cc9993e4bcf66b"
+    },
+    {
+      "path": "mods/luminous-1.7.10.jar",
+      "sizeBytes": 8442849,
+      "sha256": "2d6894ac6798b2be9e781b241772137467c8b5dc0747c065ef3d7b5be6dad099"
+    },
+    {
+      "path": "mods/LWSL-Mod-client.jar",
+      "sizeBytes": 92567,
+      "sha256": "2ad8ca67b6db686cdf3564426a539a84b104dffd124c55b20f28848a854891f0"
+    },
+    {
+      "path": "mods/magicbees-1.7.10-2.4.4.jar",
+      "sizeBytes": 498540,
+      "sha256": "ff1e30708801caafa9ac594976facc65d53c72f79118a7c40b1d00bcbf78f113"
+    },
+    {
+      "path": "mods/Mantle-1.7.10-0.3.2b.jar",
+      "sizeBytes": 183317,
+      "sha256": "a7040e1a6c47d93bea80cdd8ebdd642b8fe64ee621c7a77eeac20a7ef56ba4a7"
+    },
+    {
+      "path": "mods/MCTags-1.7.10.jar",
+      "sizeBytes": 107814,
+      "sha256": "355669d965c78334e4c6c930409ea165e981c2e41f1187a1adb6653264646a0f"
+    },
+    {
+      "path": "mods/MinecraftPerformancePrimitives-master-72068fa1.jar",
+      "sizeBytes": 579595,
+      "sha256": "b6e1fe45666ad3d175b9f685572573300bace48fabcf1de219f76c39006d72d5"
+    },
+    {
+      "path": "mods/MMLib-autumn-wipe-6c801863.jar",
+      "sizeBytes": 786958,
+      "sha256": "caf50df01519085cd6b6ca1c5538b2ca02e7976f93ba24b56ba5df9e20a1e9df"
+    },
+    {
+      "path": "mods/ModTweaker2-master-81fcf0f2.jar",
+      "sizeBytes": 338474,
+      "sha256": "3e62c4f0c16fa70443800e8083cb6a44d13875f2e4fced273393fab3be9ec12b"
+    },
+    {
+      "path": "mods/MouseTweaks-master-63bd8055.jar",
+      "sizeBytes": 20406,
+      "sha256": "5db499cc639854982bb73b828e9be5693491d1272a4193f9130ec0d615eff69d"
+    },
+    {
+      "path": "mods/msw-main-5950ee98.jar",
+      "sizeBytes": 60155330,
+      "sha256": "5188cad4fe41ff2d121875764bd3f1d370810e126a426d215a8e851f820edc50"
+    },
+    {
+      "path": "mods/neiaddons-master-10e77ff8.jar",
+      "sizeBytes": 69253,
+      "sha256": "ef9f3f9b914b05a9248037c205d453e8922db0ad4d38ce737b20b8bed18285ab"
+    },
+    {
+      "path": "mods/NEIIntegration-summer-wipe-fbf18adb.jar",
+      "sizeBytes": 78900,
+      "sha256": "a28263c775b1ae47c6f1f036594bc8d55ea958b5832dfde3c49344b1fda61f18"
+    },
+    {
+      "path": "mods/NotEnoughItems-2.3.83-GTNH.jar",
+      "sizeBytes": 745023,
+      "sha256": "07ccdfe7bff12b6ee337eef5ab210ba9be74fa44979ed64ca31e9900f944a63a"
+    },
+    {
+      "path": "mods/Omicron-client.jar",
+      "sizeBytes": 772588,
+      "sha256": "9ef92d2507a2621c90e0d71edee817c3e028a70fda76245621498535c9c4029a"
+    },
+    {
+      "path": "mods/OmniCraft.jar",
+      "sizeBytes": 89525,
+      "sha256": "4c6773ac3ffb687f7d245d9dff58e0a8c8fc59928b30205897f377d2593fa243"
+    },
+    {
+      "path": "mods/RealmBlockLimiter-master-b0f16c33.jar",
+      "sizeBytes": 15118,
+      "sha256": "a3c16dd862343cb180579ce9d648d0c9db1196edcecd190263b18b82edd3d04e"
+    },
+    {
+      "path": "mods/spark-1.7.10.jar",
+      "sizeBytes": 4622317,
+      "sha256": "bd231b720c9fc37af4a52db42c778e785b77c3939f5f78ed99566b8753bbaae4"
+    },
+    {
+      "path": "mods/SpawnTrickLib-1.7.10-1.0.1.jar",
+      "sizeBytes": 29384,
+      "sha256": "10fab9e4c07daa321778e538f5104499f40093ab0d9a189819638cc2c2f52493"
+    },
+    {
+      "path": "mods/StandardExpansion-master-46cc8414.jar",
+      "sizeBytes": 335198,
+      "sha256": "7ef1be26adba7133c1e8c2027b36deb76934dace9cc5ed851982cc246ee85bb4"
+    },
+    {
+      "path": "mods/Tainted-Magic-1.7.10-8.0.4.jar",
+      "sizeBytes": 2579325,
+      "sha256": "1fdd5df9ef6e19cf74e2231aa251e6b66e469c020e3842b23329a9f5a046fc38"
+    },
+    {
+      "path": "mods/tcinventoryscan-mc1.7.10-1.0.11.jar",
+      "sizeBytes": 15154,
+      "sha256": "b222fd6570fb11ef64412609c7cad8b51affec8e62a7bf44150e78e9a6424545"
+    },
+    {
+      "path": "mods/TConstruct-1.7.10-1.8.8.jar",
+      "sizeBytes": 3927382,
+      "sha256": "5f9845b74dba2eadfa6f80029b573f5901faa4790e5338c83bc9a742ba41a9b9"
+    },
+    {
+      "path": "mods/TechnoMagic-Elements-1.7.10-client.jar",
+      "sizeBytes": 107220,
+      "sha256": "95262cab025baa58477ec4f37860485cb71fe89d5b7c330b1c75f6fe4ba27317"
+    },
+    {
+      "path": "mods/Thaumcraft-1.7.10-4.2.3.5.jar",
+      "sizeBytes": 10285958,
+      "sha256": "c1e5e9c1cc6ad0369a4209704e8f7bcff5fb93b40ebeab8089e596da17ee2e1d"
+    },
+    {
+      "path": "mods/Thaumcraft4Tweaks-1.4.26.jar",
+      "sizeBytes": 95224,
+      "sha256": "8ff9cce30f1286228e5df98196b644125e873d83c5e2177c32f4b9c3c797590f"
+    },
+    {
+      "path": "mods/thaumcraftneiplugin-1.7.10-1.7a.jar",
+      "sizeBytes": 10722,
+      "sha256": "b9e328c1c08e9ed0c12c6986e7732744997f0182fb4fb8d092efad1585da4802"
+    },
+    {
+      "path": "mods/ThaumicTinkerer-2.5-1.7.10-538.jar",
+      "sizeBytes": 1208865,
+      "sha256": "d93554f31b0b859d5806193aee7b77b29d12eb934916609d40c167af76cdd0fb"
+    },
+    {
+      "path": "mods/ThermalDynamics-[1.7.10]1.2.1-172.jar",
+      "sizeBytes": 564003,
+      "sha256": "7217c3ff31d3d101a0c70de24a8079796bc31a0df9874246e050fcb24d146b33"
+    },
+    {
+      "path": "mods/Treecapitator-1.7.10-2.0.4.jar",
+      "sizeBytes": 97207,
+      "sha256": "e9e3185540ef34c9f41110475adf85f35a4ea39fcccc4eb2afbf721cde622a42"
+    },
+    {
+      "path": "mods/Universal+Singularities+[Version+8]-1.7.10.jar",
+      "sizeBytes": 17197,
+      "sha256": "4ddd860ad4e75f0b13b207b83330324833ddaefa65b223623364b374b4a36050"
+    },
+    {
+      "path": "mods/UniversalResources.jar",
+      "sizeBytes": 304237,
+      "sha256": "b4e319bd70b4e70dc3bb739d1256e79e67a84f35b7267025c32a7cef0d186355"
+    },
+    {
+      "path": "mods/Waila-master-c47aac3d.jar",
+      "sizeBytes": 543267,
+      "sha256": "c833079c2571c9f089d6f32416f784c74aeb227f3c1fe60d9c0a0d11cb4b3c63"
+    },
+    {
+      "path": "mods/WanionLib-1.7.10-1.8.jar",
+      "sizeBytes": 53936,
+      "sha256": "bdf7797af7ac67ffebd0a7ac4d56ec48702d3d35a7dcce46d9d852d2033c7396"
+    },
+    {
+      "path": "mods/wiki.jar",
+      "sizeBytes": 535629,
+      "sha256": "dccb267a7f4509170804aeca8b640308f49c0ab3f41745a32876881c34fb0279"
+    },
+    {
+      "path": "mods/WorldGenEngine-autumn-wipe-f8e4de26.jar",
+      "sizeBytes": 1281994,
+      "sha256": "3bbbfcaacaa242125b2ba547f4b6160458efbe29b01c9ad9f001f5dcd53d8fae"
+    }
+  ]
+}

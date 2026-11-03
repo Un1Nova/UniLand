@@ -27,6 +27,7 @@ def validate(catalog, require_complete=False):
         require(isinstance(catalog.get(key), list), f"{key} must be a list")
     meta = catalog.get("meta", {})
     items, recipes = catalog["items"], catalog["recipes"]
+    require(len(items) <= 100000 and len(recipes) <= 250000, "Catalog exceeds current browser capacity; expand loading, never truncate data")
     item_ids, recipe_ids = set(), set()
     for item in items:
         iid = item.get("id")
@@ -41,16 +42,33 @@ def validate(catalog, require_complete=False):
         rid = recipe.get("id")
         require(isinstance(rid, str) and rid and rid not in recipe_ids, f"Invalid or duplicate recipe: {rid}")
         recipe_ids.add(rid)
+        require(isinstance(recipe.get("type"), str) and recipe["type"], f"Missing recipe type: {rid}")
         require(recipe.get("verification") == "runtime", f"Recipe is not a runtime export: {rid}")
         require(isinstance(recipe.get("inputs"), list), f"Missing inputs: {rid}")
-        require(isinstance(recipe.get("outputs"), list) and recipe["outputs"], f"Missing outputs: {rid}")
+        native_rule = recipe.get('operation') == 'native-rule' and bool(recipe.get('sources')) and bool(recipe.get('detailsFile'))
+        require(isinstance(recipe.get("outputs"), list) and (recipe["outputs"] or native_rule), f"Missing outputs: {rid}")
+        require(len(recipe["inputs"]) <= 512 and len(recipe["outputs"]) <= 128, f"Stack capacity exceeded: {rid}")
         w, h = recipe.get("width"), recipe.get("height")
-        if w is not None or h is not None:
+        if "width" in recipe or "height" in recipe:
             require(type(w) is int and type(h) is int and 1 <= w <= 9 and 1 <= h <= 9, f"Invalid grid: {rid}")
+            require(len(recipe["inputs"]) <= w * h, f"Grid capacity exceeded: {rid}")
+        occupied = set()
+        for stack in recipe["inputs"]:
+            if "slot" in stack:
+                slot = stack["slot"]
+                require(w is not None and type(slot) is int and 0 <= slot < w * h, f"Invalid slot: {rid}")
+                require(slot not in occupied, f"Duplicate ingredient slot: {rid}")
+                occupied.add(slot)
         for stack in recipe["inputs"] + recipe["outputs"]:
             require(stack.get("itemId") in item_ids, f"Unknown item: {rid}")
             require(positive(stack.get("count", 1)), f"Invalid quantity: {rid}")
-            require(all(a in item_ids for a in stack.get("alternatives", [])), f"Unknown alternative: {rid}")
+            alternatives = stack.get("alternatives", [])
+            require(isinstance(alternatives, list) and len(alternatives) <= 2048, f"Invalid alternatives: {rid}")
+            require(all(a in item_ids for a in alternatives), f"Unknown alternative: {rid}")
+            if 'variants' in stack:
+                require(isinstance(stack['variants'], list) and all(v.get('itemId') in item_ids and positive(v.get('count')) for v in stack['variants']), f'Invalid variant quantities: {rid}')
+            if "unit" in stack:
+                require(isinstance(stack["unit"], str) and len(stack["unit"]) <= 80, f"Invalid unit: {rid}")
             if "chance" in stack:
                 p = stack["chance"]
                 require(type(p) in (int, float) and math.isfinite(p) and 0 <= p <= 1, f"Chance must be 0..1: {rid}")

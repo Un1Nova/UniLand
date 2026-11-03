@@ -1,0 +1,13 @@
+{
+  "status": "partial",
+  "scope": "observed-client-sources",
+  "catalogSha256": "56f7ad813975fdeb4c625ebd1d3fb70dd2e5211e7d0e31009d2d9d9841b438a5",
+  "nativeRules": 515,
+  "counts": {
+    "items": 25230,
+    "recipes": 30291,
+    "quests": 989,
+    "questLines": 9,
+    "pages": 822
+  }
+}

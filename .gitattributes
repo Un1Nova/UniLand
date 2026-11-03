@@ -1,0 +1,9 @@
+*.json text eol=lf
+*.py text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.png binary
+*.webp binary
+# This source evidence is hashed byte-for-byte in catalog.meta.
+data/client-manifest.json -text

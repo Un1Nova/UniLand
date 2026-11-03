@@ -1,0 +1,3275 @@
+{
+  "kind": "static-handler-candidates",
+  "complete": false,
+  "runtimeExport": false,
+  "note": "Candidate classes, including abstract types; runtime registration and counts have NOT been confirmed.",
+  "candidates": [
+    {
+      "class": "alfheim.client.integration.luminous.index.ManaInfuserRecipeType",
+      "archive": "Alfheim-BETA-38.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "alfheim.client.integration.luminous.index.TreeCraftingRecipeType",
+      "archive": "Alfheim-BETA-38.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "alfheim.client.integration.nei.recipes.RecipeHandlerManaInfuser",
+      "archive": "Alfheim-BETA-38.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "alfheim.client.integration.nei.recipes.RecipeHandlerTreeCrafting",
+      "archive": "Alfheim-BETA-38.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "appeng.integration.modules.NEIHelpers.NEIAEShapelessRecipeHandler",
+      "archive": "appliedenergistics2-rv3-beta-6.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "appeng.integration.modules.NEIHelpers.NEIAEShapedRecipeHandler",
+      "archive": "appliedenergistics2-rv3-beta-6.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "fox.spiteful.avaritia.omnicraft.recipe.ExtremeShapedCraftingOmniRecipeType",
+      "archive": "Avaritia-1.13.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "fox.spiteful.avaritia.omnicraft.recipe.ExtremeShapelessCraftingOmniRecipeType",
+      "archive": "Avaritia-1.13.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "fox.spiteful.avaritia.omnicraft.recipe.NeutroniumCompressionOmniRecipeType",
+      "archive": "Avaritia-1.13.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "fox.spiteful.avaritia.recipe.ExtremeCraftingRecipeType",
+      "archive": "Avaritia-1.13.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "fox.spiteful.avaritia.recipe.NeutroniumCompressionRecipeType",
+      "archive": "Avaritia-1.13.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.botany.index.type.FlowerBreedingRecipeType",
+      "archive": "binnie-mods-1.7.10-2.0.22.7.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.botany.index.type.PigmentMixingRecipeType",
+      "archive": "binnie-mods-1.7.10-2.0.22.7.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "WayofTime.alchemicalWizardry.client.nei.NEIBloodOrbShapelessHandler",
+      "archive": "BloodMagic-1.7.10-1.3.3-17.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "WayofTime.alchemicalWizardry.client.nei.NEIBindingRitualHandler",
+      "archive": "BloodMagic-1.7.10-1.3.3-17.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "WayofTime.alchemicalWizardry.client.nei.NEIAltarRecipeHandler",
+      "archive": "BloodMagic-1.7.10-1.3.3-17.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "WayofTime.alchemicalWizardry.client.nei.NEIAlchemyRecipeHandler",
+      "archive": "BloodMagic-1.7.10-1.3.3-17.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "WayofTime.alchemicalWizardry.client.nei.NEIBloodOrbShapedHandler",
+      "archive": "BloodMagic-1.7.10-1.3.3-17.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "vazkii.botania.client.integration.nei.recipe.RecipeHandlerBrewery",
+      "archive": "Botania-r1.8-249.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "vazkii.botania.client.integration.nei.recipe.RecipeHandlerManaPool",
+      "archive": "Botania-r1.8-249.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "vazkii.botania.client.integration.nei.recipe.RecipeHandlerPureDaisy",
+      "archive": "Botania-r1.8-249.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "vazkii.botania.client.integration.nei.recipe.RecipeHandlerRunicAltar",
+      "archive": "Botania-r1.8-249.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "vazkii.botania.client.integration.nei.recipe.RecipeHandlerPetalApothecary",
+      "archive": "Botania-r1.8-249.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "vazkii.botania.client.integration.nei.recipe.RecipeHandlerFloatingFlowers",
+      "archive": "Botania-r1.8-249.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "vazkii.botania.client.integration.nei.recipe.RecipeHandlerLexicaBotania",
+      "archive": "Botania-r1.8-249.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "com.creativemd.creativecore.api.nei.NEIRecipeInfoHandler",
+      "archive": "CreativeCore-master-74e33014.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "forestry.omnicraft.recipe.FabricatorOmniRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "forestry.omnicraft.recipe.CarpenterOmniRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "forestry.omnicraft.recipe.CentrifugeOmniRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "forestry.omnicraft.recipe.FermenterOmniRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "forestry.omnicraft.recipe.SqueezerOmniRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "forestry.omnicraft.recipe.StillOmniRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.BeeBreedingRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.TreeProductsRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.GeneticBreedingRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.FabricatorRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.CarpenterRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.StillRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.CentrifugeRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.BeeMutationTreeRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.ForestryProductsRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.BeeProductsRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.ButterflyBreedingRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.MoistenerRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.TreeBreedingRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.BottlerRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.SqueezerRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.base.ForestryMachineRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.base.ForestryFluidMachineRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.index.type.FermenterRecipeType",
+      "archive": "forestry_1.7.10-4.2.16.64.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "team.luxinfine.javagendustry.omnicraft.recipe.LiquifierOmniRecipeType",
+      "archive": "Gendustry-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "team.luxinfine.javagendustry.omnicraft.recipe.ExtractorOmniRecipeType",
+      "archive": "Gendustry-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "team.luxinfine.javagendustry.omnicraft.recipe.MutagenProducerOmniRecipeType",
+      "archive": "Gendustry-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.gendustry.index.type.LiquifierRecipeType",
+      "archive": "Gendustry-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.gendustry.index.type.base.GendustryItemToFluidRecipeType",
+      "archive": "Gendustry-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.gendustry.index.type.base.GendustryFluidMachineRecipeType",
+      "archive": "Gendustry-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.gendustry.index.type.base.GendustryMachineRecipeType",
+      "archive": "Gendustry-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.gendustry.index.type.MutagenProducerRecipeType",
+      "archive": "Gendustry-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.gendustry.index.type.ReplicatorRecipeType",
+      "archive": "Gendustry-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.gendustry.index.type.TransposerRecipeType",
+      "archive": "Gendustry-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.gendustry.index.type.ExtractorRecipeType",
+      "archive": "Gendustry-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.gendustry.index.type.SamplerRecipeType",
+      "archive": "Gendustry-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.gendustry.index.type.ForestryRecipeTypeProxy",
+      "archive": "Gendustry-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.neiIntegration.core.recipehandler.AdvShapelessRecipeHandler",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.neiIntegration.core.recipehandler.CentrifugeRecipeHandler",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.neiIntegration.core.recipehandler.FluidCannerRecipeHandler",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.neiIntegration.core.recipehandler.ScrapboxRecipeHandler",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.neiIntegration.core.recipehandler.AdvRecipeHandler",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.neiIntegration.core.recipehandler.MaceratorRecipeHandler",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.neiIntegration.core.recipehandler.BlockCutterRecipeHandler",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.neiIntegration.core.recipehandler.ExtractorRecipeHandler",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.neiIntegration.core.recipehandler.SolidCannerRecipeHandler",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.neiIntegration.core.recipehandler.OreWashingRecipeHandler",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.neiIntegration.core.recipehandler.CompressorRecipeHandler",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.neiIntegration.core.recipehandler.MachineRecipeHandler",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.lIiIii1LAnD",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.l0l00lAND",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.i100laND",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.I1O1I1LaNd",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.liIOI1LANd",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.O1liliLANd",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.OIl0IilanD",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.i1i1OilanD",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.IiiilAnD",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.core.omnicraft.recipe.SolidCannerOmniRecipeType",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.core.omnicraft.recipe.FluidEnrichingOmniRecipeType",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.core.omnicraft.recipe.CondenserOmniRecipeType",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ic2.core.omnicraft.recipe.IC2SimpleOmniRecipeType",
+      "archive": "industrialcraft-2-2.2.827-experimental.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.technologies.ae2.client.gui.luminous.index.InWorldCraftingRecipeType",
+      "archive": "LoliAE2-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "net.loliland.lolidimensions.integration.index.GraceFontRecipeType",
+      "archive": "LoliDimensions-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "net.loliland.lolidimensions.integration.index.TradeRecipeType",
+      "archive": "LoliDimensions-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "net.loliland.lolidimensions.integration.omnicraft.TradeOmniRecipeType",
+      "archive": "LoliDimensions-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.dragonmight.obf.lI101LANd$OOOIilanD",
+      "archive": "LoliDragonMight-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.dragonmight.obf.lI101LANd",
+      "archive": "LoliDragonMight-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.dragonmight.obf.l0I0O0lAnD",
+      "archive": "LoliDragonMight-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.dragonmight.obf.i0lO01LAnd",
+      "archive": "LoliDragonMight-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.dragonmight.obf.lI101LANd$I1O1I1LaNd",
+      "archive": "LoliDragonMight-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.dragonmight.obf.iI0OilLANd",
+      "archive": "LoliDragonMight-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.dragonmight.obf.lIl0laND",
+      "archive": "LoliDragonMight-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.dragonmight.obf.liI0O1laNd",
+      "archive": "LoliDragonMight-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.dragonmight.obf.l10iLaNd",
+      "archive": "LoliDragonMight-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.dragonmight.obf.ll0i0I1ILAnD",
+      "archive": "LoliDragonMight-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.dragonmight.obf.lliOlIllAnd",
+      "archive": "LoliDragonMight-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.dragonmight.obf.l0IOlaND",
+      "archive": "LoliDragonMight-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEISmeltingPlantHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEILaserDrillHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.AssemblyTableRecipeHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MolecularRecipeHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MatterSolidRecipeHandler$MatterSolidT5",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEICauldronHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIRotaryCondensentratorHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MatterSolidRecipeHandler$MatterSolidT4",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEICrystallizationCoolingComplexHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIHemontransmutatorHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MatterSolidRecipeHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEILiquidNeutronHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIHardeningBathHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MolecularFarmRecipeHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIChemicalFillerHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIIndustrialMixerHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.DoubleMolecularRecipeHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEISteamBoilerHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEICrystalGrowthChamberHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIReactionChamberHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MatterSolidRecipeHandler$MatterSolidT0",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEICokeOvenHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MatterSolidRecipeHandler$MatterSolidT3",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIBlenderHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIDrillComplexHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.Oill1LAnD",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MolecularRecipeHandler$LegendaryMolecular",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIChemicalOxidizerHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MatterSolidRecipeHandler$MatterSolidT8",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIEnergonSynthesizerHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIThermonuclearSmeltingComplexHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MatterSolidRecipeHandler$MatterSolidT2",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIElectrolyticSeparatorHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIProceduralAssemblerHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIBlastFurnaceHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEICrystalChargingChamberHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MatterSolidRecipeHandler$MatterSolidT9",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MatterSolidRecipeHandler$MatterSolidT7",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MatterSolidRecipeHandler$MatterSolidT6",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.AdvancedQEDHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MolecularRecipeHandler$MolecularX1",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIEnrichmentChamberHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIIndustrialSteamBoilerHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MatterSolidRecipeHandler$MatterSolidT1",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.QEDRecipeHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIAlloyChamberHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.NEIAmbientGasCollectorHandler",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.loliland.le.integration.notenoughitems.MolecularRecipeHandler$MolecularX12",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.III01ilaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.Il1Ol1i0lAND",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.liIIOOOllaND",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.lI1lOIi1laNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.iOOiOiIland",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.ll1OOIlAND",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.l11l1ilaND",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.l10iI0iOLAND",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.l11illaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.ili1lOlAnD",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.ili1llAnD",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.li1O1LANd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.l1Oi1I0ILANd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.iIi1Oi1iLand",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.i1IllilLaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.li1OI0I0lANd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.li0O0LAnD",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.l0Oi0l1IlAnd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.lI0Iiland",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.i0OIOOIlANd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.lIIl11laNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.l000iiO0LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.lli0IILand",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "ru.lolienergistics.O00iiI1lAnD",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.ll0IILaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.l11l0lanD",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.IOOOLaND",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.l1IlllAND",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.l01lLanD",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.Iii1OilaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.l0l1lLaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.l0I0OLaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.lIliIILAnd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.I1i0laND",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.l1IllaND",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.iI0OilLANd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.IOOIlOlAnD",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.ll0IlILANd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.llOIlIilAND$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.ll0iOlLAnd$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.lI1liiIlLAND$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.O1lO0ILaND$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.Oii1O00LAnD$OOOIilanD",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.I1OIOlaNd$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.lIl1Oi0llaND$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.ll0111iIlAND$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.OOil1LaNd$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.OOOiland$OOOIilanD",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.l0liiO0land$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.Iil0lIl1LAnd$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.lIIiO0laNd$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.l0i1IIOlaND$OOOIilanD",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.liOl1lLANd$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.lI0011OLaND$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.I1Ol1IlaND$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.l000O1ILaND$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.l10II00OLaND$I1O1I1LaNd",
+      "archive": "LoliEnergistics-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.loliforestry.index.type.base.LoliForestryFluidMachineRecipeType",
+      "archive": "LoliForestry-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.loliforestry.index.type.base.LoliForestryMachineRecipeType",
+      "archive": "LoliForestry-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "luminous.ui.loliforestry.index.type.BeeFactoryRecipeType",
+      "archive": "LoliForestry-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.llIllAnD",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.lO1OLanD",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.iIlOi1llAND",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.Oi11ILAnD",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.i0ll01l1laNd",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.IlIOOI1OlANd",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.O1l1LanD",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.i01ii1lAnD",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.IOlllAnd",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.l0i01llAnD",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.lOIiIi0land",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.llOiO0LaNd",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.OO1O0O0LaND",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.O1O00OllAND",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.lOiIiIOllanD",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.lI00IlLanD",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.lOiILanD",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.l10lO11lanD",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.lIiO10IlLaNd",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.iilOi1LanD",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.liOO1O0lANd",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.l000iLAnd",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.l01O1OilaND",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.iiO101LanD",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.OI1l11LaNd",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.magically.obf.OOOiO0lANd",
+      "archive": "LoliMagically-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.i0IO1II1laND",
+      "archive": "LoliUtility-1.7.10-client.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.LoliRecipeViewerScreen$buildFallbackRecipeType$1",
+      "archive": "luminous-1.7.10.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.builtin.BrewingRecipeType",
+      "archive": "luminous-1.7.10.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.builtin.CraftingRecipeType",
+      "archive": "luminous-1.7.10.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.builtin.FuelRecipeType",
+      "archive": "luminous-1.7.10.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.builtin.MobDropRecipeType",
+      "archive": "luminous-1.7.10.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.builtin.OreDropRecipeType",
+      "archive": "luminous-1.7.10.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.luminous.ui.recipe.builtin.SmeltingRecipeType",
+      "archive": "luminous-1.7.10.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tonius.neiintegration.IRecipeHandler",
+      "archive": "NEIIntegration-summer-wipe-fbf18adb.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tonius.neiintegration.RecipeHandlerBase",
+      "archive": "NEIIntegration-summer-wipe-fbf18adb.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tonius.neiintegration.mods.harvestcraft.RecipeHandlerHCBase",
+      "archive": "NEIIntegration-summer-wipe-fbf18adb.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tonius.neiintegration.mods.harvestcraft.RecipeHandlerPresser",
+      "archive": "NEIIntegration-summer-wipe-fbf18adb.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tonius.neiintegration.mods.harvestcraft.RecipeHandlerChurn",
+      "archive": "NEIIntegration-summer-wipe-fbf18adb.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tonius.neiintegration.mods.harvestcraft.RecipeHandlerPresserOld",
+      "archive": "NEIIntegration-summer-wipe-fbf18adb.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tonius.neiintegration.mods.harvestcraft.RecipeHandlerApiary",
+      "archive": "NEIIntegration-summer-wipe-fbf18adb.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tonius.neiintegration.mods.harvestcraft.RecipeHandlerQuern",
+      "archive": "NEIIntegration-summer-wipe-fbf18adb.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tonius.neiintegration.mods.harvestcraft.RecipeHandlerOven",
+      "archive": "NEIIntegration-summer-wipe-fbf18adb.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tonius.neiintegration.mods.mcforge.RecipeHandlerFluidRegistry",
+      "archive": "NEIIntegration-summer-wipe-fbf18adb.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tonius.neiintegration.mods.mcforge.RecipeHandlerOreDictionary",
+      "archive": "NEIIntegration-summer-wipe-fbf18adb.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "codechicken.nei.recipe.IUsageHandler",
+      "archive": "NotEnoughItems-2.3.83-GTNH.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "codechicken.nei.recipe.ICraftingHandler",
+      "archive": "NotEnoughItems-2.3.83-GTNH.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "codechicken.nei.recipe.FurnaceRecipeHandler",
+      "archive": "NotEnoughItems-2.3.83-GTNH.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "codechicken.nei.recipe.FuelRecipeHandler",
+      "archive": "NotEnoughItems-2.3.83-GTNH.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "codechicken.nei.recipe.ProfilerRecipeHandler",
+      "archive": "NotEnoughItems-2.3.83-GTNH.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "codechicken.nei.recipe.ShapedRecipeHandler",
+      "archive": "NotEnoughItems-2.3.83-GTNH.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "codechicken.nei.recipe.ShapelessRecipeHandler",
+      "archive": "NotEnoughItems-2.3.83-GTNH.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "codechicken.nei.recipe.FireworkRecipeHandler",
+      "archive": "NotEnoughItems-2.3.83-GTNH.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "codechicken.nei.recipe.TemplateRecipeHandler",
+      "archive": "NotEnoughItems-2.3.83-GTNH.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "codechicken.nei.recipe.BrewingRecipeHandler",
+      "archive": "NotEnoughItems-2.3.83-GTNH.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.omnicraft.common.recipe.CraftingRecipeType",
+      "archive": "OmniCraft.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.omnicraft.common.recipe.SmeltingRecipeType",
+      "archive": "OmniCraft.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.client.index.type.AlloyingRecipeType",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.client.index.type.CastingBasinRecipeType",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.client.index.type.CastingTableRecipeType",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.client.index.type.DryingRecipeType",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.client.index.type.MaterialsRecipeType",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.client.index.type.MeltingRecipeType",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.client.index.type.base.CastingRecipeType",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.client.index.type.base.TConstructRecipeType",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.plugins.nei.RecipeHandlerAlloying",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.plugins.nei.RecipeHandlerBase",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.plugins.nei.RecipeHandlerCastingBase",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.plugins.nei.RecipeHandlerCastingBasin",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.plugins.nei.RecipeHandlerCastingTable",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.plugins.nei.RecipeHandlerDryingRack",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.plugins.nei.RecipeHandlerMelting",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "tconstruct.plugins.nei.RecipeHandlerToolMaterials",
+      "archive": "TConstruct-1.7.10-1.8.8.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "thaumcraft.common.omnicraft.recipe.CrucibleOmniRecipeType",
+      "archive": "Thaumcraft-1.7.10-4.2.3.5.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "thaumcraft.common.omnicraft.recipe.ArcaneShapedOmniRecipeType",
+      "archive": "Thaumcraft-1.7.10-4.2.3.5.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "thaumcraft.common.omnicraft.recipe.InfusionOmniRecipeType",
+      "archive": "Thaumcraft-1.7.10-4.2.3.5.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "thaumcraft.common.omnicraft.recipe.ArcaneShapelessOmniRecipeType",
+      "archive": "Thaumcraft-1.7.10-4.2.3.5.jar",
+      "apiKinds": [
+        "omnicraft"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.lOOO110laNd",
+      "archive": "Thaumcraft-1.7.10-4.2.3.5.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.l0IilaND",
+      "archive": "Thaumcraft-1.7.10-4.2.3.5.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.liO0lAND",
+      "archive": "Thaumcraft-1.7.10-4.2.3.5.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.lIOI1Land",
+      "archive": "Thaumcraft-1.7.10-4.2.3.5.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.iOI10lAnd",
+      "archive": "Thaumcraft-1.7.10-4.2.3.5.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "loliland.common.obf.lliOlOLanD",
+      "archive": "Thaumcraft-1.7.10-4.2.3.5.jar",
+      "apiKinds": [
+        "luminous"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    },
+    {
+      "class": "cofh.thermaldynamics.plugins.nei.RecipeHandlerCover",
+      "archive": "ThermalDynamics-[1.7.10]1.2.1-172.jar",
+      "apiKinds": [
+        "nei"
+      ],
+      "runtimeRegistered": null,
+      "sourceCount": null,
+      "exportedCount": 0,
+      "status": "not-runtime-enumerated"
+    }
+  ]
+}

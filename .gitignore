@@ -8,3 +8,8 @@ data-sources/current/raw/
 *.jar
 *.exe
 *.log
+raw/
+inspection/
+runtime-private/
+exporter/build/
+_site/

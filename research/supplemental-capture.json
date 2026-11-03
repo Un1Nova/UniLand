@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "source": "LoliLand TechnoMagic RPG",
+  "observedAt": "2026-11-03T12:48:03.257800900Z",
+  "runtimeExport": true,
+  "complete": false,
+  "questDefinitions": {
+    "sourceCount": 989,
+    "exportedCount": 989,
+    "lineSourceCount": 9,
+    "lineExportedCount": 9,
+    "unresolvedPrerequisites": 0,
+    "method": "QuestDatabase.writeToNBT and QuestLineDatabase.writeToNBT with null ID filter; no progress serialization",
+    "questNbtSha256": "154afd39ed5ad420a3cc0224d096eea315f9b03e80455616f03b5517208a6c8e",
+    "lineNbtSha256": "0ab55ee16db1b1d56503c71f0e2ae4dd1b35ab267651d0a0addfc7dd92791a8c"
+  },
+  "knowledge": {
+    "observedAt": "2026-11-03T12:52:30.017882900Z",
+    "listedResources": 960,
+    "capturedResources": 960,
+    "errors": 0,
+    "applicableGuides": 26,
+    "applicableWikiPages": 796,
+    "pagesExcludedByModRequirements": 109,
+    "method": "Live ResourceListing and IResourceManager; active resource-pack precedence; requiresMod evaluated against loaded mod IDs",
+    "remainingCheck": "GUI and item lookup targets must be validated against complete registries"
+  },
+  "luminousFirstPass": {
+    "registeredTypes": 133,
+    "capturedEntries": 11014,
+    "referencedItemVariants": 9280,
+    "complete": false,
+    "note": "A supplemental getAllRecipes pass, not a complete recipe catalog. 29 handlers returned null or errored. The first capture reports NullPointerException for null collections; the exporter now records unavailable enumeration explicitly. Unknown metadata types are marked unresolved, never silently declared complete. Direct-registry capture is a separate source."
+  }
+}

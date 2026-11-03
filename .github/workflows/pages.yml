@@ -25,12 +25,15 @@ jobs:
       - name: Validate catalog and app
         run: |
           test ! -d __qa
-          python3 build-catalog.py --validate-only
+          python3 build-catalog.py
+          python3 validate_release.py
           node --check app.js
+          node --check knowledge.js
+          python3 -m unittest test_prepare_site.py test_catalog_contract.py
+          python3 exporter/test_web_grids.py
       - name: Prepare static files
         run: |
-          mkdir _site
-          cp index.html styles.css fonts.css app.js favicon.svg logo.svg catalog.json background.webp *.woff2 _site/
+          python3 prepare_site.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

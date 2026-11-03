@@ -15,6 +15,8 @@
       <button class="brand" id="home-button" type="button" aria-label="UniLand — все крафты"><img src="logo.svg" alt="UniLand" width="111" height="24"></button>
       <nav class="header-navigation" aria-label="Разделы каталога">
         <button class="nav-button active" id="catalog-nav" type="button" aria-pressed="true"><span data-icon="cube"></span><span>Крафты</span></button>
+        <button class="nav-button" id="quests-nav" type="button" aria-pressed="false"><span data-icon="map"></span><span>Квесты</span></button>
+        <button class="nav-button" id="guides-nav" type="button" aria-pressed="false"><span data-icon="book"></span><span>Гайды</span></button>
         <button class="nav-button" id="favorite-items" type="button" aria-label="Избранное" aria-pressed="false"><span data-icon="star"></span><span>Избранное</span></button>
       </nav>
     </div>
@@ -27,7 +29,8 @@
     </section>
     <section class="workspace-shell" aria-label="Предметы и рецепты">
       <div class="content empty-catalog" id="content">
-        <section class="catalog" id="catalog" aria-label="Каталог предметов"><div class="items-grid" id="items-grid" aria-label="Предметы"></div><div class="empty-state" id="empty-state"><span class="empty-symbol" data-icon="cube"></span><h2>Загрузка…</h2></div><button class="load-more" id="load-more" type="button" hidden>Показать ещё</button></section>
+        <section class="catalog" id="catalog" aria-label="Каталог предметов"><div class="items-grid" id="items-grid" aria-label="Предметы"></div><div id="knowledge-view" hidden></div><div class="empty-state" id="empty-state"><span class="empty-symbol" data-icon="cube"></span><h2>Загрузка…</h2></div><nav id="catalog-pagination" class="catalog-pagination" aria-label="Страницы выдачи" hidden></nav><button class="load-more" id="load-more" type="button" hidden>Показать ещё</button></section>
+        <div class="inspector-scrim" id="inspector-scrim" hidden></div>
         <aside class="inspector" id="inspector" aria-label="Рецепты предмета"></aside>
       </div>
     </section>
@@ -36,7 +39,7 @@
     <label class="mod-filter"><span class="sr-only">Модификация</span><select id="mod-filter"><option value="">Все моды</option></select><span class="select-chevron" data-icon="down"></span></label>
     <div class="search"><span data-icon="search"></span><input id="search-input" type="search" placeholder="Найти предмет или @мод" aria-label="Поиск по названию, ID или @моду" autocomplete="off" spellcheck="false"><button class="icon-button search-clear" id="clear-search" type="button" aria-label="Очистить поиск" hidden><span data-icon="close"></span></button><kbd id="search-shortcut">/</kbd></div>
   </div>
-  <div class="inspector-scrim" id="inspector-scrim" hidden></div>
   <script src="app.js" defer></script>
+  <script src="knowledge.js" defer></script>
 </body>
 </html>
