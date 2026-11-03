@@ -264,7 +264,7 @@
   "visualVerification": {
     "officialSiteScreenshotAvailable": false,
     "exactOneToOneMatchVerified": false,
-    "scope": "Official-style adaptation using known source tokens and fonts, with a custom UniLand wordmark derived from the header logo; existing original wallpaper retained."
+    "scope": "Original source research is historical. Current interface is a user-requested monochrome redesign; no exact match to Apple or the official LoliLand website is claimed."
   },
   "fontsCss": {
     "file": "fonts.css",
@@ -272,5 +272,19 @@
     "sha256": "9ff473a57daa7e5eadb3f1892d5d331e89991c8986d6cb32dfe5b6448730a4dd",
     "urlMode": "Relative ./ filenames; compatible with GitHub Pages project subpaths."
   },
-  "modifiedAt": "2026-11-03"
+  "modifiedAt": "2026-11-03",
+  "interfaceUpdate": {
+    "date": "2026-11-03",
+    "direction": "User-requested Apple-inspired monochrome minimal interface, superseding the prior official-site colour treatment.",
+    "preserved": "Custom UniLand vector wordmark at 111×24 and existing wallpaper. Game item sprites retain their original colours.",
+    "removed": [
+      "Database information dialog",
+      "Database status/selector button",
+      "Recipe-only filter",
+      "External project navigation link",
+      "Footer labels"
+    ],
+    "controls": "Bottom-centred rounded search field and bottom-left native mod dropdown; responsive layout with safe-area spacing.",
+    "fontStack": "Native system UI stack; the archived Ubuntu/Montserrat assets are no longer requested by index.html."
+  }
 }

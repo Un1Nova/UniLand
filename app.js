@@ -7,7 +7,6 @@
     search:svg('<circle cx="10.5" cy="10.5" r="6.8"/><path d="m16 16 4.5 4.5"/>'),
     star:svg('<path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2L3.2 9.6l6-.9L12 3Z"/>'),
     close:svg('<path d="m6 6 12 12M6 18 18 6"/>'),
-    info:svg('<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>'),
     down:svg('<path d="m6 9 6 6 6-6"/>'),
     left:svg('<path d="m15 5-7 7 7 7"/>'),
     right:svg('<path d="m9 5 7 7-7 7"/>'),
@@ -19,7 +18,6 @@
   const norm = (value) => String(value ?? '').toLocaleLowerCase('ru').replace(/ё/g,'е').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').trim();
   const plural = (n,a,b,c) => { const m=Math.abs(n)%100,d=m%10; return m>=11&&m<=14?c:d===1?a:d>=2&&d<=4?b:c; };
   const itemsLabel = (n) => `${num(n)} ${plural(n,'предмет','предмета','предметов')}`;
-  const recipesLabel = (n) => `${num(n)} ${plural(n,'рецепт','рецепта','рецептов')}`;
   const positive = (value) => typeof value==='number'&&Number.isFinite(value)&&value>0?value:1;
   const amount = (stack) => `${num(positive(stack.count))}${stack.unit?' '+stack.unit:''}`;
   const chance = (value) => typeof value==='number'&&Number.isFinite(value)&&value>=0&&value<=1?`${num(value*100)}%`:'';
@@ -36,7 +34,7 @@
   let catalog=emptyCatalog(),items=new Map(),mods=new Map(),searchIndex=new Map(),byOutput=new Map(),byInput=new Map();
   let hoverItem=null,searchTimer,drawerOpen=false,returnFocus=null,returnItem=null;
   const favorites=readLocal('atlas.favorites',[]);
-  const state={query:'',mod:'',favoritesOnly:false,recipesOnly:false,selected:null,tab:'recipes',recipeIndex:0,limit:150,trail:[],favorites:new Set(Array.isArray(favorites)?favorites.filter(v=>typeof v==='string'):[])};
+  const state={query:'',mod:'',favoritesOnly:false,selected:null,tab:'recipes',recipeIndex:0,limit:150,trail:[],favorites:new Set(Array.isArray(favorites)?favorites.filter(v=>typeof v==='string'):[])};
   document.querySelectorAll('[data-icon]').forEach(node=>{node.innerHTML=icons[node.dataset.icon]||'';});
   function validateCatalog(raw) {
     if (!raw || typeof raw !== 'object' || Array.isArray(raw)) throw new Error('Некорректный объект каталога.');
@@ -90,24 +88,6 @@
     if(!(target instanceof HTMLImageElement)||!target.classList.contains('item-icon'))return;
     const fallback=document.createElement('span');fallback.className='item-icon missing-icon';fallback.title='Нет иконки';fallback.innerHTML=icons.cube;target.replaceWith(fallback);
   },true);
-  function dataStatus(){
-    const meta=catalog.meta||{},coverage=meta.coverage||{};
-    const handlersComplete=Array.isArray(coverage.handlers)&&coverage.handlers.length>0&&coverage.handlers.every(handler=>handler&&handler.status==='exported'&&Number.isSafeInteger(handler.sourceCount)&&handler.sourceCount>=0&&handler.sourceCount===handler.exportedCount);
-    const totalsMatch=(coverage.items===undefined||coverage.items===catalog.items.length)&&(coverage.recipes===undefined||coverage.recipes===catalog.recipes.length);
-    const runtimeInventory=catalog.items.length>0&&catalog.recipes.length>0&&catalog.items.every(item=>!!item.icon)&&catalog.recipes.every(recipe=>recipe.verification==='runtime');
-    const timestampHasZone=typeof meta.exportedAt==='string'&&/T.+(?:Z|[+-]\d{2}:\d{2})$/i.test(meta.exportedAt);
-    const complete=meta.status==='complete'&&coverage.complete===true&&coverage.runtimeExport===true&&coverage.registryEnumerated===true&&meta.serverSynchronized===true&&typeof meta.clientManifestSha256==='string'&&/^[a-f0-9]{64}$/i.test(meta.clientManifestSha256)&&handlersComplete&&totalsMatch&&runtimeInventory&&timestampHasZone;
-    const date=typeof meta.exportedAt==='string'?new Date(meta.exportedAt):null;
-    const validDate=timestampHasZone&&date&&!Number.isNaN(date.getTime())&&date.getTime()<=Date.now()+300000;
-    const old=validDate&&Date.now()-date.getTime()>14*86400000;
-    const short=validDate?date.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',timeZone:'Europe/Moscow'}):'';
-    const full=validDate?date.toLocaleString('ru-RU',{timeZone:'Europe/Moscow',dateStyle:'short',timeStyle:'short'}):'';
-    if(meta.loadFailed)return {label:'База недоступна',detail:'Не удалось получить данные. Попробуй открыть страницу позже.',complete:false};
-    if(!catalog.items.length)return {label:'Нет базы',detail:'Рецепты текущей сборки пока не опубликованы.',complete:false};
-    if(!validDate)return {label:'Нет даты выгрузки',detail:'Время выгрузки клиента не подтверждено.',complete:false};
-    if(old)return {label:'Обновить базу',detail:`Снимок ${full}. Выгрузке больше 14 дней.`,complete:false};
-    return {label:complete?`Снимок ${short}`:'Частичная база',detail:`Снимок ${full}${complete?' · полная выгрузка клиента.':' · полнота не подтверждена.'}`,complete};
-  }
   function indexCatalog(){
     items=new Map(catalog.items.map(item=>[item.id,item]));mods=new Map(catalog.mods.map(mod=>[mod.id,{...mod,count:0}]));byOutput=new Map();byInput=new Map();searchIndex=new Map();
     for(const item of catalog.items){
@@ -122,32 +102,28 @@
   function applyCatalog(value){
     catalog=value;state.mod='';state.selected=null;state.trail=[];state.recipeIndex=0;state.limit=150;indexCatalog();
     $('mod-filter').innerHTML='<option value="">Все моды</option>'+[...mods.values()].filter(mod=>mod.count>0).sort((a,b)=>a.name.localeCompare(b.name,'ru')).map(mod=>`<option value="${esc(mod.id)}">${esc(mod.name)}</option>`).join('');
-    $('content').classList.toggle('empty-catalog',!catalog.items.length);renderCatalog();renderInspector();renderStatus();
+    $('content').classList.toggle('empty-catalog',!catalog.items.length);renderCatalog();renderInspector();
   }
-  function renderStatus(){const status=dataStatus();$('status-text').textContent=status.label;$('data-state').title=status.detail;$('data-state').classList.toggle('complete',status.complete);}
   function results(){const tokens=norm(state.query).split(/\s+/).filter(Boolean);return catalog.items.filter(item=>{
     if(state.mod&&(item.modId||'unknown')!==state.mod)return false;
     if(state.favoritesOnly&&!state.favorites.has(item.id))return false;
-    if(state.recipesOnly&&!byOutput.has(item.id))return false;
     const entry=searchIndex.get(item.id);return tokens.every(token=>token.startsWith('@')?entry.mod.includes(token.slice(1)):entry.text.includes(token));
   });}
   function renderCatalog(){
     const filtered=results();$('result-count').textContent=catalog.items.length?itemsLabel(filtered.length):'';
-    $('page-title').textContent=state.favoritesOnly?'Избранное':'Каталог крафтов';$('catalog-nav').classList.toggle('active',!state.favoritesOnly);$('catalog-nav').setAttribute('aria-pressed',String(!state.favoritesOnly));
+    $('page-title').textContent=state.favoritesOnly?'Избранное':'Крафты';$('catalog-nav').classList.toggle('active',!state.favoritesOnly);$('catalog-nav').setAttribute('aria-pressed',String(!state.favoritesOnly));
     $('favorite-items').classList.toggle('active',state.favoritesOnly);$('favorite-items').setAttribute('aria-pressed',String(state.favoritesOnly));$('favorite-items').title=state.favoritesOnly?'Показать все предметы':'Избранное';
-    $('recipe-filter').classList.toggle('active',state.recipesOnly);$('recipe-filter').setAttribute('aria-pressed',String(state.recipesOnly));
     $('clear-search').hidden=!state.query;$('search-shortcut').hidden=!!state.query;
     $('items-grid').innerHTML=filtered.slice(0,state.limit).map(item=>`<article class="item-card${state.selected===item.id?' selected':''}" data-item="${esc(item.id)}"><button class="card-star${state.favorites.has(item.id)?' saved':''}" type="button" data-favorite="${esc(item.id)}" aria-label="${state.favorites.has(item.id)?'Убрать из избранного':'В избранное'}: ${esc(item.name)}" aria-pressed="${state.favorites.has(item.id)}">${icons.star}</button><button class="item-select" type="button" data-select="${esc(item.id)}" title="${esc(item.name)}\n${esc(item.id)}" aria-label="${esc(item.name)}">${image(item)}<span class="item-name">${esc(item.name)}</span></button></article>`).join('');
     $('load-more').hidden=filtered.length<=state.limit;$('empty-state').hidden=!!filtered.length;
     if(!filtered.length){
       let title='Ничего не найдено',text='Измени поиск или фильтр.',action='reset',button='Сбросить';
-      if(!catalog.items.length){title=catalog.meta.loadFailed?'База недоступна':'Нет актуальной базы';text=catalog.meta.loadFailed?'Не удалось получить данные. Попробуй позже.':'Рецепты текущей сборки пока не опубликованы.';action='';button='';}
-      else if(state.favoritesOnly&&!state.query&&!state.mod&&!state.recipesOnly){title='Пока пусто';text='Сохраняй предметы звёздочкой.';button='Все предметы';}
-      else if(state.recipesOnly&&!catalog.recipes.length){title='Крафты не загружены';text='В базе пока есть только предметы.';button='Все предметы';}
+      if(!catalog.items.length){title=catalog.meta.loadFailed?'Не удалось загрузить рецепты':'Рецептов пока нет';text=catalog.meta.loadFailed?'Попробуй открыть страницу позже.':'Выгрузка текущей сборки ещё не опубликована.';action='';button='';}
+      else if(state.favoritesOnly&&!state.query&&!state.mod){title='Пока пусто';text='Сохраняй предметы звёздочкой.';button='Все предметы';}
       $('empty-state').innerHTML=`<span>${icons.cube}</span><h2>${title}</h2><p>${text}</p>${action?`<button class="text-button" type="button" data-action="${action}">${button}</button>`:''}`;
     }
   }
-  function reset(){state.query='';state.mod='';state.favoritesOnly=false;state.recipesOnly=false;state.limit=150;$('search-input').value='';$('mod-filter').value='';renderCatalog();}
+  function reset(){state.query='';state.mod='';state.favoritesOnly=false;state.limit=150;$('search-input').value='';$('mod-filter').value='';renderCatalog();}
   function favorite(id){
     if(!items.has(id))return;
     state.favorites.has(id)?state.favorites.delete(id):state.favorites.add(id);writeLocal('atlas.favorites',[...state.favorites]);
@@ -197,15 +173,10 @@
     const mobile=window.matchMedia('(max-width: 991px)').matches,open=mobile&&!!state.selected&&catalog.items.length>0;
     if(open&&!drawerOpen){returnFocus=document.activeElement;returnItem=document.activeElement?.closest('[data-item]')?.dataset.item||state.selected;}
     const wasOpen=drawerOpen;drawerOpen=open;$('inspector-scrim').hidden=!open;
-    inaccessible($('inspector'),mobile&&!open);inaccessible($('catalog'),open);inaccessible($('toolbar'),open);inaccessible($('page-heading'),open);inaccessible($('site-footer'),open);inaccessible(document.querySelector('.app-header'),open);
+    inaccessible($('inspector'),mobile&&!open);inaccessible($('catalog'),open);inaccessible($('toolbar'),open);inaccessible($('page-heading'),open);inaccessible(document.querySelector('.app-header'),open);
     if(open){$('inspector').setAttribute('role','dialog');$('inspector').setAttribute('aria-modal','true');if(!$('inspector').contains(document.activeElement))focusable()[0]?.focus({preventScroll:true});}
     else{$('inspector').removeAttribute('role');$('inspector').removeAttribute('aria-modal');if(wasOpen){let target=returnFocus;if(!target?.isConnected)target=[...$('items-grid').querySelectorAll('[data-select]')].find(node=>node.dataset.select===returnItem);if(!target?.isConnected||target.closest('[inert]')||!target.getClientRects().length)target=$('search-input');target.focus({preventScroll:true});returnFocus=null;returnItem=null;}}
     document.body.style.overflow=open?'hidden':'';
-  }
-  function settings(){
-    const status=dataStatus(),sources=Array.isArray(catalog.meta.sources)?catalog.meta.sources.filter(source=>source&&safeUrl(source.url)):[];
-    $('settings-content').innerHTML=`<p class="settings-counts">${itemsLabel(catalog.items.length)} · ${recipesLabel(catalog.recipes.length)}</p><p class="settings-status">${esc(status.detail)}</p>${sources.length?`<details class="settings-section"><summary>Источники</summary>${sources.map(source=>`<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.title||source.url)} ↗</a>`).join('')}</details>`:''}`;
-    if(!$('settings-dialog').open)$('settings-dialog').showModal();
   }
   function action(name){if(name==='reset')reset();else if(name==='close-item')closeItem();else if(name==='back'){const id=state.trail.pop();if(id)select(id,'recipes',false);}}
   document.addEventListener('click',(event)=>{
@@ -215,16 +186,13 @@
   $('search-input').addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{state.query=$('search-input').value;state.limit=150;renderCatalog();},90);});
   $('clear-search').addEventListener('click',()=>{clearTimeout(searchTimer);state.query='';$('search-input').value='';state.limit=150;renderCatalog();$('search-input').focus();});
   $('mod-filter').addEventListener('change',()=>{state.mod=$('mod-filter').value;state.limit=150;renderCatalog();});
-  $('recipe-filter').addEventListener('click',()=>{state.recipesOnly=!state.recipesOnly;state.limit=150;renderCatalog();});
   $('favorite-items').addEventListener('click',()=>{state.favoritesOnly=!state.favoritesOnly;state.limit=150;renderCatalog();});
-  $('home-button').addEventListener('click',reset);$('catalog-nav').addEventListener('click',reset);$('settings-button').addEventListener('click',settings);$('data-state').addEventListener('click',settings);
-  $('close-settings').addEventListener('click',()=>$('settings-dialog').close());$('inspector-scrim').addEventListener('click',closeItem);$('load-more').addEventListener('click',()=>{state.limit+=150;renderCatalog();});
-  $('settings-dialog').addEventListener('click',(event)=>{if(event.target!==$('settings-dialog'))return;const rect=$('settings-dialog').getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)$('settings-dialog').close();});
+  $('home-button').addEventListener('click',reset);$('catalog-nav').addEventListener('click',reset);
+  $('inspector-scrim').addEventListener('click',closeItem);$('load-more').addEventListener('click',()=>{state.limit+=150;renderCatalog();});
   $('content').addEventListener('pointerover',(event)=>{hoverItem=event.target.closest('[data-select]')?.dataset.select||event.target.closest('[data-item]')?.dataset.item||null;});
   $('content').addEventListener('pointerleave',()=>{hoverItem=null;});$('content').addEventListener('focusin',(event)=>{hoverItem=event.target.closest('[data-select]')?.dataset.select||event.target.closest('[data-item]')?.dataset.item||null;});
   window.addEventListener('resize',syncOverlay);window.addEventListener('popstate',()=>{const id=new URL(location.href).searchParams.get('item');if(id&&items.has(id))select(id,'recipes',false);else closeItem();});
   document.addEventListener('keydown',(event)=>{
-    if($('settings-dialog').open)return;
     if(event.key==='Tab'&&drawerOpen){const all=focusable(),first=all[0],last=all[all.length-1];if(!first){event.preventDefault();return;}if(event.shiftKey&&(document.activeElement===first||!$('inspector').contains(document.activeElement))){event.preventDefault();last.focus();}else if(!event.shiftKey&&(document.activeElement===last||!$('inspector').contains(document.activeElement))){event.preventDefault();first.focus();}return;}
     const editing=event.target instanceof HTMLInputElement||event.target instanceof HTMLSelectElement||event.target instanceof HTMLTextAreaElement||event.target.isContentEditable;
     if(event.key==='Escape'){if(state.selected){event.preventDefault();closeItem();}else if(editing)event.target.blur();return;}
