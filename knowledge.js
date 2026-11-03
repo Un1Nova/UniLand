@@ -3,27 +3,34 @@
   const app=window.UniLand,$=id=>document.getElementById(id),esc=app.esc;
   const plain=value=>String(value??'').replace(/§./g,'');
   let loading=null,ready=false,error=false,quests=[],lines=[],pages=[],questById=new Map(),pageById=new Map(),itemVariants=new Map();
-  let mapState={chapter:null,x:0,y:0,scale:1,width:1,height:1},drag=null,preventClick=false;
+  let mapState={chapter:null,transform:null,size:null},mapViewport=null,mapPositions=new Map();
+  const questSearchText=new Map(),guideSearchText=new Map(),guideExcerpts=new Map();
   let savedCompleted=[];try{const stored=JSON.parse(localStorage.getItem('uniland.completedQuests')||'[]');if(Array.isArray(stored))savedCompleted=stored;}catch{}
   const completed=new Set(savedCompleted.map(String));
   const props=q=>q?.properties?.betterquesting||{};
   const pageKey=p=>p.metadata?.id||p.resource;
-  function indexItems(){itemVariants=new Map();for(const item of app.items.values()){if(!itemVariants.has(item.registryId))itemVariants.set(item.registryId,[]);itemVariants.get(item.registryId).push(item);}}
-  window.addEventListener('uniland-ready',indexItems);
+  function indexItems(){itemVariants=new Map();questSearchText.clear();for(const item of app.items.values()){if(!itemVariants.has(item.registryId))itemVariants.set(item.registryId,[]);itemVariants.get(item.registryId).push(item);}}
+  window.addEventListener('uniland-ready',()=>{
+    indexItems();
+    if(ready&&['quests','guides'].includes(app.state.view)){
+      app.renderCatalog();
+      if(app.state.entity)app.renderInspector();
+    }
+  });
   async function ensure(){
     if(ready)return;if(loading)return loading;
     loading=(async()=>{try{
       const responses=await Promise.all(['quests','quest-lines','knowledge'].map(async name=>{const file=app.dataUrl(name);const r=await fetch(file,{cache:'no-cache'});if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.url}`);return r.json();}));
       [quests,lines]=responses;pages=responses[2].pages;
       questById=new Map(quests.map(q=>[String(q.questID),q]));lines.sort((a,b)=>a.order-b.order);
-      pageById=new Map(pages.map(p=>[pageKey(p),p]));indexItems();ready=true;error=false;configureFilter();
+      pageById=new Map(pages.map(p=>[pageKey(p),p]));guideSearchText.clear();guideExcerpts.clear();indexItems();ready=true;error=false;configureFilter();
     }catch(reason){console.error('[UniLand] Ошибка загрузки квестов и гайдов',reason);error=true;}finally{loading=null;if(app.state.view!=='catalog')app.renderCatalog();}})();return loading;
   }
   function configureFilter(){
     const filter=$('mod-filter');
     if(app.state.view==='quests'){
       filter.innerHTML=lines.map(line=>`<option value="${line.lineID}">${esc(plain(props(line).name))}</option>`).join('');
-      if(!lines.some(x=>String(x.lineID)===app.state.mod))app.state.mod=String(lines[0]?.lineID??'');
+      if(!lines.some(x=>String(x.lineID)===app.state.mod))app.state.mod=String(lines.find(x=>String(x.lineID)===mapState.chapter)?.lineID??lines[0]?.lineID??'');
       filter.value=app.state.mod;$('search-input').placeholder='Найти квест или предмет задания';filter.setAttribute('aria-label','Глава квестов');
     }else if(app.state.view==='guides'){
       filter.innerHTML='<option value="">Все материалы</option><option value="guide">Гайды</option><option value="wiki">Вики</option>';
@@ -48,35 +55,81 @@
   }
   function renderView(){
     const host=$('knowledge-view');
+    host.setAttribute('aria-busy',String(!ready&&!error));
+    if(app.state.view!=='quests')rememberMap();
     if(!ready){host.innerHTML=`<div class="empty-state"><h2>${error?'Не удалось загрузить материалы':'Загрузка…'}</h2>${error?'<button type="button" class="text-button" data-knowledge-retry>Повторить</button>':''}</div>`;if(!error)ensure();return;}
     if(app.state.view==='quests')renderQuests(host);else renderGuides(host);
   }
-  function matching(text){return app.norm(app.state.query).split(/\s+/).filter(Boolean).every(word=>app.norm(text).includes(word));}
+  function queryTokens(){return app.norm(app.state.query).split(/\s+/).filter(Boolean);}
+  function questText(quest){const id=String(quest.questID);if(!questSearchText.has(id))questSearchText.set(id,app.norm([props(quest).name,props(quest).desc,...(quest.tasks||[]).flatMap(task=>(task.requiredItems||[]).map(item=>itemFrom(item)?.name||item.id))].join(' ')));return questSearchText.get(id);}
+  function guideText(page){const id=pageKey(page);if(!guideSearchText.has(id))guideSearchText.set(id,app.norm(`${page.metadata?.title||''} ${page.markdown} ${page.metadata?.id||''}`));return guideSearchText.get(id);}
+  function guideExcerpt(page){
+    const id=pageKey(page);
+    if(!guideExcerpts.has(id))guideExcerpts.set(id,plain(page.markdown)
+      .replace(/```[\s\S]*?```|~~~[\s\S]*?~~~/g,' ')
+      .replace(/\{%[\s\S]*?%\}/g,' ')
+      .replace(/^[ \t]*:::[^\r\n]*/gm,'')
+      .replace(/\{#[^}\r\n]*\}/g,'')
+      .replace(/!\[[^\]]*\]\([^)]*\)/g,' ')
+      .replace(/<[^>]*>/g,'')
+      .replace(/\[([^\]]+)\]\([^)]+\)/g,'$1')
+      .replace(/\\(?:\r?\n|([\\`*{}\[\]()#+.!_>~-]))/g,(_,escaped)=>escaped||' ')
+      .replace(/^[ \t]*(?:#{1,6}\s+|>\s*|[-*+]\s+|\d+[.)]\s+)/gm,'')
+      .replace(/[#*_`~]/g,'')
+      .replace(/\s+/g,' ')
+      .replace(/\s+([,.;:!?])/g,'$1')
+      .trim().slice(0,100));
+    return guideExcerpts.get(id);
+  }
+  function rememberMap(){if(!mapViewport)return;mapState.transform=mapViewport.getTransform();mapState.size=mapViewport.getViewportSize();mapViewport.destroy();mapViewport=null;}
   function renderQuests(host){
-    const line=lines.find(x=>String(x.lineID)===app.state.mod)||lines[0];if(!line)return;
+    rememberMap();
+    const line=lines.find(x=>String(x.lineID)===app.state.mod)||lines[0];if(!line){host.innerHTML='<div class="empty-state"><h2>Квестов пока нет</h2></div>';return;}
     const nodes=line.quests.filter(n=>questById.has(String(n.id))),ids=new Set(nodes.map(n=>String(n.id)));
-    const found=quests.filter(q=>matching([props(q).name,props(q).desc,...(q.tasks||[]).flatMap(t=>(t.requiredItems||[]).map(s=>itemFrom(s)?.name||s.id))].join(' ')));
-    $('result-count').textContent=app.state.query?`${found.length} найдено`:`${nodes.length} квестов`;$('page-title').textContent='Квесты';
+    const tokens=queryTokens(),searching=tokens.length>0,found=searching?quests.filter(q=>tokens.every(word=>questText(q).includes(word))):[];
+    $('result-count').textContent=searching?`${found.length} найдено`:`${nodes.length} квестов`;$('page-title').textContent='Квесты';
+    if(!nodes.length){host.innerHTML='<div class="empty-state"><h2>В этой главе пока нет квестов</h2></div>';return;}
     const minX=Math.min(...nodes.map(n=>n.x))-24,minY=Math.min(...nodes.map(n=>n.y))-24;
     const width=(Math.max(...nodes.map(n=>n.x+n.sizeX))-minX+24)*3,height=(Math.max(...nodes.map(n=>n.y+n.sizeY))-minY+24)*3;
-    const position=new Map(nodes.map(n=>[String(n.id),{x:(n.x-minX)*3,y:(n.y-minY)*3,w:n.sizeX*3,h:n.sizeY*3}]));
+    const position=new Map(nodes.map(n=>[String(n.id),{x:(n.x-minX)*3,y:(n.y-minY)*3,w:n.sizeX*3,h:n.sizeY*3}]));mapPositions=position;
     const foundIds=new Set(found.map(q=>String(q.questID)));
     const links=nodes.flatMap(node=>(questById.get(String(node.id)).preRequisites||[]).filter(id=>ids.has(String(id))).map(id=>{
       const a=position.get(String(id)),b=position.get(String(node.id));return `<path d="M${a.x+a.w/2},${a.y+a.h/2} L${b.x+b.w/2},${b.y+b.h/2}"/>`;
     })).join('');
-    host.innerHTML=`<div class="knowledge-topline"><div><h2>${esc(plain(props(line).name))}</h2><p>Связи и расположение из квестовой книги</p></div><div class="map-controls"><button class="icon-button" type="button" data-map-zoom="-1" aria-label="Уменьшить">−</button><button class="map-fit" type="button" data-map-fit>Вся глава</button><button class="icon-button" type="button" data-map-zoom="1" aria-label="Увеличить">+</button></div></div>${app.state.query?`<div class="quest-search-results">${found.slice(0,100).map(q=>`<button type="button" data-quest="${q.questID}">${app.image(itemFrom(props(q).icon))}<span>${esc(plain(props(q).name))}</span></button>`).join('')||'<p>Ничего не найдено</p>'}${found.length>100?'<p>Уточни поиск, чтобы увидеть остальные квесты.</p>':''}</div>`:''}<div class="quest-map" id="quest-map" tabindex="0" role="region" aria-label="Карта квестов. Перетаскивай для перемещения, используй плюс и минус для масштаба."><div class="quest-world" id="quest-world" style="width:${width}px;height:${height}px"><svg class="quest-links" viewBox="0 0 ${width} ${height}" aria-hidden="true">${links}</svg>${nodes.map(node=>{const q=questById.get(String(node.id)),p=position.get(String(node.id));return `<button type="button" class="quest-node${completed.has(String(node.id))?' completed':''}${app.state.query&&!foundIds.has(String(node.id))?' dimmed':''}" data-quest="${node.id}" style="left:${p.x}px;top:${p.y}px;width:${p.w}px;height:${p.h}px" title="${esc(plain(props(q).name))}" aria-label="${esc(plain(props(q).name))}">${app.image(itemFrom(props(q).icon))}<span class="quest-node-name">${esc(plain(props(q).name))}</span></button>`;}).join('')}</div></div><div class="map-caption"><span>Потяни карту, чтобы переместиться</span><span>Отметки выполнения сохраняются на этом устройстве</span></div>`;
-    const changed=mapState.chapter!==line.lineID;mapState.chapter=line.lineID;mapState.width=width;mapState.height=height;
-    if(changed)requestAnimationFrame(fitMap);else transformMap();highlightSelection();
+    host.innerHTML=`<div class="knowledge-topline"><h2>${esc(plain(props(line).name))}</h2><div class="map-controls"><button class="icon-button" type="button" data-map-zoom="-1" aria-label="Уменьшить">−</button><button class="map-fit" type="button" data-map-fit>Вся глава</button><button class="icon-button" type="button" data-map-zoom="1" aria-label="Увеличить">+</button></div></div>${searching?`<div class="quest-search-results">${found.slice(0,100).map(q=>`<button type="button" data-quest="${q.questID}">${app.image(itemFrom(props(q).icon))}<span>${esc(plain(props(q).name))}</span></button>`).join('')||'<p>Ничего не найдено</p>'}${found.length>100?'<p>Уточни поиск, чтобы увидеть остальные квесты.</p>':''}</div>`:''}<div class="quest-map" id="quest-map" tabindex="0" role="region" aria-label="Карта квестов. Один палец перемещает карту, два меняют масштаб. Стрелки — перемещение, плюс и минус — масштаб, Home — вся глава."><div class="quest-world" id="quest-world" style="width:${width}px;height:${height}px"><svg class="quest-links" viewBox="0 0 ${width} ${height}" aria-hidden="true">${links}</svg>${nodes.map(node=>{const q=questById.get(String(node.id)),p=position.get(String(node.id));return `<button type="button" class="quest-node${completed.has(String(node.id))?' completed':''}${searching&&!foundIds.has(String(node.id))?' dimmed':''}" data-quest="${node.id}" style="left:${p.x}px;top:${p.y}px;width:${p.w}px;height:${p.h}px" title="${esc(plain(props(q).name))}" aria-label="${esc(plain(props(q).name))}">${app.image(itemFrom(props(q).icon))}<span class="quest-node-name">${esc(plain(props(q).name))}</span></button>`;}).join('')}</div></div>`;
+    const chapter=String(line.lineID),changed=mapState.chapter!==chapter,map=$('quest-map');
+    let initialTransform=changed?undefined:mapState.transform;
+    if(initialTransform&&mapState.size)initialTransform={...initialTransform,x:initialTransform.x+(map.clientWidth-mapState.size.width)/2,y:initialTransform.y+(map.clientHeight-mapState.size.height)/2};
+    mapState.chapter=chapter;
+    mapViewport=window.UniLandViewport.create({viewport:map,world:$('quest-world'),width,height,minScale:.08,maxScale:5,fitMaxScale:1.2,padding:20,fitOnResize:false,initialTransform,onChange:(transform,size)=>{mapState.transform=transform;mapState.size=size;}});
+    highlightSelection();
   }
-  function transformMap(){const world=$('quest-world');if(world)world.style.transform=`translate(${mapState.x}px,${mapState.y}px) scale(${mapState.scale})`;}
-  function fitMap(){const map=$('quest-map');if(!map)return;mapState.scale=Math.min((map.clientWidth-28)/mapState.width,(map.clientHeight-28)/mapState.height,1.2);mapState.x=(map.clientWidth-mapState.width*mapState.scale)/2;mapState.y=(map.clientHeight-mapState.height*mapState.scale)/2;transformMap();}
-  function zoom(factor,x,y){const map=$('quest-map');if(!map)return;x??=map.clientWidth/2;y??=map.clientHeight/2;const scale=Math.min(5,Math.max(.08,mapState.scale*factor));mapState.x=x-(x-mapState.x)*scale/mapState.scale;mapState.y=y-(y-mapState.y)*scale/mapState.scale;mapState.scale=scale;transformMap();}
+  function fitMap(){mapViewport?.fit();}
+  function zoom(factor){mapViewport?.zoomBy(factor);}
+  function revealQuest(id){
+    id=String(id);
+    if(!ready||app.state.view!=='quests'||!questById.has(id))return false;
+    const hasQuest=line=>line.quests.some(node=>String(node.id)===id);
+    const line=lines.find(line=>String(line.lineID)===app.state.mod&&hasQuest(line))||lines.find(hasQuest);
+    if(!line)return false;
+    const chapter=String(line.lineID),changed=app.state.mod!==chapter||mapState.chapter!==chapter;
+    app.state.mod=chapter;configureFilter();
+    if(changed||!mapViewport||!$('quest-map'))renderView();
+    const position=mapPositions.get(id);
+    if(position&&mapViewport){
+      const transform=mapViewport.getTransform(),size=mapViewport.getViewportSize(),margin=Math.min(24,size.width/8,size.height/8);
+      const left=position.x*transform.scale+transform.x,top=position.y*transform.scale+transform.y;
+      if(left<margin||top<margin||left+position.w*transform.scale>size.width-margin||top+position.h*transform.scale>size.height-margin)mapViewport.setTransform({x:size.width/2-(position.x+position.w/2)*transform.scale,y:size.height/2-(position.y+position.h/2)*transform.scale,scale:transform.scale});
+      $('quest-world').querySelectorAll('[data-quest]').forEach(node=>{if(node.dataset.quest===id)node.classList.remove('dimmed');});
+    }
+    return true;
+  }
   function highlightSelection(){document.querySelectorAll('.quest-node').forEach(node=>node.classList.toggle('selected',app.state.entity?.kind==='quest'&&node.dataset.quest===app.state.entity.id));}
   function renderGuides(host){
-    const found=pages.filter(p=>(!app.state.mod||p.kind===app.state.mod)&&matching(`${p.metadata?.title||''} ${p.markdown} ${p.metadata?.id||''}`));
+    const tokens=queryTokens(),found=pages.filter(p=>(!app.state.mod||p.kind===app.state.mod)&&tokens.every(word=>guideText(p).includes(word)));
     $('result-count').textContent=`${found.length} материалов`;$('page-title').textContent='Гайды';
     const size=app.capacity(true);app.pagination(found.length,size);
-    host.innerHTML=`<div class="knowledge-topline"><div><h2>${app.state.mod==='wiki'?'Вики':app.state.mod==='guide'?'Гайды':'Библиотека'}</h2><p>Знания о мире, предметах и механизмах</p></div></div><div class="guide-grid">${found.slice(app.state.page*size,(app.state.page+1)*size).map(p=>`<button class="guide-card" type="button" data-guide="${esc(pageKey(p))}">${app.image(itemFrom(p.metadata?.icon))}<span class="guide-card-copy"><span class="detail-eyebrow">${p.kind==='guide'?'Гайд':'Вики'}</span><strong>${esc(plain(p.metadata?.title||pageKey(p)))}</strong><span>${esc(plain(p.markdown).replace(/<[^>]*>/g,'').replace(/\[([^\]]+)\]\([^)]+\)/g,'$1').replace(/[#*_{}]/g,'').trim().slice(0,100))}</span></span>${app.icons.right}</button>`).join('')||'<div class="empty-state"><h2>Ничего не найдено</h2><p>Попробуй другое название.</p></div>'}</div>`;
+    host.innerHTML=`<div class="knowledge-topline"><h2>${app.state.mod==='wiki'?'Вики':app.state.mod==='guide'?'Гайды':'Библиотека'}</h2></div><div class="guide-grid">${found.slice(app.state.page*size,(app.state.page+1)*size).map(p=>`<button class="guide-card" type="button" data-guide="${esc(pageKey(p))}">${app.image(itemFrom(p.metadata?.icon))}<span class="guide-card-copy"><span class="detail-eyebrow">${p.kind==='guide'?'Гайд':'Вики'}</span><strong>${esc(plain(p.metadata?.title||pageKey(p)))}</strong><span>${esc(guideExcerpt(p))}</span></span>${app.icons.right}</button>`).join('')||'<div class="empty-state"><h2>Ничего не найдено</h2><p>Попробуй другое название.</p></div>'}</div>`;
   }
   function questLink(id){const q=questById.get(String(id));return q?`<button type="button" class="quest-related" data-quest="${id}">${app.image(itemFrom(props(q).icon))}<span>${esc(plain(props(q).name))}</span>${app.icons.right}</button>`:'';}
   const taskNames={'bq_standard:retrieval':'Получить предметы','bq_standard:crafting':'Создать предметы','bq_standard:checkbox':'Подтвердить выполнение','bq_standard:location':'Посетить место','bq_standard:fluid':'Собрать жидкость','bq_standard:kill':'Победить существ','bq_standard:meeting':'Встретить существо','bq_standard:scoreboard':'Выполнить условие','bq_standard:xp':'Получить опыт','bq_standard:advancement':'Получить достижение','bq_standard:hunt':'Охота'};
@@ -113,18 +166,12 @@
   }
   document.addEventListener('click',async event=>{
     const b=event.target.closest('button');if(!b)return;
-    if(b.hasAttribute('data-knowledge-retry')){error=false;ensure();return;}
+    if(b.hasAttribute('data-knowledge-retry')){error=false;ensure();app.renderCatalog();return;}
     if(b.hasAttribute('data-map-fit'))fitMap();if(b.dataset.mapZoom)zoom(Number(b.dataset.mapZoom)>0?1.35:1/1.35);
     if(b.hasAttribute('data-knowledge-more')){app.state.limit+=150;renderView();}
     if(b.dataset.completeQuest){const id=b.dataset.completeQuest;completed.has(id)?completed.delete(id):completed.add(id);try{localStorage.setItem('uniland.completedQuests',JSON.stringify([...completed]));}catch{}app.renderInspector();const node=$('quest-world')?.querySelector(`[data-quest="${id}"]`);node?.classList.toggle('completed',completed.has(id));}
-    if(b.dataset.quest){if(preventClick){preventClick=false;return;}await ensure();const id=b.dataset.quest;const current=lines.find(l=>String(l.lineID)===app.state.mod);if(app.state.view!=='quests')app.setView('quests');if(!current?.quests.some(x=>String(x.id)===id)){const line=lines.find(l=>l.quests.some(x=>String(x.id)===id));if(line){app.state.mod=String(line.lineID);configureFilter();renderView();}}app.selectEntity('quest',id);}
+    if(b.dataset.quest){await ensure();const id=b.dataset.quest;if(app.state.view!=='quests')app.setView('quests');revealQuest(id);app.selectEntity('quest',id);}
     if(b.dataset.guide){await ensure();if(app.state.view!=='guides')app.setView('guides');app.selectEntity('guide',b.dataset.guide);if(b.dataset.anchor)requestAnimationFrame(()=>$(`guide-${b.dataset.anchor}`)?.scrollIntoView({block:'start',behavior:'smooth'}));}
   });
-  document.addEventListener('wheel',event=>{const map=event.target.closest('#quest-map');if(!map)return;event.preventDefault();const rect=map.getBoundingClientRect();zoom(Math.exp(-event.deltaY*.0015),event.clientX-rect.left,event.clientY-rect.top);},{passive:false});
-  document.addEventListener('pointerdown',event=>{const map=event.target.closest('#quest-map');if(!map||event.button!==0)return;drag={id:event.pointerId,x:event.clientX,y:event.clientY,originX:mapState.x,originY:mapState.y,moved:false};preventClick=false;});
-  document.addEventListener('pointermove',event=>{if(!drag||drag.id!==event.pointerId)return;const dx=event.clientX-drag.x,dy=event.clientY-drag.y;if(Math.abs(dx)+Math.abs(dy)>5){drag.moved=true;$('quest-map')?.setPointerCapture(event.pointerId);}if(drag.moved){mapState.x=drag.originX+dx;mapState.y=drag.originY+dy;transformMap();}});
-  document.addEventListener('pointerup',event=>{if(drag?.id===event.pointerId){preventClick=drag.moved;drag=null;}});
-  document.addEventListener('pointercancel',()=>{drag=null;});
-  window.addEventListener('resize',()=>{if(app.state.view==='quests')fitMap();});
-  window.UniLandKnowledge={ensure,configureFilter,renderView,detail,highlightSelection,markdown};
+  window.UniLandKnowledge={ensure,configureFilter,renderView,detail,revealQuest,highlightSelection,markdown};
 })();

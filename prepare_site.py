@@ -7,19 +7,29 @@ import shutil
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
+from runtime_catalog import encode_runtime_catalog
 
 ROOT = Path(__file__).resolve().parent
-UI_FILES = ('index.html', 'styles.css', 'fonts.css', 'app.js', 'knowledge.js', 'favicon.svg',
-            'logo.svg', 'catalog.json', 'background.webp')
+UI_FILES = ('index.html', 'styles.css', 'fonts.css', 'runtime.js', 'app.js', 'knowledge.js',
+            'planner-engine.js', 'planner.js', 'planner-worker.js', 'planner.css',
+            'viewport.js', 'viewport.css', 'favicon.svg', 'logo.svg', 'catalog.json',
+            'background.webp')
 DATA_FILES = ('quests.json', 'quest-lines.json', 'knowledge.json', 'snapshot.json',
               'coverage-report.json', 'client-manifest.json', 'normalization-report.json')
-VERSIONED_UI_FILES = ('app.js', 'knowledge.js', 'styles.css')
+VERSIONED_UI_FILES = ('runtime.js', 'app.js', 'knowledge.js', 'styles.css',
+                      'planner-engine.js', 'planner.js', 'planner-worker.js', 'planner.css',
+                      'viewport.js', 'viewport.css')
 DATA_META_FILES = {
     'uniland-catalog': Path('catalog.json'),
     'uniland-quests': Path('data/quests.json'),
     'uniland-quest-lines': Path('data/quest-lines.json'),
     'uniland-knowledge': Path('data/knowledge.json'),
 }
+ASSET_META_FILES = {
+    'uniland-runtime': Path('catalog-runtime.json'),
+    'uniland-planner-worker': Path('planner-worker.js'),
+}
+META_FILES = {**DATA_META_FILES, **ASSET_META_FILES}
 
 
 class PublishedReferences(HTMLParser):
@@ -31,7 +41,7 @@ class PublishedReferences(HTMLParser):
         attributes = dict(attributes)
         self.references.extend(attributes[name] for name in ('src', 'href')
                                if attributes.get(name))
-        if tag == 'meta' and attributes.get('name') in DATA_META_FILES:
+        if tag == 'meta' and attributes.get('name') in META_FILES:
             self.references.append(attributes.get('content', ''))
 
 
@@ -59,11 +69,11 @@ def version_index(text, versioned):
     def remove_old_data_meta(match):
         name = re.search(r'''\bname\s*=\s*(["'])([^"']+)\1''', match.group(0),
                          flags=re.IGNORECASE)
-        return '' if name and name.group(2).lower() in DATA_META_FILES else match.group(0)
+        return '' if name and name.group(2).lower() in META_FILES else match.group(0)
 
     text = re.sub(r'<meta\b[^>]*>', remove_old_data_meta, text, flags=re.IGNORECASE)
     metadata = ''.join(f'  <meta name="{name}" content="{versioned[path].as_posix()}">\n'
-                       for name, path in DATA_META_FILES.items() if path in versioned)
+                       for name, path in META_FILES.items() if path in versioned)
     text, count = re.subn(r'</head\s*>', lambda _: metadata + '</head>', text,
                          count=1, flags=re.IGNORECASE)
     if count != 1:
@@ -143,12 +153,20 @@ def package(root=ROOT, destination=None):
         hashed_path = content_path(path, payload)
         (destination / hashed_path).write_bytes(payload)
         versioned[path] = hashed_path
+    # The complete catalog and details remain published. Only the bootstrap is
+    # projected, with shared arrays and exact item references restored by runtime.js.
+    runtime_bytes = (json.dumps(encode_runtime_catalog(catalog), ensure_ascii=False,
+                               separators=(',', ':'), allow_nan=False) + '\n').encode('utf-8')
+    runtime_path = Path('catalog-runtime.json')
+    hashed_runtime = content_path(runtime_path, runtime_bytes)
+    (destination / hashed_runtime).write_bytes(runtime_bytes)
+    versioned[runtime_path] = hashed_runtime
     files.update(versioned.values())
     index = destination / 'index.html'
     index.write_text(version_index(index.read_text(encoding='utf-8'), versioned), encoding='utf-8')
 
     # Check references in the final artifact, not just the source directory.
-    for name in ('index.html', 'styles.css', 'fonts.css'):
+    for name in ('index.html', 'styles.css', 'fonts.css', 'planner.css', 'viewport.css'):
         text = (destination / name).read_text(encoding='utf-8')
         if name == 'index.html':
             parser = PublishedReferences()

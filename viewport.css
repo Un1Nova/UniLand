@@ -1,0 +1,14 @@
+.uniland-viewport {
+  position: relative;
+  overflow: hidden;
+  touch-action: none;
+  overscroll-behavior: contain;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  cursor: grab;
+}
+.uniland-viewport-world { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
+.uniland-viewport img,.uniland-viewport a { -webkit-user-drag: none; }
+.uniland-viewport.is-panning,.uniland-viewport.is-panning * { cursor: grabbing; }
+.uniland-viewport.is-panning button:active { transform: none; }

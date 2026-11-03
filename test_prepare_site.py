@@ -1,10 +1,13 @@
 import hashlib
 import json
+import shutil
+import subprocess
 import tempfile
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
-from prepare_site import UI_FILES, package, relative_asset
+from prepare_site import UI_FILES, VERSIONED_UI_FILES, package, relative_asset
+from runtime_catalog import encode_runtime_catalog
 
 
 class PageReferences(HTMLParser):
@@ -30,9 +33,15 @@ def make_source(root):
         (root / name).write_text('', encoding='utf-8')
     (root / 'index.html').write_text('''<!doctype html><html><head>
 <meta name="uniland-catalog" content="obsolete-catalog.json">
-<link rel="stylesheet" href="styles.css"></head><body>
+<meta name="uniland-runtime" content="obsolete-runtime.json">
+<meta name="uniland-planner-worker" content="obsolete-worker.js">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="planner.css"><link rel="stylesheet" href="viewport.css"></head><body>
+<script src="runtime.js" defer></script>
 <img src="logo.svg"><script src="app.js" defer></script>
-<script src="knowledge.js" defer></script></body></html>''', encoding='utf-8')
+<script src="viewport.js" defer></script><script src="knowledge.js" defer></script>
+<script src="planner-engine.js" data-planner-engine defer></script>
+<script src="planner.js" defer></script></body></html>''', encoding='utf-8')
     (root / 'app.js').write_text('window.example = 1;', encoding='utf-8')
     (root / 'knowledge.js').write_text('window.knowledge = 1;', encoding='utf-8')
     (root / 'styles.css').write_text('@import "fonts.css";body{background:url("background.webp")}', encoding='utf-8')
@@ -50,9 +59,22 @@ def make_source(root):
                  'clientManifestSha256': 'a' * 64},
         'mods': [{'id': 'mod', 'name': 'Модификация'}],
         'items': [{'id': 'mod:item', 'name': 'Предмет', 'icon': 'assets/items/mod/variant.png',
-                   'nbt': {'display': {'Lore': ['Значение не должно потеряться']}}}],
+                   'nbt': {'display': {'Lore': ['Значение не должно потеряться']}},
+                   'translationKey': 'item.source', 'translationSource': 'source metadata',
+                   'iconKind': 'forge-inventory-render', 'fluidProperties': {'density': 1000},
+                   'futureItem': {'value': 'retained'}}],
         'recipes': [{'id': 'recipe:1', 'operation': 'native-rule', 'outputs': [],
-                     'inputs': [{'itemId': 'mod:item', 'count': 2.5, 'alternatives': ['mod:item']}],
+                     'inputs': [{'itemId': 'mod:item', 'count': 2.5, 'alternatives': ['mod:item'],
+                                 'variants': [{'itemId': 'mod:item', 'count': 3, 'chance': 0.5,
+                                               'role': 'catalyst', 'consumed': False, 'unit': 'mB',
+                                               'futureVariant': {'value': ['one', 2]}}],
+                                 'futureStack': {'itemId': 'not-a-reference', 'keep': True}}],
+                     'sources': [{'type': 'native', 'detail': 'retained'}],
+                     'ruleClass': 'source.RuleClass', 'conditions': ['Условие'],
+                     'detailsFile': 'data/recipe-details/example.json'},
+                    {'id': 'recipe:2', 'type': 'machine', 'inputs': [],
+                     'outputs': [{'itemId': 'mod:item', 'count': 1, 'chance': 0.25}],
+                     'sources': [{'type': 'recipe-provenance', 'detail': 'full source only'}],
                      'detailsFile': 'data/recipe-details/example.json'}],
         'futureField': {'nested': [True, None, 9007199254740993, {'value': 'ё & < >'}]},
     }
@@ -88,13 +110,14 @@ class PackagingTest(unittest.TestCase):
             site = root / '_site'
             page = PageReferences((site / 'index.html').read_text(encoding='utf-8'))
             self.assertEqual(set(page.metadata), {
-                'uniland-catalog', 'uniland-quests', 'uniland-quest-lines', 'uniland-knowledge'})
+                'uniland-catalog', 'uniland-quests', 'uniland-quest-lines', 'uniland-knowledge',
+                'uniland-runtime', 'uniland-planner-worker'})
             for url in page.urls:
                 self.assertNotIn('?', url)
                 self.assertNotIn('#', url)
                 self.assertFalse(url.startswith('/'))
                 self.assertTrue((site / url).is_file(), url)
-            for name in ('app.js', 'knowledge.js', 'styles.css'):
+            for name in VERSIONED_UI_FILES:
                 pinned = result['versioned'][name]
                 self.assertIn(pinned, page.urls)
                 self.assertNotIn(name, page.urls)
@@ -111,6 +134,12 @@ class PackagingTest(unittest.TestCase):
                 self.assertIn(hashlib.sha256(published).hexdigest()[:16], pinned)
             self.assertEqual(json.loads((site / 'catalog.json').read_bytes()), catalog)
             self.assertLess((site / 'catalog.json').stat().st_size, len(before[root / 'catalog.json']))
+            runtime_path = page.metadata['uniland-runtime']
+            self.assertEqual(runtime_path, result['versioned']['catalog-runtime.json'])
+            runtime_bytes = (site / runtime_path).read_bytes()
+            self.assertEqual(json.loads(runtime_bytes), encode_runtime_catalog(catalog))
+            self.assertIn(hashlib.sha256(runtime_bytes).hexdigest()[:16], runtime_path)
+            self.assertFalse((site / 'catalog-runtime.json').exists(), 'only one runtime copy is needed')
             for path, payload in before.items():
                 self.assertEqual(path.read_bytes(), payload, str(path))
             self.assertEqual(result['files'], sum(path.is_file() for path in site.rglob('*')))
@@ -127,7 +156,7 @@ class PackagingTest(unittest.TestCase):
             second = package(root, root / 'second')
             first_page = PageReferences((root / 'first/index.html').read_text(encoding='utf-8'))
             second_page = PageReferences((root / 'second/index.html').read_text(encoding='utf-8'))
-            for name in ('app.js', 'catalog.json'):
+            for name in ('app.js', 'catalog.json', 'catalog-runtime.json'):
                 self.assertNotEqual(first['versioned'][name], second['versioned'][name])
                 self.assertIn(second['versioned'][name], second_page.urls)
                 self.assertNotIn(first['versioned'][name], second_page.urls)
@@ -136,6 +165,49 @@ class PackagingTest(unittest.TestCase):
                 self.assertEqual(first['versioned'][name], second['versioned'][name])
             self.assertNotEqual(first_page.metadata['uniland-catalog'], second_page.metadata['uniland-catalog'])
             self.assertEqual(json.loads((root / 'second' / second_page.metadata['uniland-catalog']).read_bytes()), catalog)
+
+    def test_worker_changes_get_a_new_published_metadata_url(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            make_source(root)
+            first = package(root, root / 'first')
+            (root / 'planner-worker.js').write_text('self.onmessage = () => {};')
+            second = package(root, root / 'second')
+            page = PageReferences((root / 'second/index.html').read_text())
+            self.assertNotEqual(first['versioned']['planner-worker.js'], second['versioned']['planner-worker.js'])
+            self.assertEqual(page.metadata['uniland-planner-worker'], second['versioned']['planner-worker.js'])
+            self.assertEqual(first['versioned']['catalog-runtime.json'], second['versioned']['catalog-runtime.json'])
+
+    def test_runtime_encoder_and_decoder_preserve_retained_values(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            catalog = make_source(root)
+            original = json.loads(json.dumps(catalog))
+            runtime = encode_runtime_catalog(catalog)
+            self.assertEqual(catalog, original, 'runtime encoding must not mutate the source')
+            self.assertEqual(runtime['items'][0]['nbt'], catalog['items'][0]['nbt'])
+            self.assertEqual(runtime['recipes'][0]['sources'], catalog['recipes'][0]['sources'])
+            self.assertNotIn('sources', runtime['recipes'][1])
+            wire = root / 'runtime.json'
+            wire.write_text(json.dumps(runtime, ensure_ascii=False), encoding='utf-8')
+            node = shutil.which('node')
+            self.assertIsNotNone(node, 'Node is required to check the browser decoder')
+            result = subprocess.run([node, str(Path(__file__).with_name('test_runtime.js')),
+                                     str(root / 'catalog.json'), str(wire)],
+                                    capture_output=True, text=True, timeout=30)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_runtime_encoder_rejects_unknown_or_ambiguous_references(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            catalog = make_source(root)
+            catalog['recipes'][0]['inputs'][0]['itemId'] = 'mod:missing'
+            with self.assertRaisesRegex(ValueError, 'Unknown runtime item reference'):
+                encode_runtime_catalog(catalog)
+            catalog['recipes'][0]['inputs'][0]['itemId'] = 'mod:item'
+            catalog['runtimeFormat'] = 'reserved'
+            with self.assertRaisesRegex(ValueError, 'reserved runtime fields'):
+                encode_runtime_catalog(catalog)
 
     def test_unsafe_paths_are_rejected(self):
         for value in ('../secret.png', '/secret.png', '//server/file.png',

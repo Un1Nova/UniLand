@@ -33,11 +33,13 @@
   };
   const readLocal = (key,fallback) => {try{return JSON.parse(localStorage.getItem(key))??fallback;}catch{return fallback;}};
   const writeLocal = (key,value) => {try{localStorage.setItem(key,JSON.stringify(value));}catch{}};
-  const dataFiles = {catalog:'catalog.json',quests:'data/quests.json','quest-lines':'data/quest-lines.json',knowledge:'data/knowledge.json'};
+  const dataFiles = {catalog:'catalog.json',quests:'data/quests.json','quest-lines':'data/quest-lines.json',knowledge:'data/knowledge.json','planner-worker':'planner-worker.js'};
   const dataUrl = (name) => document.querySelector(`meta[name="uniland-${name}"]`)?.getAttribute('content') || dataFiles[name];
   const emptyCatalog = (loadFailed=false) => ({schemaVersion:1,meta:{status:'unavailable',loadFailed},mods:[],items:[],recipes:[]});
-  let catalog=emptyCatalog(),items=new Map(),mods=new Map(),searchIndex=new Map(),byOutput=new Map(),byInput=new Map();
-  let hoverItem=null,searchTimer,drawerOpen=false,returnFocus=null,returnItem=null;
+  let catalog=emptyCatalog(),items=new Map(),mods=new Map(),searchIndex=new Map(),byOutput=new Map(),byInput=new Map(),recipeLookup=new Map();
+  let hoverItem=null,searchTimer,drawerOpen=false,returnFocus=null,returnItem=null,resultsCache=null,favoriteVersion=0,catalogReady=false;
+  const viewStates=new Map();
+  const nextFrame=()=>new Promise(resolve=>setTimeout(resolve,0));
   const favorites=readLocal('atlas.favorites',[]);
   const state={view:'catalog',entity:null,lastEntity:null,page:0,query:'',mod:'',favoritesOnly:false,selected:null,tab:'recipes',recipeIndex:0,limit:150,trail:[],favorites:new Set(Array.isArray(favorites)?favorites.filter(v=>typeof v==='string'):[])};
   document.querySelectorAll('[data-icon]').forEach(node=>{node.innerHTML=icons[node.dataset.icon]||'';});
@@ -89,47 +91,65 @@
 
   function image(item) {
     const src=safeUrl(item?.icon,true);
-    return src?`<img class="item-icon" src="${esc(src)}" alt="" loading="lazy" decoding="async">`:`<span class="item-icon missing-icon" title="Нет иконки">${icons.cube}</span>`;
+    return src?`<img class="item-icon" src="${esc(src)}" alt="" width="36" height="36" loading="lazy" decoding="async" draggable="false">`:`<span class="item-icon missing-icon" title="Нет иконки">${icons.cube}</span>`;
   }
   document.addEventListener('error',(event)=>{
     const target=event.target;
     if(!(target instanceof HTMLImageElement)||!target.classList.contains('item-icon'))return;
     const fallback=document.createElement('span');fallback.className='item-icon missing-icon';fallback.title='Нет иконки';fallback.innerHTML=icons.cube;target.replaceWith(fallback);
   },true);
-  function indexCatalog(){
-    items=new Map(catalog.items.map(item=>[item.id,item]));mods=new Map(catalog.mods.map(mod=>[mod.id,{...mod,count:0}]));byOutput=new Map();byInput=new Map();searchIndex=new Map();
+  async function indexCatalog(){
+    items=new Map(catalog.items.map(item=>[item.id,item]));mods=new Map(catalog.mods.map(mod=>[mod.id,{...mod,count:0}]));byOutput=new Map();byInput=new Map();recipeLookup=new Map(catalog.recipes.map(recipe=>[recipe.id,recipe]));searchIndex=new Map();resultsCache=null;
+    let processed=0;
     for(const item of catalog.items){
       const modId=item.modId||'unknown';
       if(!mods.has(modId))mods.set(modId,{id:modId,name:modId==='unknown'?'Другие':modId,count:0});
       const mod=mods.get(modId);mod.count++;
       searchIndex.set(item.id,{text:norm([item.name,item.englishName,item.id,...strings(item.tags),mod.name,mod.id].join(' ')),mod:norm(`${mod.name} ${mod.id} ${item.id.split(':')[0]}`)});
+      if(++processed%1200===0)await nextFrame();
     }
     const add=(map,id,recipe)=>{if(!map.has(id))map.set(id,[]);map.get(id).push(recipe);};
-    for(const recipe of catalog.recipes){new Set(recipe.outputs.map(stack=>stack.itemId)).forEach(id=>add(byOutput,id,recipe));new Set(recipe.inputs.flatMap(stack=>[stack.itemId,...(stack.alternatives||[])])).forEach(id=>add(byInput,id,recipe));}
+    const stackIds=stacks=>{const ids=new Set();for(const stack of stacks){ids.add(stack.itemId);for(const id of stack.alternatives||[])ids.add(id);for(const variant of stack.variants||[])ids.add(variant.itemId);}return ids;};
+    for(const recipe of catalog.recipes){
+      const reference=['fuel','tconstruct.materials'].includes(recipe.type);
+      if(!reference)for(const id of stackIds(recipe.outputs))add(byOutput,id,recipe);
+      for(const id of stackIds(reference?[...recipe.inputs,...recipe.outputs]:recipe.inputs))add(byInput,id,recipe);
+      if(++processed%800===0)await nextFrame();
+    }
   }
-  function applyCatalog(value){
-    catalog=value;state.mod='';state.selected=null;state.trail=[];state.recipeIndex=0;state.limit=150;indexCatalog();
+  async function applyCatalog(value){
+    catalogReady=false;catalog=value;state.mod='';state.selected=null;state.trail=[];state.recipeIndex=0;state.limit=150;await indexCatalog();catalogReady=true;
     $('mod-filter').innerHTML='<option value="">Все моды</option>'+[...mods.values()].filter(mod=>mod.count>0).sort((a,b)=>a.name.localeCompare(b.name,'ru')).map(mod=>`<option value="${esc(mod.id)}">${esc(mod.name)}</option>`).join('');
-    $('content').classList.toggle('empty-catalog',!catalog.items.length);renderCatalog();renderInspector();
+    $('content').classList.toggle('empty-catalog',!catalog.items.length);renderInspector();renderCatalog();
   }
-  function results(){const tokens=norm(state.query).split(/\s+/).filter(Boolean);return catalog.items.filter(item=>{
-    if(state.mod&&(item.modId||'unknown')!==state.mod)return false;
-    if(state.favoritesOnly&&!state.favorites.has(item.id))return false;
-    const entry=searchIndex.get(item.id);return tokens.every(token=>token.startsWith('@')?entry.mod.includes(token.slice(1)):entry.text.includes(token));
-  });}
+  function results(){
+    if(!catalogReady)return [];
+    const key=[state.query,state.mod,state.favoritesOnly,favoriteVersion].join('\u0001');
+    if(resultsCache?.key===key)return resultsCache.items;
+    const tokens=norm(state.query).split(/\s+/).filter(Boolean);
+    const filtered=catalog.items.filter(item=>{
+      if(state.mod&&(item.modId||'unknown')!==state.mod)return false;
+      if(state.favoritesOnly&&!state.favorites.has(item.id))return false;
+      const entry=searchIndex.get(item.id);return tokens.every(token=>token.startsWith('@')?entry.mod.includes(token.slice(1)):entry.text.includes(token));
+    });
+    resultsCache={key,items:filtered};return filtered;
+  }
   function renderCatalog(){
-    for(const [id,view] of [['catalog-nav','catalog'],['quests-nav','quests'],['guides-nav','guides']]){const active=state.view===view&&!state.favoritesOnly;$(id).classList.toggle('active',active);$(id).setAttribute('aria-pressed',String(active));}
+    for(const [id,view] of [['catalog-nav','catalog'],['planner-nav','planner'],['quests-nav','quests'],['guides-nav','guides']]){const active=state.view===view&&!state.favoritesOnly;$(id).classList.toggle('active',active);$(id).setAttribute('aria-pressed',String(active));}
     $('favorite-items').classList.toggle('active',state.view==='catalog'&&state.favoritesOnly);
+    $('favorite-items').setAttribute('aria-pressed',String(state.view==='catalog'&&state.favoritesOnly));
+    if(state.view==='planner')return;
     $('items-grid').hidden=state.view!=='catalog';$('knowledge-view').hidden=state.view==='catalog';
     $('content').classList.toggle('knowledge-mode',state.view!=='catalog');
     $('content').classList.toggle('guide-mode',state.view==='guides');
     $('clear-search').hidden=!state.query;$('search-shortcut').hidden=!!state.query;
     if(state.view!=='catalog'){$('load-more').hidden=true;$('empty-state').hidden=true;$('catalog-pagination').hidden=true;window.UniLandKnowledge?.renderView();return;}
+    if(!catalogReady){$('items-grid').innerHTML='';$('catalog-pagination').hidden=true;$('empty-state').hidden=false;$('empty-state').innerHTML='<span class="loading-ring" aria-hidden="true"></span><h2>Загрузка…</h2>';return;}
     const filtered=results();$('result-count').textContent=catalog.items.length?itemsLabel(filtered.length):'';
     $('page-title').textContent=state.favoritesOnly?'Избранное':'Крафты';$('catalog-nav').classList.toggle('active',!state.favoritesOnly);$('catalog-nav').setAttribute('aria-pressed',String(!state.favoritesOnly));
     $('favorite-items').classList.toggle('active',state.favoritesOnly);$('favorite-items').setAttribute('aria-pressed',String(state.favoritesOnly));$('favorite-items').title=state.favoritesOnly?'Показать все предметы':'Избранное';
     $('clear-search').hidden=!state.query;$('search-shortcut').hidden=!!state.query;
-    const pageSize=capacity();pagination(filtered.length,pageSize);
+    $('catalog-pagination').hidden=!filtered.length;const pageSize=capacity();pagination(filtered.length,pageSize);
     $('items-grid').innerHTML=filtered.slice(state.page*pageSize,(state.page+1)*pageSize).map(item=>`<article class="item-card${state.selected===item.id?' selected':''}" data-item="${esc(item.id)}"><button class="card-star${state.favorites.has(item.id)?' saved':''}" type="button" data-favorite="${esc(item.id)}" aria-label="${state.favorites.has(item.id)?'Убрать из избранного':'В избранное'}: ${esc(item.name)}" aria-pressed="${state.favorites.has(item.id)}">${icons.star}</button><button class="item-select" type="button" data-select="${esc(item.id)}" title="${esc(item.name)}\n${esc(item.id)}" aria-label="${esc(item.name)}">${image(item)}<span class="item-name">${esc(item.name)}</span></button></article>`).join('');
     $('load-more').hidden=true;$('empty-state').hidden=!!filtered.length;
     if(!filtered.length){
@@ -139,17 +159,31 @@
       $('empty-state').innerHTML=`<span>${icons.cube}</span><h2>${title}</h2><p>${text}</p>${action?`<button class="text-button" type="button" data-action="${action}">${button}</button>`:''}`;
     }
   }
-  function capacity(guides=false){const box=$('catalog').getBoundingClientRect(),mobile=innerWidth<=700;const min=guides?240:innerWidth>=1440?94:mobile?74:86,gap=guides?10:mobile?6:8,padding=guides?32:mobile?20:24;const cols=guides&&mobile?1:Math.max(1,Math.floor((box.width-padding+gap)/(min+gap)));const row=guides?130:mobile?112:120;const rows=Math.max(1,Math.floor((box.height-(guides?116:24)-52+gap)/row));return cols*rows;}
+  function capacity(guides=false){
+    const grid=guides?$('knowledge-view').querySelector('.guide-grid'):$('items-grid');
+    if(grid&&grid.clientHeight>0){const css=getComputedStyle(grid),cols=Math.max(1,css.gridTemplateColumns.split(' ').filter(Boolean).length),row=parseFloat(css.gridAutoRows)||112,gap=parseFloat(css.rowGap)||0;return cols*Math.max(1,Math.floor((grid.clientHeight-(parseFloat(css.paddingTop)||0)-(parseFloat(css.paddingBottom)||0)+gap)/(row+gap)));}
+    const box=$('catalog').getBoundingClientRect(),mobile=innerWidth<=700,min=guides?240:mobile?82:86,gap=8,cols=guides&&mobile?1:Math.max(1,Math.floor((box.width-24+gap)/(min+gap)));return cols*Math.max(1,Math.floor((box.height-(guides?100:24)-52)/(guides?130:120)));
+  }
   function pagination(total,size){const pages=Math.max(1,Math.ceil(total/size));state.page=Math.max(0,Math.min(state.page,pages-1));const host=$('catalog-pagination');host.hidden=!total;host.innerHTML=`<button class="icon-button" type="button" data-page="-1" aria-label="Предыдущая страница"${state.page===0?' disabled':''}>${icons.left}</button><span aria-live="polite">${state.page+1}<span> / ${pages}</span></span><button class="icon-button" type="button" data-page="1" aria-label="Следующая страница"${state.page===pages-1?' disabled':''}>${icons.right}</button>`;}
   function configureFilter(){
-    if(state.view==='catalog'){$('mod-filter').innerHTML='<option value="">Все моды</option>'+[...mods.values()].filter(m=>m.count>0).sort((a,b)=>a.name.localeCompare(b.name,'ru')).map(m=>`<option value="${esc(m.id)}">${esc(m.name)}</option>`).join('');$('search-input').placeholder='Найти предмет или @мод';}
+    if(state.view==='catalog'){$('mod-filter').setAttribute('aria-label','Модификация');$('mod-filter').innerHTML='<option value="">Все моды</option>'+[...mods.values()].filter(m=>m.count>0).sort((a,b)=>a.name.localeCompare(b.name,'ru')).map(m=>`<option value="${esc(m.id)}">${esc(m.name)}</option>`).join('');$('search-input').placeholder='Найти предмет или @мод';}
     else window.UniLandKnowledge?.configureFilter();
   }
-  function setView(view){state.view=view;state.query='';state.mod='';state.favoritesOnly=false;state.limit=150;state.page=0;state.selected=null;state.entity=null;state.lastEntity=null;state.trail=[];$('search-input').value='';configureFilter();renderCatalog();renderInspector();const url=new URL(location.href);for(const key of ['item','quest','guide'])url.searchParams.delete(key);url.searchParams.set('view',view);history.replaceState(null,'',url);}
-  function reset(){setView('catalog');}
+  function setView(view,options={}){
+    if(!['catalog','quests','guides','planner'].includes(view))view='catalog';
+    if(state.view!==view)viewStates.set(state.view,{query:state.query,mod:state.mod,page:state.page,favoritesOnly:state.favoritesOnly});
+    const saved=options.reset?null:state.view===view?{query:state.query,mod:state.mod,page:state.page,favoritesOnly:state.favoritesOnly}:viewStates.get(view);
+    state.view=view;state.query=saved?.query||'';state.mod=saved?.mod||'';state.page=saved?.page||0;state.favoritesOnly=!!saved?.favoritesOnly;state.selected=null;state.entity=null;state.lastEntity=null;state.trail=[];
+    $('search-input').value=state.query;document.querySelector('.page-shell').hidden=view==='planner';$('toolbar').hidden=view==='planner';$('planner-view').hidden=view!=='planner';document.body.classList.toggle('is-planning',view==='planner');
+    if(view!=='planner'){configureFilter();$('mod-filter').value=state.mod;}renderInspector();renderCatalog();
+    if(view==='planner')window.UniLandProduction?.render();else window.UniLandProduction?.suspend();
+    if(options.url!==false){const url=new URL(location.href);for(const key of ['item','quest','guide','plan','qty'])url.searchParams.delete(key);url.searchParams.set('view',view);history.replaceState(null,'',url);}
+  }
+  function reset(){viewStates.delete('catalog');setView('catalog',{reset:true});}
+
   function favorite(id){
     if(!items.has(id))return;
-    state.favorites.has(id)?state.favorites.delete(id):state.favorites.add(id);writeLocal('atlas.favorites',[...state.favorites]);
+    state.favorites.has(id)?state.favorites.delete(id):state.favorites.add(id);favoriteVersion++;writeLocal('atlas.favorites',[...state.favorites]);
     const focused=document.activeElement?.dataset.favorite;const scroll=$('inspector').scrollTop;renderCatalog();if(state.selected===id){renderInspector();$('inspector').scrollTop=scroll;}
     if(focused){const target=[...document.querySelectorAll('[data-favorite]')].find(node=>node.dataset.favorite===focused&&!node.closest('[inert]'));target?.focus({preventScroll:true});}
   }
@@ -166,37 +200,59 @@
   function cell(stack){
     if(!stack)return '<div class="craft-slot" aria-hidden="true"></div>';
     const item=items.get(stack.itemId),alternatives=(stack.alternatives||[]).filter(id=>id!==stack.itemId),count=positive(stack.count);
-    const title=`${item?.name||stack.itemId} × ${amount(stack)}${chance(stack.chance)?' · '+chance(stack.chance):''}${alternatives.length?'\nИли: '+alternatives.map(id=>items.get(id)?.name||id).join(', '):''}`;
+    const title=`${item?.name||stack.itemId} × ${amount(stack)}${chance(stack.chance)?' · '+chance(stack.chance):''}${alternatives.length?'\nИли: '+alternatives.slice(0,4).map(id=>items.get(id)?.name||id).join(', ')+(alternatives.length>4?` и ещё ${alternatives.length-4}`:''):''}`;
     return `<div class="craft-slot"><button type="button" data-select="${esc(stack.itemId)}" title="${esc(title)}" aria-label="${esc(title)}">${image(item)}${count!==1?`<span class="stack-count">${num(count)}</span>`:''}${alternatives.length?'<span class="alternative-dot"></span>':''}</button></div>`;
   }
   const typeNames={crafting:'Верстак',shaped:'Верстак',shapeless:'Бесформенный крафт',smelting:'Переплавка',furnace:'Печь',infusion:'Наполнение',alchemy:'Алхимия',mana:'Мана',assembly:'Сборка',machine:'Механизм'};
+  const handlerNames={Macerator:'Дробитель',Compressor:'Компрессор',Extractor:'Экстрактор',BlockCutter:'Блочный резак',Centrifuge:'Термальная центрифуга',FluidCanner:'Жидкостный наполнитель',SolidCanner:'Консервирующий механизм',OreWashing:'Рудопромывочная машина'};
+  function machineName(recipe){
+    const label=recipe?.machine||typeNames[recipe?.type]||recipe?.title||recipe?.type||'Производство';
+    const handler=label.match(/\.([A-Za-z]+)RecipeHandler$/);
+    if(handler&&handlerNames[handler[1]])return handlerNames[handler[1]];
+    const matter=label.match(/MatterSolidRecipeHandler\$MatterSolidT(\d+)$/);
+    if(matter)return 'Генератор твёрдой материи · T'+matter[1];
+    const molecular=label.match(/MolecularRecipeHandler\$(MolecularX\d+|LegendaryMolecular)$/);
+    if(molecular)return molecular[1]==='LegendaryMolecular'?'Легендарный молекулярный преобразователь':'Молекулярный преобразователь ×'+molecular[1].replace('MolecularX','');
+    return label;
+  }
   function recipeView(recipe){
+    if(['fuel','tconstruct.materials'].includes(recipe.type)){return `<p class="recipe-extra">${recipe.type==='fuel'?'Применение в качестве топлива.':'Справочные свойства материала.'} Это не рецепт производства.</p><div class="recipe-workspace">${recipe.outputs.map(cell).join('')}</div>${strings(recipe.conditions).length?`<div class="recipe-extra">${strings(recipe.conditions).map(esc).join('<br>')}</div>`:''}`;}
     const grid=knownGrid(recipe),width=grid?recipe.width:0;
     const slots=grid?Array(recipe.width*recipe.height).fill(null):[];
     if(grid)recipe.inputs.forEach(stack=>{slots[stack.slot]=stack;});
     const inputView=grid?`<div class="craft-grid" style="--cols:${width}">${slots.map(cell).join('')}</div>`:`<div class="ingredient-tray" aria-label="Ингредиенты">${recipe.inputs.map(cell).join('')}</div>`;
     const caption=recipe.type==='shapeless'?'Бесформенный':!grid&&['shaped','crafting'].includes(recipe.type)?'Расположение не указано':'';
-    const grouped=new Map();for(const stack of recipe.inputs){const key=stack.itemId+'|'+(stack.alternatives||[]).join(',')+'|'+(stack.unit||'');if(grouped.has(key))grouped.get(key).count+=positive(stack.count);else grouped.set(key,{...stack,count:positive(stack.count)});}
-    const ingredientRows=[...grouped.values()].map(stack=>`<button class="ingredient-row" type="button" data-select="${esc(stack.itemId)}">${image(items.get(stack.itemId))}<span>${esc(items.get(stack.itemId)?.name||stack.itemId)}</span><span class="ingredient-amount">× ${esc(amount(stack))}</span></button>${(stack.alternatives||[]).filter(id=>id!==stack.itemId).length?`<div class="alternatives"><span>или</span>${stack.alternatives.filter(id=>id!==stack.itemId).map(id=>`<button class="alternative-button" type="button" data-select="${esc(id)}">${image(items.get(id))}<span>${esc(items.get(id)?.name||id)}</span></button>`).join('')}</div>`:''}`).join('');
     const conditions=strings(recipe.conditions),source=safeUrl(recipe.sourceUrl),sourceImage=safeUrl(recipe.sourceImage,true);
     const verification=recipe.verification==='runtime'?'':recipe.verification==='example'?'Пример':recipe.verification==='documented'?'Из гайда · не проверено в игре':'Актуальность не подтверждена';
-    return `${verification?`<p class="verification">${verification}</p>`:''}${caption?`<p class="layout-caption">${caption}</p>`:''}<div class="recipe-workspace${grid&&width>4?' large-grid':''}">${inputView}<span class="recipe-arrow">${icons.arrow}</span><div class="recipe-outputs">${recipe.outputs.map(cell).join('')}</div></div>${recipe.outputs.some(s=>s.unit||chance(s.chance))?`<div class="recipe-extra">${recipe.outputs.filter(s=>s.unit||chance(s.chance)).map(s=>`${esc(items.get(s.itemId)?.name||s.itemId)}: ${esc(amount(s))}${chance(s.chance)?' · '+chance(s.chance):''}`).join('<br>')}</div>`:''}${ingredientRows?`<details class="recipe-detail"><summary>Ингредиенты</summary>${ingredientRows}</details>`:''}${conditions.length||recipe.notes?`<details class="recipe-detail"><summary>Условия</summary><div class="recipe-extra">${conditions.map(c=>esc(c)).join('<br>')}${recipe.notes?`<p>${esc(recipe.notes)}</p>`:''}</div></details>`:''}${sourceImage?`<details class="recipe-detail"><summary>Исходная схема</summary><a href="${esc(sourceImage)}" target="_blank" rel="noopener noreferrer"><img class="source-image" src="${esc(sourceImage)}" alt="Схема рецепта" loading="lazy"></a></details>`:''}${source?`<a class="source-link" href="${esc(source)}" target="_blank" rel="noopener noreferrer">Источник ${icons.external}</a>`:''}`;
+    return `${verification?`<p class="verification">${verification}</p>`:''}${caption?`<p class="layout-caption">${caption}</p>`:''}<div class="recipe-workspace${grid&&width>4?' large-grid':''}">${inputView}<span class="recipe-arrow">${icons.arrow}</span><div class="recipe-outputs">${recipe.outputs.map(cell).join('')}</div></div>${recipe.outputs.some(s=>s.unit||chance(s.chance))?`<div class="recipe-extra">${recipe.outputs.filter(s=>s.unit||chance(s.chance)).map(s=>`${esc(items.get(s.itemId)?.name||s.itemId)}: ${esc(amount(s))}${chance(s.chance)?' · '+chance(s.chance):''}`).join('<br>')}</div>`:''}${recipe.inputs.length?`<details class="recipe-detail" data-ingredients-recipe="${esc(recipe.id)}"><summary>Ингредиенты</summary><div class="ingredient-content"></div></details>`:''}${conditions.length||recipe.notes?`<details class="recipe-detail"><summary>Условия</summary><div class="recipe-extra">${conditions.map(c=>esc(c)).join('<br>')}${recipe.notes?`<p>${esc(recipe.notes)}</p>`:''}</div></details>`:''}${sourceImage?`<details class="recipe-detail"><summary>Исходная схема</summary><a href="${esc(sourceImage)}" target="_blank" rel="noopener noreferrer"><img class="source-image" src="${esc(sourceImage)}" alt="Схема рецепта" loading="lazy"></a></details>`:''}${source?`<a class="source-link" href="${esc(source)}" target="_blank" rel="noopener noreferrer">Источник ${icons.external}</a>`:''}`;
   }
+  function ingredientGroups(recipe){
+    const grouped=new Map();for(const stack of recipe.inputs){const key=stack.itemId+'|'+(stack.unit||'')+'|'+JSON.stringify(stack.variants||stack.alternatives||[]);if(grouped.has(key)){grouped.get(key).count+=positive(stack.count);grouped.get(key).repeats++;}else grouped.set(key,{...stack,count:positive(stack.count),repeats:1});}return [...grouped.values()];
+  }
+  function alternativeRows(stack,ids){return ids.map(id=>{const variant=stack.variants?.find(value=>value.itemId===id),quantity=variant?variant.count*stack.repeats:stack.count,unit=variant?.unit??stack.unit;return `<button class="alternative-button" type="button" data-select="${esc(id)}">${image(items.get(id))}<span>${esc(items.get(id)?.name||id)} × ${esc(amount({count:quantity,unit}))}</span></button>`;}).join('');}
+  function ingredientContent(recipe){return ingredientGroups(recipe).map((stack,index)=>{
+    const ids=[...new Set([...(stack.alternatives||[]),...(stack.variants||[]).map(value=>value.itemId)])].filter(id=>id!==stack.itemId);
+    return `<button class="ingredient-row" type="button" data-select="${esc(stack.itemId)}">${image(items.get(stack.itemId))}<span>${esc(items.get(stack.itemId)?.name||stack.itemId)}</span><span class="ingredient-amount">× ${esc(amount(stack))}</span></button>${ids.length?`<div class="alternatives"><span>или</span>${alternativeRows(stack,ids.slice(0,12))}${ids.length>12?`<button class="alternative-button" type="button" data-alternatives-more="${esc(recipe.id)}" data-group="${index}" data-offset="12">Ещё ${ids.length-12} вариантов</button>`:''}</div>`:''}`;
+  }).join('');}
+  document.addEventListener('toggle',event=>{const details=event.target;if(!details.open||!details.dataset.ingredientsRecipe||details.dataset.loaded)return;const recipe=recipeLookup.get(details.dataset.ingredientsRecipe);if(recipe){details.querySelector('.ingredient-content').innerHTML=ingredientContent(recipe);details.dataset.loaded='true';}},true);
+  function moreAlternatives(button){const recipe=recipeLookup.get(button.dataset.alternativesMore);if(!recipe)return;const stack=ingredientGroups(recipe)[Number(button.dataset.group)];if(!stack)return;const ids=[...new Set([...(stack.alternatives||[]),...(stack.variants||[]).map(value=>value.itemId)])].filter(id=>id!==stack.itemId),start=Number(button.dataset.offset),end=Math.min(ids.length,start+40);button.insertAdjacentHTML('beforebegin',alternativeRows(stack,ids.slice(start,end)));if(end===ids.length){const next=button.previousElementSibling;button.remove();next?.focus({preventScroll:true});}else{button.dataset.offset=String(end);button.textContent=`Ещё ${ids.length-end} вариантов`;}}
   function renderInspector(){
+    $('content').classList.toggle('has-inspector',!!(state.selected||state.entity));
+    $('inspector').setAttribute('aria-label',state.entity?.kind==='quest'?'Квест':state.entity?.kind==='guide'?'Гайд':'Рецепты предмета');
     if(state.entity&&window.UniLandKnowledge){$('inspector').innerHTML=window.UniLandKnowledge.detail(state.entity);$('inspector').classList.add('is-open');$('inspector').scrollTop=0;syncOverlay();return;}
     const item=items.get(state.selected),focusedTab=$('inspector').contains(document.activeElement)?document.activeElement?.dataset.tab:null;
     if(!item){$('inspector').innerHTML='<div class="inspector-idle">Выбери предмет</div>';$('inspector').classList.remove('is-open');syncOverlay();return;}
     const own=byOutput.get(item.id)||[],used=byInput.get(item.id)||[],list=state.tab==='recipes'?own:used;
     state.recipeIndex=Math.max(0,Math.min(state.recipeIndex,list.length-1));const recipe=list[state.recipeIndex];
-    const body=recipe?`<div class="recipe-heading"><h3>${esc(recipe.machine||(recipe.type==='shapeless'?'Верстак':typeNames[recipe.type])||recipe.title||recipe.type||'Рецепт')}</h3>${list.length>1?`<div class="recipe-pager"><button class="icon-button" type="button" data-step="-1" aria-label="Предыдущий рецепт"${!state.recipeIndex?' disabled':''}>${icons.left}</button><span>${state.recipeIndex+1}/${list.length}</span><button class="icon-button" type="button" data-step="1" aria-label="Следующий рецепт"${state.recipeIndex>=list.length-1?' disabled':''}>${icons.right}</button></div>`:''}</div>${recipeView(recipe)}`:`<p class="no-recipes">${state.tab==='recipes'?'Рецепт не загружен':'Применение не загружено'}</p>`;
-    $('inspector').innerHTML=`<div class="inspector-nav"><button class="icon-button" type="button" data-action="back" aria-label="Назад"${!state.trail.length&&!state.lastEntity?' disabled':''}>${icons.left}</button><button class="icon-button" type="button" data-action="close-item" aria-label="Закрыть предмет">${icons.close}</button></div><div class="item-details">${image(item)}<div class="item-details-copy"><h2 title="${esc(item.id)}">${esc(item.name)}</h2><p class="detail-mod">${esc(mods.get(item.modId||'unknown')?.name||'')}</p></div><button class="icon-button${state.favorites.has(item.id)?' saved':''}" type="button" data-favorite="${esc(item.id)}" aria-label="${state.favorites.has(item.id)?'Убрать из избранного':'В избранное'}" aria-pressed="${state.favorites.has(item.id)}">${icons.star}</button></div><div class="recipe-tabs" role="tablist" aria-label="Рецепты и применение"><button type="button" class="recipe-tab${state.tab==='recipes'?' active':''}" data-tab="recipes" role="tab" aria-selected="${state.tab==='recipes'}">Крафт<span>${own.length}</span></button><button type="button" class="recipe-tab${state.tab==='usage'?' active':''}" data-tab="usage" role="tab" aria-selected="${state.tab==='usage'}">Применение<span>${used.length}</span></button></div><div class="recipe-body" role="tabpanel">${body}</div>`;
+    const body=recipe?`<div class="recipe-heading"><h3>${esc(machineName(recipe))}</h3>${list.length>1?`<div class="recipe-pager"><button class="icon-button" type="button" data-step="-1" aria-label="Предыдущий рецепт"${!state.recipeIndex?' disabled':''}>${icons.left}</button><span>${state.recipeIndex+1}/${list.length}</span><button class="icon-button" type="button" data-step="1" aria-label="Следующий рецепт"${state.recipeIndex>=list.length-1?' disabled':''}>${icons.right}</button></div>`:''}</div>${recipeView(recipe)}`:`<p class="no-recipes">${state.tab==='recipes'?'Рецепт не загружен':'Применение не загружено'}</p>`;
+    $('inspector').innerHTML=`<div class="inspector-nav"><button class="icon-button" type="button" data-action="back" aria-label="Назад"${!state.trail.length&&!state.lastEntity?' disabled':''}>${icons.left}</button><button class="icon-button" type="button" data-action="close-item" aria-label="Закрыть предмет">${icons.close}</button></div><div class="item-details">${image(item)}<div class="item-details-copy"><h2 title="${esc(item.id)}">${esc(item.name)}</h2><p class="detail-mod">${esc(mods.get(item.modId||'unknown')?.name||'')}</p></div><button class="icon-button${state.favorites.has(item.id)?' saved':''}" type="button" data-favorite="${esc(item.id)}" aria-label="${state.favorites.has(item.id)?'Убрать из избранного':'В избранное'}" aria-pressed="${state.favorites.has(item.id)}">${icons.star}</button></div><button class="plan-item-button" type="button" data-plan-item="${esc(item.id)}">${icons.map}<span>Рассчитать производство</span>${icons.right}</button><div class="recipe-tabs" role="tablist" aria-label="Рецепты и применение"><button type="button" class="recipe-tab${state.tab==='recipes'?' active':''}" data-tab="recipes" role="tab" aria-selected="${state.tab==='recipes'}">Крафт<span>${own.length}</span></button><button type="button" class="recipe-tab${state.tab==='usage'?' active':''}" data-tab="usage" role="tab" aria-selected="${state.tab==='usage'}">Применение<span>${used.length}</span></button></div><div class="recipe-body" role="tabpanel">${body}</div>`;
     $('inspector').classList.add('is-open');$('inspector').scrollTop=0;syncOverlay();
     if(focusedTab)$('inspector').querySelector(`[data-tab="${focusedTab}"]`)?.focus({preventScroll:true});
   }
-  function focusable(){return [...$('inspector').querySelectorAll('button:not([disabled]),a[href],summary,[tabindex]:not([tabindex="-1"])')].filter(node=>!node.closest('[inert]')&&node.getClientRects().length);}
+  function focusable(){return [...$('inspector').querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),a[href],summary,[tabindex]:not([tabindex="-1"])')].filter(node=>!node.closest('[inert]')&&node.getClientRects().length);}
   function inaccessible(element,value){if(value&&element.contains(document.activeElement))document.activeElement.blur();element.inert=value;if(value)element.setAttribute('aria-hidden','true');else element.removeAttribute('aria-hidden');}
   function syncOverlay(){
-    const mobile=window.matchMedia('(max-width: 991px)').matches,open=mobile&&!!(state.selected||state.entity)&&catalog.items.length>0;
+    const mobile=window.matchMedia('(max-width: 991px)').matches,open=state.view!=='planner'&&mobile&&!!(state.selected||state.entity);
     if(open&&!drawerOpen){returnFocus=document.activeElement;returnItem=document.activeElement?.closest('[data-item]')?.dataset.item||state.selected;}
     const wasOpen=drawerOpen;drawerOpen=open;$('inspector-scrim').hidden=!open;
     inaccessible($('inspector'),mobile&&!open);inaccessible($('catalog'),open);inaccessible($('toolbar'),open);inaccessible($('page-heading'),open);inaccessible(document.querySelector('.app-header'),open);
@@ -208,24 +264,26 @@
   document.addEventListener('click',(event)=>{
     const button=event.target.closest('button');if(!button||button.disabled)return;
     if(button.dataset.page){state.page+=Number(button.dataset.page);renderCatalog();$('catalog-pagination').querySelector(`[data-page="${button.dataset.page}"]:not(:disabled)`)?.focus({preventScroll:true});return;}
-    if(button.dataset.favorite)favorite(button.dataset.favorite);else if(button.dataset.select)select(button.dataset.select);else if(button.dataset.tab){state.tab=button.dataset.tab;state.recipeIndex=0;renderInspector();}else if(button.dataset.step){state.recipeIndex+=Number(button.dataset.step);renderInspector();}else if(button.dataset.action)action(button.dataset.action);
+    if(button.dataset.favorite)favorite(button.dataset.favorite);else if(button.dataset.select)select(button.dataset.select);else if(button.dataset.tab){state.tab=button.dataset.tab;state.recipeIndex=0;renderInspector();}else if(button.dataset.step){state.recipeIndex+=Number(button.dataset.step);renderInspector();}else if(button.dataset.action)action(button.dataset.action);else if(button.dataset.planItem)window.UniLandProduction?.open(button.dataset.planItem);else if(button.dataset.alternativesMore)moreAlternatives(button);
   });
   $('search-input').addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{state.query=$('search-input').value;state.limit=150;state.page=0;renderCatalog();},90);});
   $('clear-search').addEventListener('click',()=>{clearTimeout(searchTimer);state.query='';$('search-input').value='';state.limit=150;state.page=0;renderCatalog();$('search-input').focus();});
   $('mod-filter').addEventListener('change',()=>{state.mod=$('mod-filter').value;state.limit=150;state.page=0;renderCatalog();});
-  $('favorite-items').addEventListener('click',()=>{if(state.view!=='catalog')setView('catalog');state.favoritesOnly=!state.favoritesOnly;state.limit=150;state.page=0;renderCatalog();});
+  $('favorite-items').addEventListener('click',()=>{const entering=state.view!=='catalog';if(entering)setView('catalog');state.favoritesOnly=entering?true:!state.favoritesOnly;state.limit=150;state.page=0;renderCatalog();});
   $('quests-nav').addEventListener('click',()=>setView('quests'));$('guides-nav').addEventListener('click',()=>setView('guides'));
-  $('home-button').addEventListener('click',reset);$('catalog-nav').addEventListener('click',reset);
+  $('home-button').addEventListener('click',reset);$('catalog-nav').addEventListener('click',()=>setView('catalog'));$('planner-nav').addEventListener('click',()=>window.UniLandProduction?.open(state.selected));
   $('inspector-scrim').addEventListener('click',closeItem);$('load-more').addEventListener('click',()=>{state.limit+=150;renderCatalog();});
   $('content').addEventListener('pointerover',(event)=>{hoverItem=event.target.closest('[data-select]')?.dataset.select||event.target.closest('[data-item]')?.dataset.item||null;});
   $('content').addEventListener('pointerleave',()=>{hoverItem=null;});$('content').addEventListener('focusin',(event)=>{hoverItem=event.target.closest('[data-select]')?.dataset.select||event.target.closest('[data-item]')?.dataset.item||null;});
-  let resizeTimer;window.addEventListener('resize',()=>{syncOverlay();clearTimeout(resizeTimer);resizeTimer=setTimeout(renderCatalog,120);});window.addEventListener('popstate',()=>{const id=new URL(location.href).searchParams.get('item');if(id&&items.has(id))select(id,'recipes',false);else closeItem();});
+  let resizeTimer;window.addEventListener('resize',()=>{syncOverlay();clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(state.view!=='planner')renderCatalog();},120);});
+  window.addEventListener('popstate',()=>restoreRoute());
   document.addEventListener('keydown',(event)=>{
     if(event.key==='Tab'&&drawerOpen){const all=focusable(),first=all[0],last=all[all.length-1];if(!first){event.preventDefault();return;}if(event.shiftKey&&(document.activeElement===first||!$('inspector').contains(document.activeElement))){event.preventDefault();last.focus();}else if(!event.shiftKey&&(document.activeElement===last||!$('inspector').contains(document.activeElement))){event.preventDefault();first.focus();}return;}
     const editing=event.target instanceof HTMLInputElement||event.target instanceof HTMLSelectElement||event.target instanceof HTMLTextAreaElement||event.target.isContentEditable;
     if(event.key==='Escape'){if(state.selected||state.entity){event.preventDefault();closeItem();}else if(editing)event.target.blur();return;}
-    if(editing||event.ctrlKey||event.metaKey||event.altKey)return;
+    if(editing||event.ctrlKey||event.metaKey||event.altKey||state.view==='planner')return;
     if(event.key==='/'&&!drawerOpen){event.preventDefault();$('search-input').focus();}
+    else if(['PageDown','PageUp'].includes(event.key)&&state.view!=='quests'&&!drawerOpen){const button=$('catalog-pagination').querySelector(`[data-page="${event.key==='PageDown'?'1':'-1'}"]`);if(button&&!button.disabled){event.preventDefault();button.click();}}
     else if(['r','R','к','К'].includes(event.key)&&(hoverItem||state.selected)){event.preventDefault();select(hoverItem||state.selected,'recipes');}
     else if(['u','U','г','Г'].includes(event.key)&&(hoverItem||state.selected)){event.preventDefault();select(hoverItem||state.selected,'usage');}
   });
@@ -233,16 +291,27 @@
     syncOverlay();
     let next,stage='network';
     try{
-      const response=await fetch(dataUrl('catalog'),{cache:'no-cache'});
+      const response=await fetch(dataUrl('runtime')||dataUrl('catalog'),{cache:'no-cache'});
       if(!response.ok)throw new Error(`HTTP ${response.status}: ${response.url}`);
-      stage='json';const raw=await response.json();
+      stage='json';let raw=await response.json();
+      if(window.UniLandRuntime)raw=window.UniLandRuntime.decode(raw);
       stage='validation';next=validateCatalog(raw);
     }catch(error){console.error(`[UniLand] Ошибка загрузки каталога (${stage})`,error);next=emptyCatalog(true);}
-    applyCatalog(next);
-    const params=new URL(location.href).searchParams;const id=params.get('item');if(id&&items.has(id))select(id,'recipes',false);
+    await applyCatalog(next);
     window.dispatchEvent(new Event('uniland-ready'));
-    if(params.get('quest')||params.get('guide')||['quests','guides'].includes(params.get('view'))){const view=params.get('quest')?'quests':params.get('guide')?'guides':params.get('view');setView(view);await window.UniLandKnowledge?.ensure();if(params.get('quest'))selectEntity('quest',params.get('quest'));if(params.get('guide'))selectEntity('guide',params.get('guide'));}
+    await restoreRoute();
   }
-  window.UniLand={state,esc,image,icons,num,norm,dataUrl,select,selectEntity,setView,renderCatalog,renderInspector,configureFilter,capacity,pagination,get items(){return items;},get catalog(){return catalog;}};
+  const applyRouteStale=(route,view)=>location.href!==route||state.view!==view;
+  async function restoreRoute(){
+    const route=location.href,params=new URL(route).searchParams;
+    if(params.get('plan')||params.get('view')==='planner'){window.UniLandProduction?.open(params.get('plan'),{count:Number(params.get('qty'))||1});return;}
+    const view=params.get('quest')?'quests':params.get('guide')?'guides':params.get('view')||'catalog';setView(view,{url:false});
+    if(view==='quests'||view==='guides'){await window.UniLandKnowledge?.ensure();if(applyRouteStale(route,view))return;if(params.get('quest')){window.UniLandKnowledge?.revealQuest?.(params.get('quest'));selectEntity('quest',params.get('quest'));}else if(params.get('guide'))selectEntity('guide',params.get('guide'));}
+    const id=params.get('item');if(id&&items.has(id))select(id,'recipes',false);
+  }
+  window.UniLand={state,esc,image,icons,num,norm,dataUrl,select,selectEntity,setView,renderCatalog,renderInspector,configureFilter,capacity,pagination,get items(){return items;},get catalog(){return catalog;},get ready(){return catalogReady;},recipeById:(id)=>recipeLookup.get(id),machineName,recipesFor:(id)=>byOutput.get(id)||[],usesFor:(id)=>byInput.get(id)||[],readLocal,writeLocal,closeItem};
+  let layoutFrame=0,lastLayout='';
+  if(typeof ResizeObserver==='function')new ResizeObserver(()=>{const box=$('catalog').getBoundingClientRect(),key=`${Math.round(box.width)}:${Math.round(box.height)}:${state.view}`;if(key===lastLayout)return;lastLayout=key;cancelAnimationFrame(layoutFrame);layoutFrame=requestAnimationFrame(()=>{if(catalogReady&&state.view!=='planner')renderCatalog();});}).observe($('catalog'));
+  if(window.visualViewport){const syncKeyboard=()=>{const viewport=window.visualViewport,inset=Math.max(0,innerHeight-viewport.height-viewport.offsetTop);document.documentElement.style.setProperty('--keyboard-inset',`${inset}px`);document.documentElement.style.setProperty('--visual-height',`${viewport.height}px`);document.body.classList.toggle('keyboard-open',innerWidth<=700&&inset>100);};window.visualViewport.addEventListener('resize',syncKeyboard);window.visualViewport.addEventListener('scroll',syncKeyboard);syncKeyboard();}
   init();
 })();

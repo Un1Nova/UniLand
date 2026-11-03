@@ -8,6 +8,8 @@
   <title>UniLand · TechnoMagic RPG</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="viewport.css">
+  <link rel="stylesheet" href="planner.css">
 </head>
 <body>
   <header class="app-header">
@@ -15,6 +17,7 @@
       <button class="brand" id="home-button" type="button" aria-label="UniLand — все крафты"><img src="logo.svg" alt="UniLand" width="111" height="24"></button>
       <nav class="header-navigation" aria-label="Разделы каталога">
         <button class="nav-button active" id="catalog-nav" type="button" aria-pressed="true"><span data-icon="cube"></span><span>Крафты</span></button>
+        <button class="nav-button" id="planner-nav" type="button" aria-pressed="false"><span data-icon="map"></span><span>План</span></button>
         <button class="nav-button" id="quests-nav" type="button" aria-pressed="false"><span data-icon="map"></span><span>Квесты</span></button>
         <button class="nav-button" id="guides-nav" type="button" aria-pressed="false"><span data-icon="book"></span><span>Гайды</span></button>
         <button class="nav-button" id="favorite-items" type="button" aria-label="Избранное" aria-pressed="false"><span data-icon="star"></span><span>Избранное</span></button>
@@ -35,11 +38,16 @@
       </div>
     </section>
   </main>
+  <section id="planner-view" class="production-view" aria-label="План производства" hidden></section>
   <div class="toolbar" id="toolbar">
     <label class="mod-filter"><span class="sr-only">Модификация</span><select id="mod-filter"><option value="">Все моды</option></select><span class="select-chevron" data-icon="down"></span></label>
     <div class="search"><span data-icon="search"></span><input id="search-input" type="search" placeholder="Найти предмет или @мод" aria-label="Поиск по названию, ID или @моду" autocomplete="off" spellcheck="false"><button class="icon-button search-clear" id="clear-search" type="button" aria-label="Очистить поиск" hidden><span data-icon="close"></span></button><kbd id="search-shortcut">/</kbd></div>
   </div>
+  <script src="runtime.js" data-runtime defer></script>
+  <script src="viewport.js" defer></script>
   <script src="app.js" defer></script>
   <script src="knowledge.js" defer></script>
+  <script src="planner-engine.js" data-planner-engine defer></script>
+  <script src="planner.js" defer></script>
 </body>
 </html>
