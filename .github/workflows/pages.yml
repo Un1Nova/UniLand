@@ -29,6 +29,14 @@ jobs:
           python3 validate_release.py
           node --check app.js
           node --check knowledge.js
+          node --check runtime.js
+          node --check viewport.js
+          node --check planner-engine.js
+          node --check planner-worker.js
+          node --check planner.js
+          node --test test_planner_engine.js
+          node test_app_ui.js
+          node test_viewport.js
           python3 -m unittest test_prepare_site.py test_catalog_contract.py
           python3 exporter/test_web_grids.py
       - name: Prepare static files
