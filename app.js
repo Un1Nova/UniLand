@@ -33,6 +33,8 @@
   };
   const readLocal = (key,fallback) => {try{return JSON.parse(localStorage.getItem(key))??fallback;}catch{return fallback;}};
   const writeLocal = (key,value) => {try{localStorage.setItem(key,JSON.stringify(value));}catch{}};
+  const dataFiles = {catalog:'catalog.json',quests:'data/quests.json','quest-lines':'data/quest-lines.json',knowledge:'data/knowledge.json'};
+  const dataUrl = (name) => document.querySelector(`meta[name="uniland-${name}"]`)?.getAttribute('content') || dataFiles[name];
   const emptyCatalog = (loadFailed=false) => ({schemaVersion:1,meta:{status:'unavailable',loadFailed},mods:[],items:[],recipes:[]});
   let catalog=emptyCatalog(),items=new Map(),mods=new Map(),searchIndex=new Map(),byOutput=new Map(),byInput=new Map();
   let hoverItem=null,searchTimer,drawerOpen=false,returnFocus=null,returnItem=null;
@@ -132,7 +134,7 @@
     $('load-more').hidden=true;$('empty-state').hidden=!!filtered.length;
     if(!filtered.length){
       let title='Ничего не найдено',text='Измени поиск или фильтр.',action='reset',button='Сбросить';
-      if(!catalog.items.length){title=catalog.meta.loadFailed?'Не удалось загрузить рецепты':'Рецептов пока нет';text=catalog.meta.loadFailed?'Попробуй открыть страницу позже.':'Выгрузка текущей сборки ещё не опубликована.';action='';button='';}
+      if(!catalog.items.length){title=catalog.meta.loadFailed?'Не удалось загрузить рецепты':'Рецептов пока нет';text=catalog.meta.loadFailed?'Проверь подключение и повтори загрузку.':'Выгрузка текущей сборки ещё не опубликована.';action=catalog.meta.loadFailed?'reload':'';button=catalog.meta.loadFailed?'Повторить':'';}
       else if(state.favoritesOnly&&!state.query&&!state.mod){title='Пока пусто';text='Сохраняй предметы звёздочкой.';button='Все предметы';}
       $('empty-state').innerHTML=`<span>${icons.cube}</span><h2>${title}</h2><p>${text}</p>${action?`<button class="text-button" type="button" data-action="${action}">${button}</button>`:''}`;
     }
@@ -202,7 +204,7 @@
     else{$('inspector').removeAttribute('role');$('inspector').removeAttribute('aria-modal');if(wasOpen){let target=returnFocus;if(!target?.isConnected)target=[...$('items-grid').querySelectorAll('[data-select]')].find(node=>node.dataset.select===returnItem);if(!target?.isConnected||target.closest('[inert]')||!target.getClientRects().length)target=$('search-input');target.focus({preventScroll:true});returnFocus=null;returnItem=null;}}
     document.body.style.overflow=open?'hidden':'';
   }
-  function action(name){if(name==='reset')reset();else if(name==='close-item')closeItem();else if(name==='back'){const id=state.trail.pop();if(id)select(id,'recipes',false);else if(state.lastEntity){const e=state.lastEntity;selectEntity(e.kind,e.id);}}}
+  function action(name){if(name==='reset')reset();else if(name==='reload')location.reload();else if(name==='close-item')closeItem();else if(name==='back'){const id=state.trail.pop();if(id)select(id,'recipes',false);else if(state.lastEntity){const e=state.lastEntity;selectEntity(e.kind,e.id);}}}
   document.addEventListener('click',(event)=>{
     const button=event.target.closest('button');if(!button||button.disabled)return;
     if(button.dataset.page){state.page+=Number(button.dataset.page);renderCatalog();$('catalog-pagination').querySelector(`[data-page="${button.dataset.page}"]:not(:disabled)`)?.focus({preventScroll:true});return;}
@@ -229,17 +231,18 @@
   });
   async function init(){
     syncOverlay();
-    let next;
+    let next,stage='network';
     try{
-      const response=await fetch('catalog.json',{cache:'no-cache'});
-      if(!response.ok)throw new Error('База недоступна');
-      next=validateCatalog(await response.json());
-    }catch{next=emptyCatalog(true);}
+      const response=await fetch(dataUrl('catalog'),{cache:'no-cache'});
+      if(!response.ok)throw new Error(`HTTP ${response.status}: ${response.url}`);
+      stage='json';const raw=await response.json();
+      stage='validation';next=validateCatalog(raw);
+    }catch(error){console.error(`[UniLand] Ошибка загрузки каталога (${stage})`,error);next=emptyCatalog(true);}
     applyCatalog(next);
     const params=new URL(location.href).searchParams;const id=params.get('item');if(id&&items.has(id))select(id,'recipes',false);
     window.dispatchEvent(new Event('uniland-ready'));
     if(params.get('quest')||params.get('guide')||['quests','guides'].includes(params.get('view'))){const view=params.get('quest')?'quests':params.get('guide')?'guides':params.get('view');setView(view);await window.UniLandKnowledge?.ensure();if(params.get('quest'))selectEntity('quest',params.get('quest'));if(params.get('guide'))selectEntity('guide',params.get('guide'));}
   }
-  window.UniLand={state,esc,image,icons,num,norm,select,selectEntity,setView,renderCatalog,renderInspector,configureFilter,capacity,pagination,get items(){return items;},get catalog(){return catalog;}};
+  window.UniLand={state,esc,image,icons,num,norm,dataUrl,select,selectEntity,setView,renderCatalog,renderInspector,configureFilter,capacity,pagination,get items(){return items;},get catalog(){return catalog;}};
   init();
 })();

@@ -24,6 +24,27 @@ def fixture():
                          'outputs': [{'itemId': 'test:b', 'count': 0.00000001, 'chance': 0.00000001}]}]}
 
 
+def native_rule_fixture():
+    """Use the provenance shape of an actual published native-rule record."""
+    data = fixture()
+    recipe = data['recipes'][0]
+    recipe.update({
+        'type': 'hemontransmutator',
+        'operation': 'native-rule',
+        'outputs': [],
+        'sources': [{
+            'file': 'raw/registries/001a7c85f4bc5a3b1e8af50f0360ca9ec62396b43f59e7fc7efedc935b6e7c22.json',
+            'registry': 'luminous:hemontransmutator',
+            'index': 0,
+        }],
+        'detailsFile': 'data/recipe-details/8c67148c89e95127.json',
+    })
+    del recipe['width']
+    del recipe['height']
+    del recipe['inputs'][0]['slot']
+    return data
+
+
 class ContractTest(unittest.TestCase):
     def check_both(self, catalog, valid):
         if valid:
@@ -70,6 +91,50 @@ class ContractTest(unittest.TestCase):
         data = fixture()
         data['recipes'][0]['inputs'][0]['alternatives'] = ['missing']
         self.check_both(data, False)
+
+    def test_native_rule_without_outputs(self):
+        self.check_both(native_rule_fixture(), True)
+
+    def test_regular_recipe_requires_outputs(self):
+        data = fixture()
+        data['recipes'][0]['outputs'] = []
+        self.check_both(data, False)
+
+    def test_native_rule_requires_sources(self):
+        for present in (False, True):
+            with self.subTest(sources_present=present):
+                data = native_rule_fixture()
+                if present:
+                    data['recipes'][0]['sources'] = []
+                else:
+                    del data['recipes'][0]['sources']
+                self.check_both(data, False)
+
+    def test_native_rule_requires_details_file(self):
+        for present in (False, True):
+            with self.subTest(details_file_present=present):
+                data = native_rule_fixture()
+                if present:
+                    data['recipes'][0]['detailsFile'] = ''
+                else:
+                    del data['recipes'][0]['detailsFile']
+                self.check_both(data, False)
+
+    @unittest.skipUnless((ROOT / 'catalog.json').is_file(), 'No published catalog in this checkout')
+    def test_published_catalog_when_present(self):
+        # Parse the complete file once per runtime. Do not serialize its 56 MB
+        # through stdin or load it again for each small regression fixture.
+        path = ROOT / 'catalog.json'
+        with path.open(encoding='utf-8') as source:
+            catalog = json.load(source)
+        builder.validate(catalog)
+        del catalog
+        js = (ROOT / 'app.js').read_text(encoding='utf-8')
+        validator = js[js.index('  function validateCatalog('):js.index('  function image(')]
+        program = validator + '\ntry {validateCatalog(JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")));process.stdout.write("valid")}catch(e){process.stderr.write(e.message);process.stdout.write("invalid")}'
+        result = subprocess.run(['node', '-e', program, str(path)],
+                                capture_output=True, text=True, check=True)
+        self.assertEqual(result.stdout, 'valid', result.stderr)
 
 
 if __name__ == '__main__':

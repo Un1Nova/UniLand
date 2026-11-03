@@ -13,11 +13,11 @@
   async function ensure(){
     if(ready)return;if(loading)return loading;
     loading=(async()=>{try{
-      const responses=await Promise.all(['data/quests.json','data/quest-lines.json','data/knowledge.json'].map(async file=>{const r=await fetch(file);if(!r.ok)throw new Error(file);return r.json();}));
+      const responses=await Promise.all(['quests','quest-lines','knowledge'].map(async name=>{const file=app.dataUrl(name);const r=await fetch(file,{cache:'no-cache'});if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.url}`);return r.json();}));
       [quests,lines]=responses;pages=responses[2].pages;
       questById=new Map(quests.map(q=>[String(q.questID),q]));lines.sort((a,b)=>a.order-b.order);
       pageById=new Map(pages.map(p=>[pageKey(p),p]));indexItems();ready=true;error=false;configureFilter();
-    }catch{error=true;}finally{loading=null;if(app.state.view!=='catalog')app.renderCatalog();}})();return loading;
+    }catch(reason){console.error('[UniLand] Ошибка загрузки квестов и гайдов',reason);error=true;}finally{loading=null;if(app.state.view!=='catalog')app.renderCatalog();}})();return loading;
   }
   function configureFilter(){
     const filter=$('mod-filter');

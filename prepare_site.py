@@ -1,8 +1,10 @@
 """Package only public application files and referenced catalog images."""
 import argparse
+import hashlib
 import json
 import re
 import shutil
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
@@ -11,6 +13,62 @@ UI_FILES = ('index.html', 'styles.css', 'fonts.css', 'app.js', 'knowledge.js', '
             'logo.svg', 'catalog.json', 'background.webp')
 DATA_FILES = ('quests.json', 'quest-lines.json', 'knowledge.json', 'snapshot.json',
               'coverage-report.json', 'client-manifest.json', 'normalization-report.json')
+VERSIONED_UI_FILES = ('app.js', 'knowledge.js', 'styles.css')
+DATA_META_FILES = {
+    'uniland-catalog': Path('catalog.json'),
+    'uniland-quests': Path('data/quests.json'),
+    'uniland-quest-lines': Path('data/quest-lines.json'),
+    'uniland-knowledge': Path('data/knowledge.json'),
+}
+
+
+class PublishedReferences(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.references = []
+
+    def handle_starttag(self, tag, attributes):
+        attributes = dict(attributes)
+        self.references.extend(attributes[name] for name in ('src', 'href')
+                               if attributes.get(name))
+        if tag == 'meta' and attributes.get('name') in DATA_META_FILES:
+            self.references.append(attributes.get('content', ''))
+
+
+def content_path(path, payload):
+    digest = hashlib.sha256(payload).hexdigest()[:16]
+    return path.with_name(f'{path.stem}.{digest}{path.suffix}')
+
+
+def version_index(text, versioned):
+    def replace_reference(match):
+        value = match.group('value')
+        # Leave other references unchanged for the strict artifact check below.
+        try:
+            replacement = versioned.get(relative_asset(value))
+        except ValueError:
+            replacement = None
+        if replacement is None:
+            return match.group(0)
+        return (match.group('prefix') + match.group('quote')
+                + replacement.as_posix() + match.group('quote'))
+
+    text = re.sub(r'''(?P<prefix>\b(?:src|href)\s*=\s*)(?P<quote>["'])(?P<value>[^"']+)(?P=quote)''',
+                  replace_reference, text, flags=re.IGNORECASE)
+
+    def remove_old_data_meta(match):
+        name = re.search(r'''\bname\s*=\s*(["'])([^"']+)\1''', match.group(0),
+                         flags=re.IGNORECASE)
+        return '' if name and name.group(2).lower() in DATA_META_FILES else match.group(0)
+
+    text = re.sub(r'<meta\b[^>]*>', remove_old_data_meta, text, flags=re.IGNORECASE)
+    metadata = ''.join(f'  <meta name="{name}" content="{versioned[path].as_posix()}">\n'
+                       for name, path in DATA_META_FILES.items() if path in versioned)
+    text, count = re.subn(r'</head\s*>', lambda _: metadata + '</head>', text,
+                         count=1, flags=re.IGNORECASE)
+    if count != 1:
+        raise ValueError('Published index.html must contain a closing head element')
+    return text
 
 
 def relative_asset(value):
@@ -33,6 +91,9 @@ def package(root=ROOT, destination=None):
     if destination.exists() and any(destination.iterdir()):
         raise ValueError('Destination must be empty (stale files must not be published)')
     catalog = json.loads((root / 'catalog.json').read_text(encoding='utf-8'))
+    # Only publication bytes change: all values and source/release files are preserved.
+    catalog_bytes = (json.dumps(catalog, ensure_ascii=False, separators=(',', ':'),
+                               allow_nan=False) + '\n').encode('utf-8')
     files = {Path(name) for name in UI_FILES}
     for name in DATA_FILES:
         path = Path('data') / name
@@ -67,11 +128,34 @@ def package(root=ROOT, destination=None):
     for path in sorted(files):
         target = destination / path
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(root / path, target)
+        if path == Path('catalog.json'):
+            target.write_bytes(catalog_bytes)
+        else:
+            shutil.copyfile(root / path, target)
+
+    # Keep the old URLs for cached pages, and pin this page to immutable content URLs.
+    versioned = {}
+    candidates = [Path(name) for name in VERSIONED_UI_FILES] + list(DATA_META_FILES.values())
+    for path in candidates:
+        if path not in files:
+            continue
+        payload = catalog_bytes if path == Path('catalog.json') else (root / path).read_bytes()
+        hashed_path = content_path(path, payload)
+        (destination / hashed_path).write_bytes(payload)
+        versioned[path] = hashed_path
+    files.update(versioned.values())
+    index = destination / 'index.html'
+    index.write_text(version_index(index.read_text(encoding='utf-8'), versioned), encoding='utf-8')
+
     # Check references in the final artifact, not just the source directory.
     for name in ('index.html', 'styles.css', 'fonts.css'):
         text = (destination / name).read_text(encoding='utf-8')
-        refs = re.findall(r'(?:src|href)=["\']([^"\']+)', text)
+        if name == 'index.html':
+            parser = PublishedReferences()
+            parser.feed(text)
+            refs = parser.references
+        else:
+            refs = []
         refs += re.findall(r'url\(["\']?([^\)"\']+)', text)
         refs += re.findall(r'@import\s+["\']([^"\']+)', text)
         for value in refs:
@@ -82,7 +166,9 @@ def package(root=ROOT, destination=None):
     for path in files:
         if not (destination / path).is_file():
             raise ValueError(f'Missing packaged file: {path}')
-    return {'files': len(files), 'items': len(catalog['items']), 'recipes': len(catalog['recipes'])}
+    return {'files': len(files), 'items': len(catalog['items']), 'recipes': len(catalog['recipes']),
+            'bytes': sum((destination / path).stat().st_size for path in files),
+            'versioned': {path.as_posix(): hashed.as_posix() for path, hashed in versioned.items()}}
 
 
 if __name__ == '__main__':
