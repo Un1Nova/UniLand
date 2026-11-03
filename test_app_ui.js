@@ -105,6 +105,22 @@ test('output and input variants are indexed once per recipe', async () => {
   await env.settle(env.internal.applyCatalog(data));
   assert.equal(env.app.recipesFor('test:1').length, 1); assert.equal(env.app.recipesFor('test:2').length, 1); assert.equal(env.app.usesFor('test:1').length, 1);
 });
+test('recipes with inputs come before empty exports while preserving every recipe and stable order', async () => {
+  const env = environment(), data = catalog();
+  const recipe = (id, inputs) => ({ id, type: 'crafting', inputs, outputs: [{ itemId: 'test:1', count: 1 }], verification: 'runtime' });
+  data.recipes = [recipe('empty-first', []), recipe('real-first', [{ itemId: 'test:0', count: 1 }]), recipe('empty-second', []), recipe('real-second', [{ itemId: 'test:2', count: 1 }])];
+  data.recipes[0].conditions = ['Требуется верстак']; data.recipes[0].sourceUrl = 'https://example.com/recipe';
+  await env.settle(env.internal.applyCatalog(data));
+  assert.deepEqual(Array.from(env.app.recipesFor('test:1'), value => value.id), ['real-first', 'real-second', 'empty-first', 'empty-second']);
+  assert.deepEqual(data.recipes.map(value => value.id), ['empty-first', 'real-first', 'empty-second', 'real-second']);
+  env.app.select('test:1');
+  assert.match(env.element('inspector').innerHTML, /recipe-arrow/);
+  env.app.state.recipeIndex = 2; env.app.renderInspector();
+  const html = env.element('inspector').innerHTML;
+  assert.match(html, /Исходные ресурсы не указаны в выгрузке/);
+  assert.doesNotMatch(html, /recipe-arrow|layout-caption|ingredient-tray|craft-grid/);
+  assert.match(html, /recipe-outputs/); assert.match(html, /Требуется верстак/); assert.match(html, /https:\/\/example.com\/recipe/);
+});
 test('revealQuest selects the chapter and reveals its node without opening detail or changing the route', async () => {
   const env = environment(); await env.settle(env.internal.applyCatalog(catalog()));
   const quests = [1, 2, 3].map(id => ({ questID: id, properties: { betterquesting: { name: `Quest ${id}` } }, tasks: [] }));
