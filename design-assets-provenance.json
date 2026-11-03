@@ -127,17 +127,43 @@
       "viewBox": "0 0 111 24",
       "width": 111,
       "height": 24,
-      "bytes": 7525,
-      "sha256": "34274fec2ebff95339cb5784351418b990d34c3dd79fdad71a84f682b15c5a6d",
-      "source": "Saved public research/home.html, desktop header-logo-button inline SVG.",
+      "bytes": 7205,
+      "sha256": "d6bbe9fcb2207ecbf9e5256986fb440d9740c26a052fced17585f37c1726e910",
+      "source": "Repo-native vector adaptation of the prior LoliLand header wordmark extracted from saved public research/home.html.",
       "sourceSha256": "1862494302eb3b3b1df3a41e65a718419dee76b48fc90a85845ac32efeab0815",
-      "modifications": "Removed Vue scope attributes and icon CSS class, retained all child elements, path geometry and currentColor fills; normalized HTML-lowercased viewbox to case-sensitive SVG viewBox; set standalone width/height and currentColor #fff, matching the observed official header icon token.",
+      "modifications": "Changed LoliLand to UniLand while preserving width=111, height=24, viewBox=0 0 111 24 and white currentColor. Replaced the Loli prefix with a custom rounded U, a reused n path translated -56.5 on x, and the original i stem. Preserved the original heart above i byte-for-byte at its original coordinates. The four original Land path elements remain byte-for-byte identical at their original coordinates. No fonts, raster images, filters, scripts, external references or additional artwork are embedded.",
       "xmlVerification": {
         "rootViewBox": "0 0 111 24",
         "lowercaseViewboxAbsent": true,
-        "childElementsAndAttributesEqualToSavedSource": true,
+        "width": 111,
+        "height": 24,
+        "whiteCurrentColor": true,
+        "childElementCount": 8,
+        "pathCount": 8,
+        "circleCount": 0,
+        "landSuffixPathElementsPreservedByteForByte": true,
+        "landSuffixPositionUnchanged": true,
         "externalReferences": false,
-        "childElementCount": 9
+        "originalHeartPathPreservedByteForByte": true,
+        "originalHeartPositionUnchanged": true,
+        "prefixLettersUnchangedFromPriorUniLandRevision": true
+      },
+      "wordmark": "UniLand",
+      "derivedFromRepoLogo": {
+        "beforeSha256": "34274fec2ebff95339cb5784351418b990d34c3dd79fdad71a84f682b15c5a6d",
+        "beforeBytes": 7525,
+        "baseCommit": "afde8e1"
+      },
+      "visualQa": {
+        "date": "2026-11-03",
+        "renderer": "Local Inkscape CLI; no browser or network",
+        "beforeRenderInspected": true,
+        "afterLargeRenderInspected": true,
+        "nativeSizePreview": "research-uniland-logo/logo-after-native.png",
+        "doubleSizePreview": "research-uniland-logo/logo-after-2x.png",
+        "pngUsage": "Local QA only; production remains SVG.",
+        "nativeAndDoubleSizeRendersInspected": true,
+        "heartRevision": "Original heart restored at its original coordinates; regenerated 111x24 and 222x48 renders inspected."
       }
     }
   ],
@@ -238,12 +264,13 @@
   "visualVerification": {
     "officialSiteScreenshotAvailable": false,
     "exactOneToOneMatchVerified": false,
-    "scope": "Official-style adaptation using known source tokens, fonts and the header wordmark; existing original wallpaper retained."
+    "scope": "Official-style adaptation using known source tokens and fonts, with a custom UniLand wordmark derived from the header logo; existing original wallpaper retained."
   },
   "fontsCss": {
     "file": "fonts.css",
     "bytes": 2425,
     "sha256": "9ff473a57daa7e5eadb3f1892d5d331e89991c8986d6cb32dfe5b6448730a4dd",
     "urlMode": "Relative ./ filenames; compatible with GitHub Pages project subpaths."
-  }
+  },
+  "modifiedAt": "2026-11-03"
 }
